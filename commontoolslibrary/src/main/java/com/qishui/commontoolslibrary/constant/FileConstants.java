@@ -5,4 +5,16 @@ package com.qishui.commontoolslibrary.constant;
  */
 
 public class FileConstants {
+
+    /**
+     * 总目录
+     */
+    public static final String KEY_BASE_PATH = "/qishui";
+
+    /**
+     * 日志目录
+     */
+    public static final String KEY_FILE_LOG = KEY_BASE_PATH + "/log";
+
+
 }
