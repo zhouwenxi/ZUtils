@@ -63,7 +63,7 @@ public class LogUtils {
                         for (Object obj : map.keySet()) {
                             sb.append("第").append(i + 1).append("参数，输出map\n").append("key: ").append(obj).append("value: ").append(map.get(obj)).append("\n");
                         }
-                    } else if (objects[i] instanceof String && StringUtils.isXml(objects[i].toString())) {
+                    } else if (objects[i] instanceof String && objects[i].toString().startsWith("<") && objects[i].toString().endsWith(">") && StringUtils.isXml(objects[i].toString())) {
                         String last = StringUtils.String2Xml(objects[i].toString());
                         sb.append("第").append(i + 1).append("参数，输出xml文档\n").append(last).append("\n");
                     } else {
