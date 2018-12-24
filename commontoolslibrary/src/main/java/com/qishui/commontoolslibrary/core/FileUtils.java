@@ -42,6 +42,15 @@ public class FileUtils {
     public static final String KEY_FILE_ASSEST = KEY_BASE_PATH + "/assest/";
 
 
+    /**
+     * 最小50MB
+     */
+    public static final long MIN_MB = 50 * 1024 * 1024;
+    /**
+     * 编码格式
+     */
+    private static final String KEY_CHART = "utf-8";
+
     private FileUtils() {
         throw new ErrorHandle("禁止实例化!");
     }
@@ -85,7 +94,7 @@ public class FileUtils {
         StatFs stat = new StatFs(getSDPath());
         long blockSize = stat.getBlockSize();
         long totalBlocks = stat.getAvailableBlocks();
-        return blockSize * totalBlocks > 50 * 1024 * 1024;
+        return blockSize * totalBlocks > MIN_MB;
 
     }
 
@@ -127,6 +136,9 @@ public class FileUtils {
      */
     public static Boolean isExistDir(String dir) {
 
+        if (dir == null) {
+            return false;
+        }
         File file = new File(dir);
         if (file.exists()) {
             return file.isDirectory();
@@ -142,6 +154,9 @@ public class FileUtils {
      */
     public static Boolean isExistFile(String path) {
 
+        if (path == null) {
+            return false;
+        }
         File file = new File(path);
         if (file.exists()) {
             return file.isFile();
@@ -220,7 +235,7 @@ public class FileUtils {
             //新建一个FileOutputStream()，把文件的路径传进去
             FileOutputStream fileOutputStream = new FileOutputStream(path, true);
             //给定一个字符串，将其转换成字节数组
-            byte[] bytes = text.getBytes("utf-8");
+            byte[] bytes = text.getBytes(KEY_CHART);
             //通过输出流对象写入字节数组
             fileOutputStream.write(bytes);
             //关流
@@ -252,7 +267,7 @@ public class FileUtils {
             //新建一个FileOutputStream()，把文件的路径传进去
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             //给定一个字符串，将其转换成字节数组
-            byte[] bytes = text.getBytes("utf-8");
+            byte[] bytes = text.getBytes(KEY_CHART);
             //通过输出流对象写入字节数组
             fileOutputStream.write(bytes);
             //关流
@@ -289,7 +304,7 @@ public class FileUtils {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             PrintStream pout = new PrintStream(out);
             ex.printStackTrace(pout);
-            ret = new String(out.toByteArray(), "utf-8");
+            ret = new String(out.toByteArray(), KEY_CHART);
             pout.close();
             out.close();
             return ret;
@@ -380,7 +395,7 @@ public class FileUtils {
     public static String is2String(final InputStream is) {
         if (is == null) return null;
         try {
-            return new String(is2Bytes(is), "utf-8");
+            return new String(is2Bytes(is), KEY_CHART);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
@@ -417,6 +432,92 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    /**
+     * desc 格式化目录大小
+     *
+     * @param path
+     * @return
+     */
+    public static String getDirSize(String path) {
+        return Formatter.formatFileSize(BaseQiShuiApplication.getContext(), getDirLength(new File(path)));
+    }
+
+    /**
+     * desc 获取目录文件大小
+     *
+     * @param dir
+     * @return
+     */
+    public static long getDirLength(final File dir) {
+        if (!(dir.isDirectory())) return -1;
+        long len = 0;
+        File[] files = dir.listFiles();
+        if (files != null && files.length != 0) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    len += getDirLength(file);
+                } else {
+                    len += file.length();
+                }
+            }
+        }
+        return len;
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param fileDir
+     */
+    public static void deleteDirAndFiles(File fileDir) {
+        // 输出当前目录名称
+        if (!fileDir.exists()) {
+            return;
+        }
+        File[] file = fileDir.listFiles();
+        if (file == null) {
+            return;
+        }
+        if (file.length == 0) {
+            fileDir.delete();
+            return;
+        }
+
+        for (int i = 0; i < file.length; i++) {
+            // 判断，如果是文件夹，则把当前文件夹的名称传回给这个函数，递归调用。
+            if (file[i].isDirectory()) {
+                // 把当前文件夹的名称和层级传回给本函数
+                deleteDirAndFiles(file[i]);
+            } else {
+                file[i].delete();
+            }
+        }
+    }
+
+    /**
+     * desc 获取文件名字
+     *
+     * @param filePath
+     * @return
+     */
+    public static String getFileName(final String filePath) {
+        if (filePath == null || !isExistFile(filePath)) return "";
+        int lastSep = filePath.lastIndexOf(File.separator);
+        return lastSep == -1 ? filePath : filePath.substring(lastSep + 1);
+    }
+
+    /**
+     * desc 获取文件长度
+     *
+     * @param filePath
+     * @return
+     */
+    public static long getFileSize(final String filePath) {
+        if (filePath == null || !isExistFile(filePath)) return 0;
+        return new File(filePath).length();
     }
 
 
