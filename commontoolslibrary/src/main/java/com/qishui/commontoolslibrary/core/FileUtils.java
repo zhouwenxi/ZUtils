@@ -308,7 +308,7 @@ public class FileUtils {
         String format = new SimpleDateFormat("yyyy年MM月dd日").format(currentTimeMillis);
         String dir = getSDPath() + KEY_FILE_LOG + format;
         String name = new SimpleDateFormat("HH").format(currentTimeMillis) + ".log";
-        String last = SimpleDateFormat.getDateTimeInstance().format(currentTimeMillis) + "\n" + text;
+        String last = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(currentTimeMillis) + "\n" + text;
         write(dir, name, last);
     }
 

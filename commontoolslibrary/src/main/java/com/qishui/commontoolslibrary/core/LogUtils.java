@@ -53,22 +53,23 @@ public class LogUtils {
      */
     private static StringBuilder getStringBuilder(Object... objects) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n");
         if (objects != null) {
             for (int i = 0; i < objects.length; i++)
                 if (objects[i] == null) {
-                    sb.append("下标为").append(i).append("null").append("\n");
+                    sb.append("null");
                 } else {
                     if (objects[i] instanceof HashMap) {
                         HashMap<Object, Object> map = (HashMap) objects[i];
+                        sb.append("{");
                         for (Object obj : map.keySet()) {
-                            sb.append("key: ").append(obj).append(" value: ").append(map.get(obj)).append("\n");
+                            sb.append("\"").append(obj).append("\"").append(":").append(map.get(obj)).append(",");
                         }
+                        sb.append("}\n");
                     } else if (objects[i] instanceof String && objects[i].toString().startsWith("<") && objects[i].toString().endsWith(">") && StringUtils.isXml(objects[i].toString())) {
                         String last = StringUtils.String2Xml(objects[i].toString());
                         sb.append("\n").append(last).append("\n");
                     } else {
-                        sb.append(objects[i]).append(" ");
+                        sb.append(objects[i]).append(",");
                     }
                 }
         } else {
