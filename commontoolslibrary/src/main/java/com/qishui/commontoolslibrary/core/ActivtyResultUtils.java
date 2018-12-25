@@ -20,12 +20,26 @@ public class ActivtyResultUtils {
     private static final String TAG = "ACTIVTYRESULTUTILS";
     private ResultBackFragment mResultBackFragment;
 
-    public ActivtyResultUtils(Fragment fragment) {
+    private ActivtyResultUtils(Fragment fragment) {
         this(fragment.getActivity());
     }
 
-    public ActivtyResultUtils(FragmentActivity activity) {
+    private ActivtyResultUtils(FragmentActivity activity) {
         mResultBackFragment = getFragment(activity.getSupportFragmentManager());
+    }
+
+    /**
+     * 构建对象
+     *
+     * @param activity
+     * @return
+     */
+    public static ActivtyResultUtils with(FragmentActivity activity) {
+        return new ActivtyResultUtils(activity);
+    }
+
+    public static ActivtyResultUtils with(Fragment fragment) {
+        return new ActivtyResultUtils(fragment);
     }
 
     /**

@@ -214,7 +214,7 @@ public class PermissionUtils {
 
                                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                 intent.setData(Uri.parse("package:" + activity.getPackageName()));
-                                new ActivtyResultUtils(activity).startForResult(intent, requestCode, new ActivtyResultUtils.Callback() {
+                                ActivtyResultUtils.with(activity).startForResult(intent, requestCode, new ActivtyResultUtils.Callback() {
                                     @Override
                                     public void onActivityResult(int requestCode, int resultCode, Intent data) {
                                         //判断是否需要再次请求权限处理
