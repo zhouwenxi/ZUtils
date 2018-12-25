@@ -53,25 +53,26 @@ public class LogUtils {
      */
     private static StringBuilder getStringBuilder(Object... objects) {
         StringBuilder sb = new StringBuilder();
+        sb.append("\n");
         if (objects != null) {
             for (int i = 0; i < objects.length; i++)
                 if (objects[i] == null) {
-                    sb.append("下标为").append(i).append("打印结果输出为空!").append("\n");
+                    sb.append("下标为").append(i).append("null").append("\n");
                 } else {
                     if (objects[i] instanceof HashMap) {
                         HashMap<Object, Object> map = (HashMap) objects[i];
                         for (Object obj : map.keySet()) {
-                            sb.append("第").append(i + 1).append("参数，输出map\n").append("key: ").append(obj).append("value: ").append(map.get(obj)).append("\n");
+                            sb.append("key: ").append(obj).append(" value: ").append(map.get(obj)).append("\n");
                         }
                     } else if (objects[i] instanceof String && objects[i].toString().startsWith("<") && objects[i].toString().endsWith(">") && StringUtils.isXml(objects[i].toString())) {
                         String last = StringUtils.String2Xml(objects[i].toString());
-                        sb.append("第").append(i + 1).append("参数，输出xml文档\n").append(last).append("\n");
+                        sb.append("\n").append(last).append("\n");
                     } else {
-                        sb.append("第").append(i + 1).append("参数，输出 ").append(objects[i]).append("\n");
+                        sb.append(objects[i]).append(" ");
                     }
                 }
         } else {
-            sb.append("打印结果输出为空!");
+            sb.append("null");
         }
         return sb;
     }

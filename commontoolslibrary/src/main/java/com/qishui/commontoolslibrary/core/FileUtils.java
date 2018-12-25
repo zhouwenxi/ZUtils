@@ -237,6 +237,11 @@ public class FileUtils {
      * @param text
      */
     public static void write(String dir, String name, String text) {
+        Boolean hasAllPermission = PermissionUtils.hasAllPermission(BaseQiShuiApplication.getContext(), PermissionUtils.GROUP_STORAGE);
+        if (!hasAllPermission) {
+            LogUtils.e("u has not the permissions ");
+            return;
+        }
 
         String path = createFile(dir, name);
 
@@ -300,9 +305,9 @@ public class FileUtils {
      */
     public static void writeLog(String text) {
         long currentTimeMillis = System.currentTimeMillis();
-        String format = SimpleDateFormat.getDateInstance().format(currentTimeMillis);
+        String format = new SimpleDateFormat("yyyy年MM月dd日").format(currentTimeMillis);
         String dir = getSDPath() + KEY_FILE_LOG + format;
-        String name = SimpleDateFormat.getTimeInstance().format(currentTimeMillis) + ".log";
+        String name = new SimpleDateFormat("HH").format(currentTimeMillis) + ".log";
         String last = SimpleDateFormat.getDateTimeInstance().format(currentTimeMillis) + "\n" + text;
         write(dir, name, last);
     }

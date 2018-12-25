@@ -4,6 +4,7 @@ import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -233,11 +234,11 @@ public class PermissionUtils {
     /**
      * 是否存在权限
      *
-     * @param activity
+     * @param context
      * @param pers
      * @return
      */
-    public static Boolean hasAllPermission(Activity activity, String... pers) {
+    public static Boolean hasAllPermission(Context context, String... pers) {
 
         if (pers == null) {
             return true;
@@ -246,7 +247,7 @@ public class PermissionUtils {
         if (runVersion()) {
             for (int i = 0; i < pers.length; i++) {
                 //存在拒绝的
-                if (activity.getApplicationContext().checkSelfPermission(pers[i]) != PackageManager.PERMISSION_GRANTED) {
+                if (context.getApplicationContext().checkSelfPermission(pers[i]) != PackageManager.PERMISSION_GRANTED) {
                     return false;
                 }
             }
@@ -259,11 +260,11 @@ public class PermissionUtils {
     /**
      * 是否存在权限
      *
-     * @param activity
+     * @param context
      * @param pers
      * @return
      */
-    public static Boolean hasAllPermission(Activity activity, List<String> pers) {
+    public static Boolean hasAllPermission(Context context, List<String> pers) {
 
         if (pers == null) {
             return true;
@@ -272,7 +273,7 @@ public class PermissionUtils {
         if (runVersion()) {
             for (int i = 0; i < pers.size(); i++) {
                 //存在拒绝的
-                if (activity.getApplicationContext().checkSelfPermission(pers.get(i)) != PackageManager.PERMISSION_GRANTED) {
+                if (context.getApplicationContext().checkSelfPermission(pers.get(i)) != PackageManager.PERMISSION_GRANTED) {
                     return false;
                 }
             }
