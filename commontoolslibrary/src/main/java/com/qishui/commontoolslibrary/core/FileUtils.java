@@ -41,6 +41,11 @@ public class FileUtils {
      */
     public static final String KEY_FILE_ASSEST = KEY_BASE_PATH + "/assest/";
 
+    /**
+     * 图片目录
+     */
+    public static final String KEY_FILE_PICTURE = KEY_BASE_PATH + "/picture/";
+
 
     /**
      * 最小50MB
@@ -215,6 +220,14 @@ public class FileUtils {
         return file.getAbsolutePath();
     }
 
+    /**
+     * 创建png文件
+     *
+     * @return
+     */
+    public static String createNewPngFile() {
+        return createFileDelOld(getSDPath() + KEY_FILE_PICTURE, "_" + System.currentTimeMillis() + ".png");
+    }
 
     /**
      * desc 追加信息
