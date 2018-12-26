@@ -1,14 +1,17 @@
 package com.qishui.commontoolslibrary.core;
 
+import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
+import android.util.Log;
 
 import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
 import com.qishui.commontoolslibrary.exception.ErrorHandle;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -297,6 +300,39 @@ public class FileUtils {
         }
     }
 
+    /**
+     * desc 输入流转成输出流
+     *
+     * @param is
+     * @param os
+     */
+    public static void copyIS2OS(InputStream is, FileOutputStream os) {
+
+        try {
+            int len;
+            byte[] buffer = new byte[1024];
+            while ((len = is.read(buffer)) != -1) {
+                os.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (is != null) {
+                    is.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * desc 记录日志文件
@@ -367,19 +403,12 @@ public class FileUtils {
     public static File copyAssestFile(String name) {
 
         String dir = getSDPath() + KEY_FILE_ASSEST;
-        InputStream is;
         String filePath = createFileDelOld(dir, name);
 
         try {
-            is = BaseQiShuiApplication.getContext().getAssets().open(name);
+            InputStream is = BaseQiShuiApplication.getContext().getAssets().open(name);
             FileOutputStream fos = new FileOutputStream(new File(filePath));
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = is.read(buffer)) > 0) {
-                fos.write(buffer, 0, len);
-            }
-            is.close();
-            fos.close();
+            copyIS2OS(is, fos);
         } catch (IOException e) {
             e.printStackTrace();
         }
