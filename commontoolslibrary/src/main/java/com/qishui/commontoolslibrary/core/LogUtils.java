@@ -64,10 +64,10 @@ public class LogUtils {
                         for (Object obj : map.keySet()) {
                             sb.append("\"").append(obj).append("\"").append(":").append(map.get(obj)).append(",");
                         }
-                        sb.append("}\n");
+                        sb.append("}");
                     } else if (objects[i] instanceof String && objects[i].toString().startsWith("<") && objects[i].toString().endsWith(">") && StringUtils.isXml(objects[i].toString())) {
                         String last = StringUtils.String2Xml(objects[i].toString());
-                        sb.append("\n").append(last).append("\n");
+                        sb.append("\n").append(last);
                     } else {
                         sb.append(objects[i]).append(",");
                     }

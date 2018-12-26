@@ -1,12 +1,14 @@
 package com.qishui.zutils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
 
-import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-
-import java.util.HashMap;
+import com.qishui.commontoolslibrary.core.TakePictureUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,17 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
-        LogUtils.e(1, 2, 3, 4, "hello world !");
-        String xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me this weekend!</body></note>";
-        LogUtils.e(xml);
+    }
 
-        HashMap map=new HashMap<>();
-        map.put("1",2);
-        map.put("2",2.999);
-        map.put("age","ttt");
-        LogUtils.e(map);
-
-        LogUtils.toFile(1,2,3,"hello world !",xml,map);
+    public void onclick(View view) {
 
     }
 }

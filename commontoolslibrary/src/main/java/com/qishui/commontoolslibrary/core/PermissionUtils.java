@@ -3,7 +3,6 @@ package com.qishui.commontoolslibrary.core;
 import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
