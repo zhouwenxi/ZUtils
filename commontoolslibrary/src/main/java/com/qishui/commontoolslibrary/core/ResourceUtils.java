@@ -5,4 +5,5 @@ package com.qishui.commontoolslibrary.core;
  */
 
 public class ResourceUtils {
+
 }

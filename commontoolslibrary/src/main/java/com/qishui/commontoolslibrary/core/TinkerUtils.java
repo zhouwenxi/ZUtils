@@ -33,11 +33,11 @@ public class TinkerUtils {
     private static final String DEX_PATHLIST_FIELD = "pathList";
 
 
+
     public static void loadDex(Context context) {
 
         List<File> dexFiles = new ArrayList<>();
         File filesDir = context.getDir("dexs", Context.MODE_PRIVATE);
-
         // dex 缓存目录
         File dexCache = new File(filesDir, "cache");
         if (!dexCache.exists()) {
@@ -45,9 +45,9 @@ public class TinkerUtils {
         }
 
         File[] listFiles = filesDir.listFiles();
+
         for (File file : listFiles) {
             if (file.getName().endsWith(DEX_FILE_E)) {
-                Log.i("INFO", "dexName:" + file.getName());
                 dexFiles.add(file);
             }
         }
@@ -55,6 +55,7 @@ public class TinkerUtils {
         if (dexFiles.size() > 0) {
             loadDex(context, dexFiles.get(0), dexCache);
         }
+
     }
 
     /**
