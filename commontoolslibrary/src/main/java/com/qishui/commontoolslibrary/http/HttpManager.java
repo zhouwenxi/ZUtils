@@ -1,0 +1,39 @@
+package com.qishui.commontoolslibrary.http;
+
+import com.qishui.commontoolslibrary.http.proxy.IHttp;
+import com.qishui.commontoolslibrary.http.proxy.OKHttpProxy;
+
+/**
+ * Created by zhou on 2018/12/27.
+ */
+
+public class HttpManager {
+
+    private volatile static HttpManager httpManager;
+
+    private HttpManager() {
+
+    }
+
+    public static HttpManager with() {
+        if (httpManager == null) {
+            synchronized (HttpManager.class) {
+                if (httpManager == null) {
+                    httpManager = new HttpManager();
+                }
+            }
+        }
+        return httpManager;
+    }
+
+    private static IHttp mHttp;
+
+    public void setHttp(IHttp mHttp) {
+        this.mHttp = mHttp;
+    }
+
+    public IHttp getProxy() {
+        //默认使用OKHttp
+        return mHttp == null ? new OKHttpProxy() : mHttp;
+    }
+}
