@@ -19,4 +19,9 @@ public interface ICallBack {
      * @param message
      */
     void onfalure(String message);
+
+    /**
+     * 最后都通过
+     */
+    void onLast();
 }

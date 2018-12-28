@@ -44,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
     public void onclick1(View view) {
 
         HttpManager.with().getProxy().get("http://www.bejson.com/", new StringCallBack() {
+
+
+            @Override
+            public void onLast() {
+                Toast.makeText(MainActivity.this, "end~~~~", Toast.LENGTH_LONG).show();
+            }
+
             @Override
             protected void onEasySuccess(String result) {
 
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 LogUtils.e(message);
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
+
         });
 
     }

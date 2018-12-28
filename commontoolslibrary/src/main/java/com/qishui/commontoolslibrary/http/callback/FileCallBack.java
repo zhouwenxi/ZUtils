@@ -17,13 +17,15 @@ public abstract class FileCallBack implements ICallBack {
     @Override
     public void onSuccess(final String result) {
 
-        if (Looper.getMainLooper() == Looper.getMainLooper()) {
+        if (Looper.getMainLooper() == Looper.myLooper()) {
             onEasySuccess(result);
+            onLast();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     onEasySuccess(result);
+                    onLast();
                 }
             });
         }
@@ -33,13 +35,15 @@ public abstract class FileCallBack implements ICallBack {
     @Override
     public void onfalure(final String message) {
 
-        if (Looper.getMainLooper() == Looper.getMainLooper()) {
+        if (Looper.getMainLooper() == Looper.myLooper()) {
             onEasyError(message);
+            onLast();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     onEasyError(message);
+                    onLast();
                 }
             });
         }
@@ -49,4 +53,9 @@ public abstract class FileCallBack implements ICallBack {
     abstract void onEasySuccess(String result);
 
     abstract void onEasyError(String message);
+
+    @Override
+    public void onLast() {
+
+    }
 }

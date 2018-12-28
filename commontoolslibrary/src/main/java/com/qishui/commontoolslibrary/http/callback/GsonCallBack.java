@@ -27,11 +27,13 @@ public abstract class GsonCallBack<T> implements ICallBack {
 
         if (Looper.getMainLooper() == Looper.myLooper()) {
             onEasySuccess(clazz);
+            onLast();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     onEasySuccess(clazz);
+                    onLast();
                 }
             });
         }
@@ -43,11 +45,13 @@ public abstract class GsonCallBack<T> implements ICallBack {
 
         if (Looper.getMainLooper() == Looper.myLooper()) {
             onEasyError(message);
+            onLast();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     onEasyError(message);
+                    onLast();
                 }
             });
         }
@@ -66,4 +70,9 @@ public abstract class GsonCallBack<T> implements ICallBack {
     protected abstract void onEasySuccess(T result);
 
     protected abstract void onEasyError(String message);
+
+    @Override
+    public void onLast() {
+
+    }
 }
