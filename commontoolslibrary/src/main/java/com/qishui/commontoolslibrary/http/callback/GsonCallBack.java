@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -17,7 +18,9 @@ public abstract class GsonCallBack<T> implements ICallBack {
     @Override
     public void onSuccess(String response) {
         try {
-            clazz = (T) new Gson().fromJson(response, getType(this).getClass());
+            T t = (T) getType(this).getClass();
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            clazz = (T) gson.fromJson(response, t.getClass());
         } catch (Exception e) {
             onfalure("Error-" + e.toString());
         }

@@ -11,6 +11,7 @@ import com.qishui.commontoolslibrary.core.FileUtils;
 import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
 import com.qishui.commontoolslibrary.http.HttpManager;
+import com.qishui.commontoolslibrary.http.callback.GsonCallBack;
 import com.qishui.commontoolslibrary.http.callback.StringCallBack;
 
 import java.io.File;
@@ -18,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        HttpManager.with().getProxy().get("http://www.bejson.com/", new StringCallBack() {
+        String url = "http://www.mzict.com:8081/tongtaiOA/api/data/list";
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("user_id", "0ffe1106c6a84ed8b4a38a17c0646f95");
+        HttpManager.with().getProxy().get(url, params, new GsonCallBack<Bean>() {
 
 
             @Override
@@ -52,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onEasySuccess(String result) {
+            protected void onEasySuccess(Bean result) {
 
-                LogUtils.e(result);
-                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
+                List<Bean.DataBean> data = result.getData();
+                LogUtils.e(data);
             }
 
             @Override
