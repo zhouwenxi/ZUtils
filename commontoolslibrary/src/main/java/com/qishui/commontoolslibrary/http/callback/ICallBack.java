@@ -6,7 +6,17 @@ package com.qishui.commontoolslibrary.http.callback;
 
 public interface ICallBack {
 
+    /**
+     * 请求成功
+     *
+     * @param result
+     */
     void onSuccess(String result);
 
-    void onFail(String message);
+    /**
+     * 请求失败
+     *
+     * @param message
+     */
+    void onfalure(String message);
 }

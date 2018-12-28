@@ -1,5 +1,6 @@
 package com.qishui.commontoolslibrary.http.proxy;
 
+import com.qishui.commontoolslibrary.http.easyhttp.EasyHttp;
 import com.qishui.commontoolslibrary.http.callback.ICallBack;
 
 import java.io.File;
@@ -7,34 +8,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by zhou on 2018/12/27.
+ *
  */
-
-public class OKHttpProxy implements IHttp {
-
+public class EasyHttpProxy implements IHttp {
     @Override
     public void get(String url, HashMap<String, Object> params, ICallBack callBack) {
-
+        EasyHttp.get(url, params, callBack);
     }
 
     @Override
     public void get(String url, ICallBack callBack) {
-
+        EasyHttp.get(url, callBack);
     }
 
     @Override
     public void post(String url, HashMap<String, Object> params, ICallBack callBack) {
-
+        EasyHttp.post(url, params, callBack);
     }
 
     @Override
     public void post(String url, ICallBack callBack) {
-
+        EasyHttp.post(url, callBack);
     }
 
     @Override
-    public void postJson(String url,  String json, ICallBack callBack) {
-
+    public void postJson(String url, String json, ICallBack callBack) {
+        EasyHttp.postJson(url, json, callBack);
     }
 
     @Override

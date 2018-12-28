@@ -1,23 +1,56 @@
 package com.qishui.commontoolslibrary.http.callback;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.google.gson.Gson;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-/**
- * Created by zhou on 2018/12/27.
- */
-
 public abstract class GsonCallBack<T> implements ICallBack {
+
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private T clazz = null;
+
 
     @Override
     public void onSuccess(String response) {
+        try {
+            clazz = (T) new Gson().fromJson(response, getType(this).getClass());
+        } catch (Exception e) {
+            onfalure("Error-" + e.toString());
+        }
+        if (clazz == null) {
+            return;
+        }
 
-        T t = getType(this);
-        T clazz = (T) new Gson().fromJson(response, t.getClass());
-        onSuccess(clazz);
+        if (Looper.getMainLooper() == Looper.myLooper()) {
+            onEasySuccess(clazz);
+        } else {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onEasySuccess(clazz);
+                }
+            });
+        }
 
+    }
+
+    @Override
+    public void onfalure(final String message) {
+
+        if (Looper.getMainLooper() == Looper.myLooper()) {
+            onEasyError(message);
+        } else {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onEasyError(message);
+                }
+            });
+        }
     }
 
 
@@ -30,6 +63,7 @@ public abstract class GsonCallBack<T> implements ICallBack {
 
     }
 
+    protected abstract void onEasySuccess(T result);
 
-    protected abstract void onSuccess(T result);
+    protected abstract void onEasyError(String message);
 }
