@@ -1,6 +1,6 @@
 package com.qishui.commontoolslibrary.http;
 
-import com.qishui.commontoolslibrary.http.proxy.IHttp;
+import com.qishui.commontoolslibrary.http.callback.IHttp;
 import com.qishui.commontoolslibrary.http.proxy.OKHttpProxy;
 
 /**

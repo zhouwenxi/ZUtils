@@ -1,6 +1,4 @@
-package com.qishui.commontoolslibrary.http.proxy;
-
-import com.qishui.commontoolslibrary.http.callback.ICallBack;
+package com.qishui.commontoolslibrary.http.callback;
 
 import java.io.File;
 import java.util.HashMap;
