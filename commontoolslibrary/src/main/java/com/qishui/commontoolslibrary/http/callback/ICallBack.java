@@ -24,4 +24,17 @@ public interface ICallBack {
      * 最后都通过
      */
     void onLast();
+
+    /**
+     * 空处理
+     */
+    void onNull();
+
+
+    /**
+     * 进度条
+     *
+     * @param progress
+     */
+    void inProgress(float progress);
 }

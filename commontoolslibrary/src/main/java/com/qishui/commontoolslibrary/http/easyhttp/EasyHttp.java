@@ -63,12 +63,22 @@ public class EasyHttp {
 
     }
 
-    public void uploadFile(String url, Map<String, Object> params, String fileParam, File file, ICallBack callBack) {
-
+    public static void uploadFile(final String url, final Map<String, Object> params, final String fileParam, final String file, final ICallBack callBack) {
+        HttpThreadPoolManager.with().excute(new Runnable() {
+            @Override
+            public void run() {
+                HttpService.with().uploadFile(url,params,fileParam,file,callBack);
+            }
+        });
     }
 
-    public void downloadFile(String url, String path, String name, ICallBack callBack) {
-
+    public static void downloadFile(final String url, final String path, final String name, final ICallBack callBack) {
+        HttpThreadPoolManager.with().excute(new Runnable() {
+            @Override
+            public void run() {
+                HttpService.with().downloadFile(url,path,name,callBack);
+            }
+        });
     }
 
     public void cancel(String url) {

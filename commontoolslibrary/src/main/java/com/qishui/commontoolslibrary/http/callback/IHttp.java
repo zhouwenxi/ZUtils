@@ -71,7 +71,7 @@ public interface IHttp {
      * @param file
      * @param callBack
      */
-    void uploadFile(String url, Map<String, Object> params, String fileParam, File file, ICallBack callBack);
+    void uploadFile(String url, Map<String, Object> params, String fileParam, String file, ICallBack callBack);
 
     /**
      * 下载文件

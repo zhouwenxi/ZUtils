@@ -58,4 +58,14 @@ public abstract class FileCallBack implements ICallBack {
     public void onLast() {
 
     }
+
+    @Override
+    public void onNull() {
+
+    }
+
+    @Override
+    public void inProgress(int progress) {
+
+    }
 }

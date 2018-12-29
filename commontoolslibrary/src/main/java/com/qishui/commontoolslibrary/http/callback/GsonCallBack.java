@@ -4,38 +4,52 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GsonCallBack<T> implements ICallBack {
 
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    private T clazz;
+    private Class<T> clazz;
+    private T bean;
+
 
     @Override
     public void onSuccess(String response) {
+
+        if (response == null || "".equals(response)) {
+            onNull();
+            return;
+        }
         try {
             Gson gson = new Gson();
-            T t = getType(this);
-            clazz = (T) gson.fromJson(response, t.getClass());
+            ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
+            this.clazz = (Class<T>) type.getActualTypeArguments()[0];
+            bean = gson.fromJson(response, clazz);
 
         } catch (Exception e) {
-            onfalure("Error-" + e.toString());
+            onfalure("Error-" + e.toString() + "-" + response);
         }
-        if (clazz == null) {
+        if (bean == null) {
+            onNull();
             return;
         }
 
         if (Looper.getMainLooper() == Looper.myLooper()) {
-            onEasySuccess(clazz);
+            onEasySuccess(bean);
             onLast();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    onEasySuccess(clazz);
+                    onEasySuccess(bean);
                     onLast();
                 }
             });
@@ -61,21 +75,22 @@ public abstract class GsonCallBack<T> implements ICallBack {
     }
 
 
-    private T getType(GsonCallBack<T> callBack) {
-
-        Type t = callBack.getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        Type[] ts = pt.getActualTypeArguments();
-        return (T) ts[0];
-
-    }
-
-    protected abstract void onEasySuccess(T result);
+    protected abstract void onEasySuccess(T t);
 
     protected abstract void onEasyError(String message);
 
     @Override
     public void onLast() {
+
+    }
+
+    @Override
+    public void onNull() {
+
+    }
+
+    @Override
+    public void inProgress(int progress) {
 
     }
 }

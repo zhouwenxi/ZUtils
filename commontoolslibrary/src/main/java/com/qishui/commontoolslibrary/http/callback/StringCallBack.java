@@ -32,6 +32,10 @@ public abstract class StringCallBack implements ICallBack {
     @Override
     public void onSuccess(final String result) {
 
+        if (result == null || "".equals(result)) {
+            onNull();
+            return;
+        }
         if (Looper.getMainLooper() == Looper.myLooper()) {
             onEasySuccess(result);
             onLast();
@@ -76,6 +80,16 @@ public abstract class StringCallBack implements ICallBack {
 
     @Override
     public void onLast() {
+
+    }
+
+    @Override
+    public void onNull() {
+
+    }
+
+    @Override
+    public void inProgress(int progress) {
 
     }
 }

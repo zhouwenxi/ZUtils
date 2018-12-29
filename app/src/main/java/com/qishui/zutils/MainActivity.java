@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.core.FileUtils;
+import com.qishui.commontoolslibrary.core.GsonUtils;
 import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
 import com.qishui.commontoolslibrary.http.HttpManager;
@@ -21,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,23 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        String url = "http://www.mzict.com:8081/tongtaiOA/api/data/list";
+        String url = "http://192.168.1.249:3838/tongtaiOA/loginAppController/login_app";
         HashMap<String, Object> params = new HashMap<>();
-        params.put("user_id", "0ffe1106c6a84ed8b4a38a17c0646f95");
-        HttpManager.with().getProxy().get(url, params, new GsonCallBack<Bean>() {
-
+        params.put("USERNAME", "glm");
+        params.put("PASSWORD", "123");
+        HttpManager.with().getProxy().post(url, params, new StringCallBack() {
 
             @Override
             public void onLast() {
                 Toast.makeText(MainActivity.this, "end~~~~", Toast.LENGTH_LONG).show();
             }
 
-            @Override
-            protected void onEasySuccess(Bean result) {
 
-                Toast.makeText(MainActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
-                List<Bean.DataBean> data = result.getData();
-                LogUtils.e(data);
+            @Override
+            protected void onEasySuccess(String result) {
+                LogUtils.e(result);
             }
 
             @Override

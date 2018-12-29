@@ -43,13 +43,13 @@ public class EasyHttpProxy implements IHttp {
     }
 
     @Override
-    public void uploadFile(String url, Map<String, Object> params, String fileParam, File file, ICallBack callBack) {
-
+    public void uploadFile(String url, Map<String, Object> params, String fileParam, String file, ICallBack callBack) {
+        EasyHttp.uploadFile(url,params,fileParam,file,callBack);
     }
 
     @Override
     public void downloadFile(String url, String path, String name, ICallBack callBack) {
-
+         EasyHttp.downloadFile(url,path,name,callBack);
     }
 
     @Override
