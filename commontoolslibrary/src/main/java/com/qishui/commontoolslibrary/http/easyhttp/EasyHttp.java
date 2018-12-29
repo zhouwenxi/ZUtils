@@ -81,6 +81,15 @@ public class EasyHttp {
         });
     }
 
+    public static void downloadFile(final String url, final Map<String,Object>map, final String path, final String name, final ICallBack callBack) {
+        HttpThreadPoolManager.with().excute(new Runnable() {
+            @Override
+            public void run() {
+                HttpService.with().downloadFile(url,map,path,name,callBack);
+            }
+        });
+    }
+
     public void cancel(String url) {
 
     }

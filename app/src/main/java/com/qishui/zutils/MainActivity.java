@@ -12,6 +12,7 @@ import com.qishui.commontoolslibrary.core.GsonUtils;
 import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
 import com.qishui.commontoolslibrary.http.HttpManager;
+import com.qishui.commontoolslibrary.http.callback.FileCallBack;
 import com.qishui.commontoolslibrary.http.callback.GsonCallBack;
 import com.qishui.commontoolslibrary.http.callback.StringCallBack;
 
@@ -48,30 +49,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        String url = "http://192.168.1.249:3838/tongtaiOA/loginAppController/login_app";
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("USERNAME", "glm");
-        params.put("PASSWORD", "123");
-        HttpManager.with().getProxy().post(url, params, new StringCallBack() {
-
+        String destFileDir = FileUtils.getSDPath() + "/mz/file";
+        String destFileName = "aaa.docx";
+        String url = "http://192.168.1.249:3838/tongtaiOA/api/indexNotice/download?ID=0c255f210a9b43deb6a58562bbf09210";
+        HttpManager.with().getProxy().downloadFile(url, destFileDir, destFileName, new FileCallBack() {
             @Override
-            public void onLast() {
-                Toast.makeText(MainActivity.this, "end~~~~", Toast.LENGTH_LONG).show();
+            protected void onEasyInProgress(float progress) {
+                LogUtils.e("下载进度:"+progress);
             }
-
 
             @Override
             protected void onEasySuccess(String result) {
-                LogUtils.e(result);
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             protected void onEasyError(String message) {
-
-                LogUtils.e(message);
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
-
         });
 
     }

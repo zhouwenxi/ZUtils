@@ -53,6 +53,11 @@ public class EasyHttpProxy implements IHttp {
     }
 
     @Override
+    public void downloadFile(String url, Map<String, Object> params, String path, String name, ICallBack callBack) {
+        EasyHttp.downloadFile(url,params,path,name,callBack);
+    }
+
+    @Override
     public void cancel(String url) {
 
     }

@@ -90,7 +90,7 @@ public abstract class GsonCallBack<T> implements ICallBack {
     }
 
     @Override
-    public void inProgress(int progress) {
+    public void inProgress(float progress) {
 
     }
 }

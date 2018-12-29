@@ -89,7 +89,7 @@ public abstract class StringCallBack implements ICallBack {
     }
 
     @Override
-    public void inProgress(int progress) {
+    public void inProgress(float progress) {
 
     }
 }

@@ -84,6 +84,17 @@ public interface IHttp {
     void downloadFile(String url, String path, String name, ICallBack callBack);
 
     /**
+     * 下载文件
+     * @param url
+     * @param params
+     * @param path
+     * @param name
+     * @param callBack
+     */
+    void downloadFile(String url,Map<String,Object>params, String path, String name, ICallBack callBack);
+
+
+    /**
      * 网络请求
      *
      * @param url

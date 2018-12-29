@@ -311,6 +311,33 @@ public class HttpService {
 
     /**
      * 下载文件
+     * @param urlPath
+     * @param map
+     * @param downloadDir
+     * @param downloadFileName
+     * @param callBack
+     */
+    public  void downloadFile(String urlPath, Map<String,Object>map,String downloadDir,String downloadFileName,ICallBack callBack){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(urlPath);
+        if (map != null) {
+            stringBuilder.append("?");
+            int size = map.size();
+            int cur = 0;
+            for (String key : map.keySet()) {
+                cur++;
+                stringBuilder.append(key).append("=").append(map.get(key));
+                if (cur < size) {
+                    stringBuilder.append("&");
+                }
+            }
+        }
+
+        downloadFile(stringBuilder.toString(),  downloadDir, downloadFileName, callBack);
+    }
+    /**
+     * 下载文件
      * @param urlPath  下载路径
      * @param downloadDir 下载目录
      * @param downloadFileName 下载名字

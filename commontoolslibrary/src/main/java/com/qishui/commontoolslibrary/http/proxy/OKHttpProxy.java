@@ -54,6 +54,11 @@ public class OKHttpProxy implements IHttp {
     }
 
     @Override
+    public void downloadFile(String url, Map<String, Object> params, String path, String name, ICallBack callBack) {
+
+    }
+
+    @Override
     public void cancel(String url) {
 
     }
