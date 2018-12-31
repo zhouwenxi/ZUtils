@@ -1,17 +1,15 @@
 package com.qishui.commontoolslibrary.core;
 
-import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
-import android.util.Log;
 
 import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
 import com.qishui.commontoolslibrary.exception.ErrorHandle;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,6 +46,11 @@ public class FileUtils {
      * 图片目录
      */
     public static final String KEY_FILE_PICTURE = KEY_BASE_PATH + "/picture/";
+
+    /**
+     * 缓存目录
+     */
+    public static final String KEY_FILE_CACHE = KEY_BASE_PATH + "/cache/";
 
 
     /**
@@ -298,6 +301,21 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @param result
+     * @return
+     */
+    public static InputStream string2Is(String result) {
+        try {
+            InputStream is = new ByteArrayInputStream(result.getBytes("UTF-8"));
+            return is;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
     /**
