@@ -17,16 +17,34 @@ import java.io.FileOutputStream;
 public class LocalCache {
 
     public static final String KEY_CACHE = FileUtils.KEY_FILE_CACHE;
+    //最大存放量 100MB
+    private static final int MAX = 100 * 1024 * 1024;
 
+    private static LocalCache localCache;
+
+    private LocalCache() {
+    }
+
+    public static LocalCache with() {
+        if (localCache == null) {
+            synchronized (CacheManager.class) {
+                if (localCache == null) {
+                    localCache = new LocalCache();
+                }
+            }
+        }
+        return localCache;
+    }
 
     /**
      * 保存String数据
      *
      * @param key
-     * @param result
+     * @param object
      */
-    public void putString(String key, String result) {
-        FileUtils.writeNewFile(KEY_CACHE, key, result);
+    public void putObject(String key, Object object) {
+
+        FileUtils.writeNewFile(KEY_CACHE, key, String.valueOf(object));
     }
 
     /**
@@ -49,7 +67,7 @@ public class LocalCache {
      *
      * @param key
      */
-    public String getString(String key) {
+    public Object getObject(String key) {
 
         try {
             FileInputStream is = new FileInputStream(new File(KEY_CACHE, key));
@@ -75,6 +93,16 @@ public class LocalCache {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 清除数据
+     */
+    public void delete() {
+        long dirLength = FileUtils.getDirLength(new File(KEY_CACHE));
+        if (dirLength >= MAX) {
+            FileUtils.deleteDirAndFiles(new File(KEY_CACHE));
+        }
     }
 
 }

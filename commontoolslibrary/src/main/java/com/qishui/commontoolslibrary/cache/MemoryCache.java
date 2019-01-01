@@ -9,9 +9,16 @@ import android.util.LruCache;
 
 public class MemoryCache {
 
+    /**
+     * 存放bitmap
+     */
     private LruCache<String, Bitmap> map;
+    /**
+     * 存放小数据
+     */
+    private LruCache<String, Object> stringMap;
 
-    public MemoryCache() {
+    private MemoryCache() {
         long memory = Runtime.getRuntime().maxMemory();
         int size = (int) (memory / 8);
         map = new LruCache<String, Bitmap>(size) {
@@ -20,6 +27,27 @@ public class MemoryCache {
                 return value.getByteCount();
             }
         };
+
+        int stringSize = (int) (memory / 16);
+        stringMap = new LruCache<String, Object>(stringSize) {
+            @Override
+            protected int sizeOf(String key, Object value) {
+                return 100;
+            }
+        };
+
+    }
+
+    private static MemoryCache memoryCache;
+    public static MemoryCache with() {
+        if(memoryCache==null){
+            synchronized (MemoryCache.class){
+                if(memoryCache==null){
+                    memoryCache=new MemoryCache();
+                }
+            }
+        }
+        return memoryCache;
     }
 
     /**
@@ -41,5 +69,28 @@ public class MemoryCache {
         return map.get(key);
     }
 
+
+    public void putObject(String key, Object object) {
+        stringMap.put(key, object);
+    }
+
+
+    public Object getObject(String key) {
+        return stringMap.get(key);
+    }
+
+
+    /**
+     * 清除数据
+     *
+     * @param key
+     */
+    public void removeObject(String key) {
+        stringMap.remove(key);
+    }
+
+    public void removeBitmap(String key) {
+        map.remove(key);
+    }
 
 }

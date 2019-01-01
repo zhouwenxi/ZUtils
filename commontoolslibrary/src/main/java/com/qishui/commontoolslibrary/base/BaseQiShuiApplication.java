@@ -3,8 +3,9 @@ package com.qishui.commontoolslibrary.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.qishui.commontoolslibrary.core.TinkerUtils;
+import com.qishui.commontoolslibrary.cache.CacheManager;
 import com.qishui.commontoolslibrary.http.HttpManager;
+import com.qishui.commontoolslibrary.http.easyhttp.HttpThreadPoolManager;
 import com.qishui.commontoolslibrary.http.proxy.EasyHttpProxy;
 
 /**
@@ -23,6 +24,15 @@ public class BaseQiShuiApplication extends Application {
         context = this;
 
         HttpManager.with().setHttp(new EasyHttpProxy());
+
+        //检查最大容量 使用子线程，提高启动速度
+        HttpThreadPoolManager.with().excute(new Runnable() {
+            @Override
+            public void run() {
+                CacheManager.with().clean();
+            }
+        });
+
 
     }
 

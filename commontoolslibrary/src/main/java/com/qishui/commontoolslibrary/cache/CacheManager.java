@@ -14,15 +14,8 @@ import java.util.HashMap;
 public class CacheManager {
 
     private static CacheManager cacheManager;
-    private static LocalCache localCache;
-    private static MemoryCache memoryCache;
-    private static NetCache netCache;
-
 
     private CacheManager() {
-        localCache = new LocalCache();
-        memoryCache = new MemoryCache();
-        netCache = new NetCache();
     }
 
     public static CacheManager with() {
@@ -36,6 +29,7 @@ public class CacheManager {
         return cacheManager;
     }
 
+
     /**
      * 获取key
      *
@@ -43,7 +37,7 @@ public class CacheManager {
      * @param map
      * @return
      */
-    public static String getkey(String url, HashMap<String, Object> map) {
+    public String getkey(String url, HashMap<String, Object> map) {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(url);
@@ -63,23 +57,104 @@ public class CacheManager {
     }
 
 
-    public static Bitmap getBitmap(String url, HashMap<String, Object> map) {
+    /**
+     * 获取数据
+     *
+     * @param url
+     * @return
+     */
+    public Bitmap getBitmap(String url) {
+        return getBitmap(url, null);
+    }
+
+    public Bitmap getBitmap(String url, HashMap<String, Object> map) {
         Bitmap bitmap = null;
         String key = getkey(url, map);
 
-        bitmap = memoryCache.getBitmap(key);
+        bitmap = MemoryCache.with().getBitmap(key);
         if (bitmap != null) {
             return bitmap;
         }
-        bitmap = localCache.getBitmap(key);
+        bitmap = LocalCache.with().getBitmap(key);
         if (bitmap != null) {
             return bitmap;
         }
-
-        netCache.getNetBitmapData(url,map);
 
         return null;
     }
 
+    /**
+     * 获取数据
+     *
+     * @param url
+     * @return
+     */
+    public Object getObject(String url) {
+        return getObject(url, null);
+    }
 
+    public Object getObject(String url, HashMap<String, Object> map) {
+        Object obj = null;
+        String key = getkey(url, map);
+
+        obj = MemoryCache.with().getObject(key);
+        if (obj != null) {
+            return obj;
+        }
+        obj = LocalCache.with().getObject(key);
+        if (obj != null) {
+            return obj;
+        }
+
+        return null;
+    }
+
+    /**
+     * 存放bitmap
+     *
+     * @param url
+     * @param map
+     * @param bitmap
+     */
+    public void putBitmap(String url, HashMap<String, Object> map, Bitmap bitmap) {
+
+        if (bitmap == null) {
+            return;
+        }
+        String key = getkey(url, map);
+        MemoryCache.with().putBitmap(key, bitmap);
+        LocalCache.with().putBitmap(key, bitmap);
+    }
+
+    public void putBitmap(String url, Bitmap bitmap) {
+        putBitmap(url, null, bitmap);
+    }
+
+    /**
+     * 存放小数据类型
+     *
+     * @param url
+     * @param map
+     * @param object
+     */
+    public void putObject(String url, HashMap<String, Object> map, Object object) {
+
+        if (object == null) {
+            return;
+        }
+        String key = getkey(url, map);
+        MemoryCache.with().putObject(key, object);
+        LocalCache.with().putObject(key, object);
+    }
+
+    public void putObject(String url, Object object) {
+        putObject(url, null, object);
+    }
+
+    /**
+     * 清除本地缓存
+     */
+    public void clean() {
+        LocalCache.with().delete();
+    }
 }
