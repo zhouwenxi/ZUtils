@@ -1,29 +1,25 @@
 package com.qishui.zutils;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.qishui.commontoolslibrary.cache.CacheManager;
 import com.qishui.commontoolslibrary.core.FileUtils;
-import com.qishui.commontoolslibrary.core.GsonUtils;
 import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
 import com.qishui.commontoolslibrary.http.HttpManager;
 import com.qishui.commontoolslibrary.http.callback.FileCallBack;
-import com.qishui.commontoolslibrary.http.callback.GsonCallBack;
-import com.qishui.commontoolslibrary.http.callback.StringCallBack;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,17 +45,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        String destFileDir = FileUtils.getSDPath() + "/mz/file";
-        String destFileName = "aaa.docx";
-        String url = "http://192.168.1.249:3838/tongtaiOA/api/indexNotice/download?ID=0c255f210a9b43deb6a58562bbf09210";
-        HttpManager.with().getProxy().downloadFile(url, destFileDir, destFileName, new FileCallBack() {
+        String destFileDir = FileUtils.KEY_FILE_CACHE;
+        final String url = "https://imgsa.baidu.com/exp/w=500/sign=6aaae3d9163853438ccf8721a312b01f/8435e5dde71190ef2946826ac81b9d16fcfa60c1.jpg";
+        HttpManager.with().getProxy().downloadFile(url, destFileDir, "", new FileCallBack() {
             @Override
             protected void onEasyInProgress(float progress) {
-                LogUtils.e("下载进度:"+progress);
+                LogUtils.e("下载进度:" + progress);
             }
 
             @Override
             protected void onEasySuccess(String result) {
+
+                CacheManager.with().putObject(url,result);
+                CacheManager.with().putBitmap(url, BitmapFactory.decodeFile(result));
                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
 
             }

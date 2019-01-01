@@ -28,7 +28,7 @@ public class MemoryCache {
             }
         };
 
-        int stringSize = (int) (memory / 16);
+        int stringSize = (int) (memory / 32);
         stringMap = new LruCache<String, Object>(stringSize) {
             @Override
             protected int sizeOf(String key, Object value) {

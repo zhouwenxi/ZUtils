@@ -14,6 +14,8 @@ import java.util.HashMap;
 public class CacheManager {
 
     private static CacheManager cacheManager;
+    private static final String KEY_BITMAP = "_bitmap";
+    private static final String KEY_OBJECT = "_object";
 
     private CacheManager() {
     }
@@ -37,10 +39,10 @@ public class CacheManager {
      * @param map
      * @return
      */
-    public String getkey(String url, HashMap<String, Object> map) {
+    public String getkey(String url, HashMap<String, Object> map, String tag) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(url);
+        stringBuilder.append(url).append(tag);
         if (map != null) {
             stringBuilder.append("?");
             int size = map.size();
@@ -69,7 +71,7 @@ public class CacheManager {
 
     public Bitmap getBitmap(String url, HashMap<String, Object> map) {
         Bitmap bitmap = null;
-        String key = getkey(url, map);
+        String key = getkey(url, map, KEY_BITMAP);
 
         bitmap = MemoryCache.with().getBitmap(key);
         if (bitmap != null) {
@@ -95,7 +97,7 @@ public class CacheManager {
 
     public Object getObject(String url, HashMap<String, Object> map) {
         Object obj = null;
-        String key = getkey(url, map);
+        String key = getkey(url, map, KEY_OBJECT);
 
         obj = MemoryCache.with().getObject(key);
         if (obj != null) {
@@ -116,18 +118,21 @@ public class CacheManager {
      * @param map
      * @param bitmap
      */
-    public void putBitmap(String url, HashMap<String, Object> map, Bitmap bitmap) {
+    public CacheManager putBitmap(String url, HashMap<String, Object> map, Bitmap bitmap) {
 
         if (bitmap == null) {
-            return;
+            return this;
         }
-        String key = getkey(url, map);
+        String key = getkey(url, map, KEY_BITMAP);
         MemoryCache.with().putBitmap(key, bitmap);
         LocalCache.with().putBitmap(key, bitmap);
+        return this;
     }
 
-    public void putBitmap(String url, Bitmap bitmap) {
+    public CacheManager putBitmap(String url, Bitmap bitmap) {
+
         putBitmap(url, null, bitmap);
+        return this;
     }
 
     /**
@@ -137,18 +142,20 @@ public class CacheManager {
      * @param map
      * @param object
      */
-    public void putObject(String url, HashMap<String, Object> map, Object object) {
+    public CacheManager putObject(String url, HashMap<String, Object> map, Object object) {
 
         if (object == null) {
-            return;
+            return this;
         }
-        String key = getkey(url, map);
+        String key = getkey(url, map, KEY_OBJECT);
         MemoryCache.with().putObject(key, object);
         LocalCache.with().putObject(key, object);
+        return this;
     }
 
-    public void putObject(String url, Object object) {
+    public CacheManager putObject(String url, Object object) {
         putObject(url, null, object);
+        return this;
     }
 
     /**

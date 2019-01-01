@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.qishui.commontoolslibrary.core.FileUtils;
+import com.qishui.commontoolslibrary.core.LogUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -100,6 +101,7 @@ public class LocalCache {
      */
     public void delete() {
         long dirLength = FileUtils.getDirLength(new File(KEY_CACHE));
+        LogUtils.e("SD缓存数据大小:" + (dirLength / 1024) + " KB");
         if (dirLength >= MAX) {
             FileUtils.deleteDirAndFiles(new File(KEY_CACHE));
         }

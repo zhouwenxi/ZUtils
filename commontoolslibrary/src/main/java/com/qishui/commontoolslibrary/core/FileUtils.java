@@ -30,7 +30,7 @@ public class FileUtils {
     /**
      * 总目录
      */
-    public static final String KEY_BASE_PATH = "/qishui";
+    public static final String KEY_BASE_PATH = getSDPath()+"/qishui";
 
     /**
      * 日志目录
@@ -232,7 +232,7 @@ public class FileUtils {
      * @return
      */
     public static String createNewPngFile() {
-        return createFileDelOld(getSDPath() + KEY_FILE_PICTURE, "_" + System.currentTimeMillis() + ".png");
+        return createFileDelOld( KEY_FILE_PICTURE, "_" + System.currentTimeMillis() + ".png");
     }
 
     /**
@@ -360,7 +360,7 @@ public class FileUtils {
     public static void writeLog(String text) {
         long currentTimeMillis = System.currentTimeMillis();
         String format = new SimpleDateFormat("yyyy年MM月dd日").format(currentTimeMillis);
-        String dir = getSDPath() + KEY_FILE_LOG + format;
+        String dir =  KEY_FILE_LOG + format;
         String name = new SimpleDateFormat("HH").format(currentTimeMillis) + ".log";
         String last = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(currentTimeMillis) + "\n" + text;
         write(dir, name, last);
@@ -420,7 +420,7 @@ public class FileUtils {
      */
     public static File copyAssestFile(String name) {
 
-        String dir = getSDPath() + KEY_FILE_ASSEST;
+        String dir =KEY_FILE_ASSEST;
         String filePath = createFileDelOld(dir, name);
 
         try {
