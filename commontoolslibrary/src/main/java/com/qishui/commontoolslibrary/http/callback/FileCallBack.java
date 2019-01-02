@@ -3,6 +3,8 @@ package com.qishui.commontoolslibrary.http.callback;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.io.File;
+
 /**
  *
  */
@@ -26,17 +28,28 @@ public abstract class FileCallBack implements ICallBack {
             });
         }
     }
+
     @Override
     public void onSuccess(final String result) {
 
         if (Looper.getMainLooper() == Looper.myLooper()) {
-            onEasySuccess(result);
+            if (!new File(result).exists()) {
+                onNull();
+                onLast();
+                return;
+            }
+            onEasySuccess(new File(result));
             onLast();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    onEasySuccess(result);
+                    if (!new File(result).exists()) {
+                        onNull();
+                        onLast();
+                        return;
+                    }
+                    onEasySuccess(new File(result));
                     onLast();
                 }
             });
@@ -64,7 +77,7 @@ public abstract class FileCallBack implements ICallBack {
 
     protected abstract void onEasyInProgress(float progress);
 
-    protected abstract void onEasySuccess(String result);
+    protected abstract void onEasySuccess(File file);
 
     protected abstract void onEasyError(String message);
 

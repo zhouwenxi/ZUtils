@@ -19,7 +19,12 @@ public abstract class GsonCallBack<T> implements ICallBack {
     public void onSuccess(String response) {
 
         if (response == null || "".equals(response)) {
-            onNull();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onNull();
+                }
+            });
             return;
         }
         try {
@@ -32,7 +37,12 @@ public abstract class GsonCallBack<T> implements ICallBack {
             onfalure("Error-" + e.toString() + "-" + response);
         }
         if (bean == null) {
-            onNull();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onNull();
+                }
+            });
             return;
         }
 
