@@ -85,14 +85,23 @@ public interface IHttp {
 
     /**
      * 下载文件
+     *
      * @param url
      * @param params
      * @param path
      * @param name
      * @param callBack
      */
-    void downloadFile(String url,Map<String,Object>params, String path, String name, ICallBack callBack);
+    void downloadFile(String url, Map<String, Object> params, String path, String name, ICallBack callBack);
 
+
+    /**
+     * 下载
+     * @param url
+     * @param dir
+     * @param callBack
+     */
+    void downloadFile(String url, String dir, ICallBack callBack);
 
     /**
      * 网络请求

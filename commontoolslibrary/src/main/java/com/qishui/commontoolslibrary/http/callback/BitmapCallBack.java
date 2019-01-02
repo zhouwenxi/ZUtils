@@ -25,7 +25,6 @@ public abstract class BitmapCallBack implements ICallBack {
             bitmap = BitmapFactory.decodeStream(is);
         } catch (Exception e) {
             onfalure("errorMsg_" + e.getMessage());
-            onLast();
         }
 
         if (Looper.getMainLooper() == Looper.myLooper()) {

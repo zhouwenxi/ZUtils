@@ -1,6 +1,7 @@
 package com.qishui.commontoolslibrary.http.easyhttp;
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.DelayQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -10,6 +11,9 @@ public class HttpThreadPoolManager {
 
     //一个由链表结构组成的双向阻塞队列，即可以从队列的两端插入和移除元素
     private LinkedBlockingDeque<Runnable> queue = new LinkedBlockingDeque<>();
+
+    //延时队列
+    private DelayQueue delayQueue = new DelayQueue<>();
 
     //添加任务就是添加线程
     public void excute(Runnable runnable) {
@@ -79,7 +83,7 @@ public class HttpThreadPoolManager {
         //　　也就是说corePoolSize就是线程池大小，maximumPoolSize在我看来是线程池的一种补救措施，即任务量突然过大时的一种补救措施。
         //　　不过为了方便理解，在本文后面还是将corePoolSize翻译成核心池大小。
 
-        threadPoolExecutor = new ThreadPoolExecutor(10, 20, 35, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4),rejectedExecutionHandler);
+        threadPoolExecutor = new ThreadPoolExecutor(5, 20, 35, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4), rejectedExecutionHandler);
         //开启传动带
         threadPoolExecutor.execute(runnable);
     }

@@ -163,5 +163,6 @@ public class CacheManager {
      */
     public void clean() {
         LocalCache.with().delete();
+        MemoryCache.with().delete();
     }
 }

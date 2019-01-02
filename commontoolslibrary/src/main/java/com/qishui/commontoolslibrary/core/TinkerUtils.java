@@ -1,10 +1,16 @@
 package com.qishui.commontoolslibrary.core;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -120,6 +126,27 @@ public class TinkerUtils {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void down(Context context) {
+
+        // 修复包保存为 /data/data/包名/app_dexs/out.dex
+        File filesDir = context.getDir("dexs", Context.MODE_PRIVATE);
+        String name = "out.dex";
+
+        String dexFile = FileUtils.createFileDelOld(filesDir.getAbsolutePath(), name);
+
+        // 获取 sd 卡下的 out.dex
+        try {
+            InputStream is = new FileInputStream(new File(Environment.getExternalStorageDirectory(), name));
+            FileOutputStream os = new FileOutputStream(dexFile);
+            FileUtils.copyIS2OS(is, os);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

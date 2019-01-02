@@ -39,11 +39,12 @@ public class MemoryCache {
     }
 
     private static MemoryCache memoryCache;
+
     public static MemoryCache with() {
-        if(memoryCache==null){
-            synchronized (MemoryCache.class){
-                if(memoryCache==null){
-                    memoryCache=new MemoryCache();
+        if (memoryCache == null) {
+            synchronized (MemoryCache.class) {
+                if (memoryCache == null) {
+                    memoryCache = new MemoryCache();
                 }
             }
         }
@@ -56,8 +57,9 @@ public class MemoryCache {
      * @param key
      * @param result
      */
-    public void putBitmap(String key, Bitmap result) {
+    public MemoryCache putBitmap(String key, Bitmap result) {
         map.put(key, result);
+        return this;
     }
 
     /**
@@ -70,8 +72,9 @@ public class MemoryCache {
     }
 
 
-    public void putObject(String key, Object object) {
+    public MemoryCache putObject(String key, Object object) {
         stringMap.put(key, object);
+        return this;
     }
 
 
@@ -85,12 +88,28 @@ public class MemoryCache {
      *
      * @param key
      */
-    public void removeObject(String key) {
+    public MemoryCache removeObject(String key) {
         stringMap.remove(key);
+        return this;
     }
 
-    public void removeBitmap(String key) {
+    public MemoryCache removeBitmap(String key) {
         map.remove(key);
+        return this;
     }
+
+
+    /**
+     * 清除内存缓存
+     */
+    public void delete() {
+        if (map != null) {
+            map.evictAll();
+        }
+        if (stringMap != null) {
+            stringMap.evictAll();
+        }
+    }
+
 
 }

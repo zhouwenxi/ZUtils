@@ -43,9 +43,10 @@ public class LocalCache {
      * @param key
      * @param object
      */
-    public void putObject(String key, Object object) {
+    public LocalCache putObject(String key, Object object) {
 
         FileUtils.writeNewFile(KEY_CACHE, key, String.valueOf(object));
+        return this;
     }
 
     /**
@@ -54,12 +55,13 @@ public class LocalCache {
      * @param key
      * @param bitmap
      */
-    public void putBitmap(String key, Bitmap bitmap) {
+    public LocalCache putBitmap(String key, Bitmap bitmap) {
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(FileUtils.createFileDelOld(KEY_CACHE, key)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return this;
 
     }
 
