@@ -44,22 +44,27 @@ public class EasyHttpProxy implements IHttp {
 
     @Override
     public void uploadFile(String url, Map<String, Object> params, String fileParam, String file, ICallBack callBack) {
-        EasyHttp.uploadFile(url,params,fileParam,file,callBack);
+        EasyHttp.uploadFile(url, params, fileParam, file, callBack);
     }
 
     @Override
     public void downloadFile(String url, String path, String name, ICallBack callBack) {
-         EasyHttp.downloadFile(url,path,name,callBack);
+        EasyHttp.downloadFile(url, path, name, callBack);
     }
 
     @Override
     public void downloadFile(String url, Map<String, Object> params, String path, String name, ICallBack callBack) {
-        EasyHttp.downloadFile(url,params,path,name,callBack);
+        EasyHttp.downloadFile(url, params, path, name, callBack);
+    }
+
+    @Override
+    public void downloadFile(String url, Map<String, Object> params, String path, ICallBack callBack) {
+        EasyHttp.downloadFile(url, params, path, null, callBack);
     }
 
     @Override
     public void downloadFile(String url, String dir, ICallBack callBack) {
-        EasyHttp.downloadFile(url,null,dir,null,callBack);
+        EasyHttp.downloadFile(url, null, dir, null, callBack);
     }
 
     @Override

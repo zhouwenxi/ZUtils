@@ -94,6 +94,7 @@ public interface IHttp {
      */
     void downloadFile(String url, Map<String, Object> params, String path, String name, ICallBack callBack);
 
+    void downloadFile(String url, Map<String, Object> params, String path, ICallBack callBack);
 
     /**
      * 下载

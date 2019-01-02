@@ -23,6 +23,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 实现GET POST 上传\下载\解析文件\gson\bitmap
+ * todo 网络取消、断点续传、后台下载、失败重试、Https机制、证书设置、长连接、缓存(配合数据库)
+ */
 public class HttpService {
 
     /**
@@ -311,13 +315,14 @@ public class HttpService {
 
     /**
      * 下载文件
+     *
      * @param urlPath
      * @param map
      * @param downloadDir
      * @param downloadFileName
      * @param callBack
      */
-    public  void downloadFile(String urlPath, Map<String,Object>map,String downloadDir,String downloadFileName,ICallBack callBack){
+    public void downloadFile(String urlPath, Map<String, Object> map, String downloadDir, String downloadFileName, ICallBack callBack) {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(urlPath);
@@ -334,16 +339,18 @@ public class HttpService {
             }
         }
 
-        downloadFile(stringBuilder.toString(),  downloadDir, downloadFileName, callBack);
+        downloadFile(stringBuilder.toString(), downloadDir, downloadFileName, callBack);
     }
+
     /**
      * 下载文件
-     * @param urlPath  下载路径
-     * @param downloadDir 下载目录
+     *
+     * @param urlPath          下载路径
+     * @param downloadDir      下载目录
      * @param downloadFileName 下载名字
      * @param callBack
      */
-    public  void downloadFile(String urlPath, String downloadDir,String downloadFileName,ICallBack callBack){
+    public void downloadFile(String urlPath, String downloadDir, String downloadFileName, ICallBack callBack) {
 
         File file = null;
         try {
@@ -352,12 +359,12 @@ public class HttpService {
             // 文件大小
             int fileLength = httpURLConnection.getContentLength();
             String path;
-            if(downloadFileName==null || "".equals(downloadFileName)){
+            if (downloadFileName == null || "".equals(downloadFileName)) {
                 // 文件名
                 String filePathUrl = httpURLConnection.getURL().getFile();
                 String fileFullName = filePathUrl.substring(filePathUrl.lastIndexOf(File.separatorChar) + 1);
                 path = downloadDir + File.separatorChar + fileFullName;
-            }else {
+            } else {
                 path = downloadDir + File.separatorChar + downloadFileName;
             }
             BufferedInputStream bin = new BufferedInputStream(httpURLConnection.getInputStream());
@@ -369,32 +376,33 @@ public class HttpService {
             OutputStream out = new FileOutputStream(file);
             int size;
             int len = 0;
-            int index=0;
+            int index = 0;
             byte[] buf = new byte[1024];
             while ((size = bin.read(buf)) != -1) {
                 len += size;
                 out.write(buf, 0, size);
                 index++;
-                if(index%10==0){
-                    if(callBack!=null){
+                if (index % 10 == 0) {
+                    if (callBack != null) {
                         callBack.inProgress(len * 100 / fileLength);
                     }
                 }
             }
-            close(bin,out);
+            close(bin, out);
         } catch (Exception e) {
-            if(callBack!=null){
-                callBack.onfalure("errorMsg_"+e.getMessage());
+            if (callBack != null) {
+                callBack.onfalure("errorMsg_" + e.getMessage());
             }
         }
-        if(callBack!=null){
-            if(file!=null){
+        if (callBack != null) {
+            if (file != null) {
                 callBack.onSuccess(file.getAbsolutePath());
-            }else {
+            } else {
                 callBack.onfalure("errorMsg_file_null");
             }
         }
     }
+
     /**
      * 下载 使用服务器文件名字
      *
@@ -402,8 +410,8 @@ public class HttpService {
      * @param downloadDir
      * @return
      */
-    public  void downloadFile(String urlPath, String downloadDir,ICallBack callBack) {
-        downloadFile(urlPath,downloadDir,null,callBack);
+    public void downloadFile(String urlPath, String downloadDir, ICallBack callBack) {
+        downloadFile(urlPath, downloadDir, null, callBack);
     }
 
 
@@ -418,17 +426,17 @@ public class HttpService {
      */
     public void uploadFile(String url, Map<String, Object> map, String fileParam, String filePath, ICallBack callBack) {
 
-        if(url==null || "".equals(url)){
+        if (url == null || "".equals(url)) {
             throw new RuntimeException("上传路径不能为空!");
         }
 
-        if(fileParam==null || "".equals(fileParam)){
-            fileParam="file";
+        if (fileParam == null || "".equals(fileParam)) {
+            fileParam = "file";
         }
-        if(filePath==null || "".equals(filePath)){
+        if (filePath == null || "".equals(filePath)) {
             throw new RuntimeException("上传文件路径不能为空!");
         }
-        if(!FileUtils.isExistFile(filePath)){
+        if (!FileUtils.isExistFile(filePath)) {
             throw new RuntimeException("上传文件不存在!");
         }
 
@@ -437,6 +445,7 @@ public class HttpService {
 
     /**
      * 上传单个文件
+     *
      * @param url
      * @param fileParam
      * @param filePath
@@ -448,6 +457,7 @@ public class HttpService {
 
     /**
      * 上传单个文件
+     *
      * @param url
      * @param filePath
      * @param callBack
@@ -487,26 +497,26 @@ public class HttpService {
         int sum = 0;
 
         //多文件矫正
-        String[] lastFiles=new String[]{};
-        if(uploadFilePaths.length>1){
-            ArrayList<String>list=new ArrayList<>();
+        String[] lastFiles = new String[]{};
+        if (uploadFilePaths.length > 1) {
+            ArrayList<String> list = new ArrayList<>();
             //上传总长度
             for (int i = 0; i < uploadFilePaths.length; i++) {
-                if(FileUtils.isExistFile(uploadFilePaths[i])){
+                if (FileUtils.isExistFile(uploadFilePaths[i])) {
                     sum = +uploadFilePaths[i].length();
                     list.add(uploadFilePaths[i]);
                 }
             }
             lastFiles = (String[]) list.toArray();
-            if(lastFiles.length<=0){
-                if(callBack!=null){
+            if (lastFiles.length <= 0) {
+                if (callBack != null) {
                     callBack.onfalure("errorMsg_files not exists ...");
                 }
                 return;
             }
-        }else  if(uploadFilePaths.length==1){
+        } else if (uploadFilePaths.length == 1) {
             //单文件
-            lastFiles=uploadFilePaths;
+            lastFiles = uploadFilePaths;
         }
 
         try {
@@ -519,7 +529,7 @@ public class HttpService {
             //其他参数上传
             writeParams(ds, map);
             //文件上传
-            writeFiles(fileParam, lastFiles, ds,sum, callBack);
+            writeFiles(fileParam, lastFiles, ds, sum, callBack);
 
             if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream();
@@ -549,7 +559,7 @@ public class HttpService {
      * @param callBack
      * @throws IOException
      */
-    private void writeFiles(String[] fileParam, String[] uploadFilePaths, DataOutputStream ds,int sum, ICallBack callBack) throws IOException {
+    private void writeFiles(String[] fileParam, String[] uploadFilePaths, DataOutputStream ds, int sum, ICallBack callBack) throws IOException {
 
         //当前长度
         int curSize = 0;
