@@ -3,10 +3,9 @@ package com.qishui.zutils;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-import com.qishui.commontoolslibrary.notice.dialog.CommonDialog;
+import com.qishui.commontoolslibrary.notice.dialog.LoadingDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,17 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        CommonDialog.with(this).setDialogContent("Hello World ").setCallBack(new CommonDialog.CallBack() {
-            @Override
-            public void left() {
-                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void right() {
-                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
-            }
-        }).showDialog();
+        new LoadingDialog(this).showDialog();
 
     }
 

@@ -1,4 +1,4 @@
-package com.qishui.commontoolslibrary.base;
+package com.qishui.commontoolslibrary.bean;
 
 /**
  * Created by zhou on 2018/12/22.

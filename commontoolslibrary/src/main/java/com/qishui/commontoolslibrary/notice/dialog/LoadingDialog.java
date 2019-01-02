@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.qishui.commontoolslibrary.R;
+
 public class LoadingDialog extends BaseQishuiDialog {
 
     public LoadingDialog(@NonNull Activity context) {
@@ -12,7 +14,7 @@ public class LoadingDialog extends BaseQishuiDialog {
 
     @Override
     protected int initLayout() {
-        return 0;
+        return R.layout.dialog_loading;
     }
 
     @Override

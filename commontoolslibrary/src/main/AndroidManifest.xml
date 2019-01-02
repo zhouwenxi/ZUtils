@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qishui.commontoolslibrary">
 
-    <!--相机-->
+    <!-- 相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--电话-->
+    <!-- 电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--网络-->
+    <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 获取网络状态改变的权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,14 +17,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!--位置-->
+    <!-- 位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!--读写权限-->
+    <!-- 读写权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <application>
         <provider
@@ -36,6 +36,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".activity.QiShuiSplashActivity" />
+        <activity android:name=".activity.QiShuiAboutActivity" />
+        <activity android:name=".activity.QiShuiMainStyle01Activity" />
+        <activity android:name=".activity.QiShuiMainStyle02Activity" />
+        <activity android:name=".activity.QiShuiMainStyle03Activity" />
+        <activity android:name=".activity.QiShuiSeeBigPictureActivity"></activity>
     </application>
 
 </manifest>
