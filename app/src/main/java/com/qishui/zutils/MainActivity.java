@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.core.PermissionUtils;
+import com.qishui.commontoolslibrary.notice.dialog.CommonDialog;
 import com.qishui.commontoolslibrary.notice.dialog.ListDialog;
 
 import java.util.ArrayList;
@@ -26,7 +27,13 @@ public class MainActivity extends AppCompatActivity {
                 .setCallback(new PermissionUtils.Callback() {
                     @Override
                     public void refuse() {
-                        PermissionUtils.goSetInfo(MainActivity.this, PermissionUtils.getPermission(), null);
+                        PermissionUtils.goSetInfo(MainActivity.this, PermissionUtils.getPermission(), new PermissionUtils.SetCallback() {
+                            @Override
+                            public void onclikCancle() {
+
+                                Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
 
@@ -35,16 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        List<Bean> list=new ArrayList<Bean>();
-        list.add(new Bean("0x1233","hello world 0","江西"));
-        list.add(new Bean("0x1234","hello world 1","北京"));
-        list.add(new Bean("0x1235","hello world 2","上海"));
+        List<Bean> list = new ArrayList<Bean>();
+        list.add(new Bean("0x1233", "hello world 0", "江西"));
+        list.add(new Bean("0x1234", "hello world 1", "北京"));
+        list.add(new Bean("0x1235", "hello world 2", "上海"));
 
-        new ListDialog<Bean>(this).setDialogLv(list).setCallback(new ListDialog.CallBack<Bean>() {
+        new ListDialog<Bean>(this).setDialogLv(list).setDialogTitle("选择城市").setDialogNoDataTip("没有城市").setCallback(new ListDialog.CallBack<Bean>() {
             @Override
             public void disPlay(Bean bean, int position) {
 
                 Toast.makeText(MainActivity.this, bean.getCode(), Toast.LENGTH_SHORT).show();
+
             }
         }).showDialog();
 
@@ -53,6 +61,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick2(View view) {
 
+        CommonDialog.with(this, CommonDialog.STYLE_IOS).setDialogTitle("你是否需要添加?").setDialogLeftText("不了").setDialogRightText("好的").setCallBack(new CommonDialog.CallBack() {
+            @Override
+            public void left() {
+
+                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void right() {
+
+                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
+            }
+        }).showDialog();
 
     }
 
