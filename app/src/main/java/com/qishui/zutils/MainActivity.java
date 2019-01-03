@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         list.add(new Bean("0x1234","hello world 1","北京"));
         list.add(new Bean("0x1235","hello world 2","上海"));
 
-
         new ListDialog<Bean>(this).setDialogLv(list).setCallback(new ListDialog.CallBack<Bean>() {
             @Override
             public void disPlay(Bean bean, int position) {
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, bean.getCode(), Toast.LENGTH_SHORT).show();
             }
         }).showDialog();
-
 
 
     }

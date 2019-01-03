@@ -25,8 +25,7 @@ dialog
 
     }
     
-    
- 
+
     public class Bean  extends QiShuiDialogBean {
 
     private String code;
@@ -66,9 +65,9 @@ dialog
         this.msg = msg;
         this.displayCity = displayCity;
         this.showName=displayCity;
-    }
 
-}
+        }
+    }
 
 
 http
