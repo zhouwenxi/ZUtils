@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -51,6 +50,8 @@ public abstract class BaseQishuiDialog extends Dialog {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;   //设置宽度充满屏幕
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
+        //设置背景透明
+        window.setBackgroundDrawableResource(R.color.colorTransparent);
     }
 
     /**
