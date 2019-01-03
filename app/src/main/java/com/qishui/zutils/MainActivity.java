@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.qishui.commontoolslibrary.core.PermissionUtils;
+import com.qishui.commontoolslibrary.notice.dialog.CommonDialog;
 import com.qishui.commontoolslibrary.notice.dialog.LoadingDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclick1(View view) {
 
-        new LoadingDialog(this).showDialog();
+        CommonDialog.with(this,CommonDialog.STYLE_ANDROID).setDialogTitle("添书").setDialogContent("是否将本书加入书架?").setDialogRightText("加入书架").setDialogLeftText("不了").setCallBack(new CommonDialog.CallBack() {
+            @Override
+            public void left() {
+
+            }
+
+            @Override
+            public void right() {
+
+            }
+        }).showDialog();
 
     }
 

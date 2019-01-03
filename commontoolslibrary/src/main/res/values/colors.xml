@@ -4,11 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorLine">#66000000</color>
+    <color name="colorLine">#33000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorRed">#ff0000</color>
+    <color name="colorRed99">#99ff0000</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorF7">#f7f7f7</color>
     <color name="colorF2">#f2f2f2</color>
     <color name="color06">#aa060606</color>
+    <color name="color07">#ff070707</color>
 </resources>

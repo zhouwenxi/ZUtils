@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_common_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
-    android:id="@+id/dialog_common_ll">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:background="@drawable/dialog_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bg"
         android:gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/dialog_common_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="15dp"
+            android:text="添加"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/dialog_common_tv_content"
-                android:gravity="center|left"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="15"
-                android:padding="15dp"
-                android:lineSpacingExtra="3dp"
-                android:textColor="@color/color06"
-                android:text="该系统显然并不顺畅，也不明晰。" />
+        <TextView
+            android:id="@+id/dialog_common_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="15"
+            android:padding="15dp"
+            android:text="该系统显然并不顺畅，也不明晰。"
+            android:textColor="@color/color06" />
 
 
         <View
@@ -31,7 +40,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:background="@color/color06" />
+            android:background="@color/colorLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
-                android:background="@color/color06" />
+                android:background="@color/colorLine" />
 
             <TextView
                 android:id="@+id/dialog_common_tv_right"

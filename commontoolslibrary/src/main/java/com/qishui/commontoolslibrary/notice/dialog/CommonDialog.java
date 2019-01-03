@@ -27,29 +27,51 @@ public class CommonDialog extends BaseQishuiDialog {
     private TextView mDialog_common_tv_content;
     private TextView mDialog_common_tv_left;
     private TextView mDialog_common_tv_right;
+    private TextView mDialog_common_tv_title;
     private String mContent;
     private String mLeft;
     private String mRight;
-
+    private String mTitle;
+    //ios
+    public static String STYLE_IOS="01";
+    //android
+    public static String STYLE_ANDROID="02";
+    //类型
+    private static String STYLE;
     private void bindViews() {
 
         mDialog_common_ll = findViewById(R.id.dialog_common_ll);
         mDialog_common_tv_content = findViewById(R.id.dialog_common_tv_content);
         mDialog_common_tv_left = findViewById(R.id.dialog_common_tv_left);
         mDialog_common_tv_right = findViewById(R.id.dialog_common_tv_right);
+        mDialog_common_tv_title=findViewById(R.id.dialog_common_tv_title);
     }
 
     public static CommonDialog with(Activity activity){
         return new CommonDialog(activity);
     }
 
+    public static CommonDialog with(Activity activity,String style){
+        return new CommonDialog(activity,style);
+    }
+
     private CommonDialog(@NonNull Activity activity) {
         super(activity);
+        STYLE=STYLE_IOS;
+    }
+
+    private CommonDialog(@NonNull Activity activity,String style) {
+        super(activity);
+        this.STYLE=style;
     }
 
     @Override
     protected int initLayout() {
-        return R.layout.dialog_common;
+
+        if(TextUtils.equals(STYLE,STYLE_IOS)){
+            return R.layout.dialog_common_style1;
+        }
+        return R.layout.dialog_common_style2;
     }
 
     @Override
@@ -66,6 +88,7 @@ public class CommonDialog extends BaseQishuiDialog {
      * 设置文本
      */
     private void setText() {
+        getDialogTitleTv().setText(TextUtils.isEmpty(mTitle) ? "提示" : mTitle);
         getDialogContentTv().setText(TextUtils.isEmpty(mContent) ? "请输入提示内容" : mContent);
         getDialogLeftTv().setText(TextUtils.isEmpty(mLeft) ? "取消" : mLeft);
         getDialogRightTv().setText(TextUtils.isEmpty(mRight) ? "确认" : mRight);
@@ -129,6 +152,14 @@ public class CommonDialog extends BaseQishuiDialog {
 
 
     /**
+     * 获取标题
+     * @return
+     */
+    public TextView getDialogTitleTv() {
+        return mDialog_common_tv_title;
+    }
+
+    /**
      * 获取文字内容控件
      *
      * @return
@@ -185,6 +216,16 @@ public class CommonDialog extends BaseQishuiDialog {
      */
     public CommonDialog setDialogRightText(String text) {
         this.mRight=text;
+        return this;
+    }
+
+    /**
+     * 设置标题
+     * @param text
+     * @return
+     */
+    public CommonDialog setDialogTitle(String text) {
+        this.mTitle=text;
         return this;
     }
 

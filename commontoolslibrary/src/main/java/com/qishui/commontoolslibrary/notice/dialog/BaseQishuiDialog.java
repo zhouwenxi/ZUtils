@@ -6,6 +6,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.view.Gravity;
+import android.view.Window;
+import android.view.WindowManager;
+
+import com.qishui.commontoolslibrary.R;
 
 /**
  * Created by zhou on 2018/12/22.
@@ -30,6 +35,22 @@ public abstract class BaseQishuiDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(initLayout());
         initEvent(savedInstanceState);
+        setWidthAndHeight();
+    }
+
+    /**
+     * 设置dialog宽高
+     */
+    private void setWidthAndHeight() {
+        Window window = this.getWindow();
+        //可设置dialog的位置
+        //window.setGravity(Gravity.BOTTOM);
+        //消除边距
+        //window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;   //设置宽度充满屏幕
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
     }
 
     /**
