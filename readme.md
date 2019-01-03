@@ -16,7 +16,7 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.0'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.1'
     }
 
 permisssion
