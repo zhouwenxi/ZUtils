@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/head_left_rl"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#169BF9">
+
+    <ImageView
+        android:id="@+id/head_left_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/back_white" />
+
+    <TextView
+        android:id="@+id/head_left_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/head_left_iv"
+        android:gravity="center_vertical"
+        android:text="返回"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/head_middle_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:text="标题"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/head_right_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:text="设置"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:visibility="invisible" />
+
+
+    <ImageView
+        android:id="@+id/head_right_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/add_white" />
+
+
+</RelativeLayout>

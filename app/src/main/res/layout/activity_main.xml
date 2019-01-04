@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context="com.qishui.zutils.MainActivity">
 
+    <com.qishui.commontoolslibrary.view.HeadView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
