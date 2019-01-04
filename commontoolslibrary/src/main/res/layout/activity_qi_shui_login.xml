@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="30dp"
+    android:gravity="center_horizontal"
+    tools:context=".mvp.sample.QiShuiLoginActivity">
+
+
+    <EditText
+        android:id="@+id/qishui_login_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/please_Input_Name"/>
+
+    <EditText
+        android:id="@+id/qishui_login_et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/please_Input_Password"/>
+
+
+    <Button
+        android:text="@string/login"
+        android:id="@+id/qishui_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="login"/>
+
+</LinearLayout>

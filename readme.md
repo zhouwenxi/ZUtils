@@ -20,7 +20,7 @@
 
 permisssion
 ---
-1、Activity\Fragment请求权限及拒绝回调处理
+1、Activity、Fragment请求权限及拒绝回调处理
 
     PermissionUtils.with(this)
                 .addPermissions(PermissionUtils.GROUP_STORAGE)
@@ -30,7 +30,8 @@ permisssion
                 .setCallback(new PermissionUtils.Callback() {
                     @Override
                     public void refuse() {
-                        PermissionUtils.goSetInfo(MainActivity.this, PermissionUtils.getPermission(), new PermissionUtils.SetCallback() {
+                        PermissionUtils.goSetInfo(MainActivity.this, PermissionUtils.getPermission(), 
+                        new PermissionUtils.SetCallback() {
                             @Override
                             public void onclikCancle() {
                                 Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
@@ -146,12 +147,13 @@ cache
 
 3、清除数据【默认SD大于100MB自动删除SD缓存数据】
 
-   CacheManager.with().clean();
+    CacheManager.with().clean();
 
 ActivtyResultUtils 处理onActivityResult方法
 ---
     int requestCode=123;
-    ActivtyResultUtils.with(this).startForResult(QiShuiSeeBigPictureActivity.class, requestCode, new ActivtyResultUtils.Callback() {
+    ActivtyResultUtils.with(this).startForResult(QiShuiSeeBigPictureActivity.class, requestCode, 
+      new ActivtyResultUtils.Callback() {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
 

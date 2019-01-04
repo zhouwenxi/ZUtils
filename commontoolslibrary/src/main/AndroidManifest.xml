@@ -41,7 +41,8 @@
         <activity android:name=".activity.QiShuiMainStyle01Activity" />
         <activity android:name=".activity.QiShuiMainStyle02Activity" />
         <activity android:name=".activity.QiShuiMainStyle03Activity" />
-        <activity android:name=".activity.QiShuiSeeBigPictureActivity"></activity>
+        <activity android:name=".activity.QiShuiSeeBigPictureActivity" />
+        <activity android:name=".mvp.sample.QiShuiLoginActivity"></activity>
     </application>
 
 </manifest>

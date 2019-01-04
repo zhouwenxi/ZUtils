@@ -1,11 +1,13 @@
 package com.qishui.zutils;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.core.PermissionUtils;
+import com.qishui.commontoolslibrary.mvp.sample.QiShuiLoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onclick1(View view) {
+
+        startActivity(new Intent(this,QiShuiLoginActivity.class));
 
     }
 

@@ -20,12 +20,21 @@ public class LoadingDialog extends BaseQishuiDialog {
 
     private String mText;
 
+    private static LoadingDialog loadingDialog;
+
     private LoadingDialog(@NonNull Activity context) {
         super(context);
     }
 
     public static LoadingDialog with(Activity activity){
-        return new LoadingDialog(activity);
+        if(loadingDialog==null){
+            synchronized (LoadingDialog.class){
+                if(loadingDialog==null){
+                    loadingDialog=new LoadingDialog(activity);
+                }
+            }
+        }
+        return loadingDialog;
     }
 
     @Override
@@ -36,6 +45,7 @@ public class LoadingDialog extends BaseQishuiDialog {
     @Override
     protected void initEvent(Bundle savedInstanceState) {
 
+        setCanceledOnTouchOutside(false);
         TextView tv = findViewById(R.id.dialog_loading_tv);
         tv.setText(TextUtils.isEmpty(mText)?"加载中...":mText);
 
