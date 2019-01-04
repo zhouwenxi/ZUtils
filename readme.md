@@ -2,7 +2,7 @@
 
 2019年1月3日16:51:40
 
-使用方式
+使用方式(最低api为19)
 
     1、Add it in your root build.gradle at the end of repositories:
 
@@ -15,7 +15,7 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.1'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.2'
     }
 
 permisssion
@@ -193,6 +193,212 @@ TakePictureUtils 拍照及选取相册图片
 
 MVP
 ---
+使用用例
+
+1、QiShuiMVPContract 所有要实现的UI及数据加载及逻辑约束控制类
+
+    public class QiShuiMVPContract {
+    
+        interface ILoginView extends MvpBaseView{
+    
+            /**
+             * 提示信息
+             * @param message
+             */
+            void show(String message);
+    
+            /**
+             * 设置加载进度条
+             * @param text
+             */
+            void loadingDialog(String text);
+    
+            /**
+             * 关闭进度条
+             */
+            void dissmissDialog();
+    
+            /**
+             * 页面跳转
+             */
+            void nextPage();
+        }
+    
+        // m p 一般是相对应的，排除同一个请求使用不同参数
+    
+        interface ILoginModel extends MvpBaseModel {
+    
+            /**
+             * 进行联网操作 登录
+             * @param url
+             * @param map
+             * @param callBack
+             */
+            void requestLogin(String url, HashMap<String,Object> map, ICallBack callBack);
+        }
+    
+        interface IPresenter {
+    
+            /**
+             * 请求登录
+             * @param userName
+             * @param password
+             */
+            void login(String userName,String password);
+    
+        }
+    
+    }
+
+2、QiShuiLoginModel 数据操作类
+
+    public class QiShuiLoginModel implements QiShuiMVPContract.ILoginModel {
+    
+        @Override
+        public void requestLogin(String url, HashMap<String, Object> map, ICallBack callBack) {
+            /**
+             * 实际请求网络
+             */
+            HttpManager.with().getProxy().get(url,map,callBack);
+        }
+    }
+3、QiShuiLoginPresenter业务处理
+
+    public class QiShuiLoginPresenter extends MvpBasePresenter<QiShuiMVPContract.ILoginView,QiShuiLoginModel> implements QiShuiMVPContract.IPresenter{
+    
+        public QiShuiLoginPresenter(QiShuiLoginModel qiShuiLoginModel) {
+            super(qiShuiLoginModel);
+        }
+    
+        @Override
+        public void login(final String userName, final String password) {
+    
+            if(isAttachView()){
+                if(TextUtils.isEmpty(userName)){
+                    getView().show("用户名不能为空!");
+                    return;
+                }
+                if(TextUtils.isEmpty(password)){
+                    getView().show("密码不能为空!");
+                    return;
+                }
+                getView().loadingDialog("正在登录中...");
+            }
+    
+            String url="https://www.baidu.com";
+            HashMap<String, Object> map=new HashMap<>();
+            map.put("username",userName);
+            map.put("password",password);
+            getModel().requestLogin(url, map, new StringCallBack() {
+                @Override
+                protected void onEasySuccess(String result) {
+    
+                    //提示登录成功，及发生跳转
+                    if(isAttachView()){
+                        getView().show(userName+"_"+result);
+                        getView().nextPage();
+                    }
+    
+                }
+    
+                @Override
+                protected void onEasyError(String message) {
+    
+                    //提示错误信息
+                    if(isAttachView()){
+                        getView().show(userName+"_"+message);
+                    }
+    
+                }
+    
+                @Override
+                public void onLast() {
+                    //关闭进度条
+                    if(isAttachView()){
+                        getView().dissmissDialog();
+                    }
+                }
+            });
+    
+    
+        }
+    }
+
+4、页面转移 MVP 使用实例 login
+
+    public class QiShuiLoginActivity extends MvpBaseActivity<QiShuiMVPContract.ILoginView, QiShuiLoginModel, QiShuiLoginPresenter> implements QiShuiMVPContract.ILoginView {
+    
+        private EditText etName;
+        private EditText etPassword;
+    
+        @Override
+        protected QiShuiLoginPresenter createPresenter() {
+            return new QiShuiLoginPresenter(new QiShuiLoginModel());
+        }
+    
+        @Override
+        protected int initLayout() {
+            return R.layout.activity_qi_shui_login;
+        }
+    
+        @Override
+        protected void initEvent(Bundle savedInstanceState) {
+    
+            bindView();
+            login();
+        }
+    
+        private void bindView() {
+            etName = findViewById(R.id.qishui_login_et_name);
+            etPassword = findViewById(R.id.qishui_login_et_password);
+        }
+    
+        /**
+         * 登录
+         */
+        public void login() {
+            findViewById(R.id.qishui_login_btn).setOnClickListener(new QiShuiClick(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getPresenter() != null) {
+                        getPresenter().login(getText(etName), getText(etPassword));
+                    }
+                }
+            }));
+        }
+    
+        @Override
+        public void show(String message) {
+            toast(message);
+        }
+    
+        @Override
+        public void loadingDialog(String text) {
+            LoadingDialog.with(this).setText(text).showDialog();
+        }
+    
+        @Override
+        public void dissmissDialog() {
+            LoadingDialog.with(this).dismissDialog();
+        }
+    
+        @Override
+        public void nextPage() {
+             startActivity(QiShuiMainStyle01Activity.class);
+        }
+    
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            LoadingDialog.with(this).dismissDialog();
+        }
+    }
+    
+MVP总结 2019年1月4日16:33:19
+
+    把要在Activity要处理的，以view分割处理事件，model获取数据 转移到presenter里面处理。
+    
+    详情参见源码，关于基类mvp封装、网络部分封装。
 
 OnClickListener
 ---
