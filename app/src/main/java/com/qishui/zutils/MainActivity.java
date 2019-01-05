@@ -1,21 +1,39 @@
 package com.qishui.zutils;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.qishui.commontoolslibrary.annotation.QBindView;
+import com.qishui.commontoolslibrary.annotation.QBingLayout;
+import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-import com.qishui.commontoolslibrary.mvp.sample.QiShuiLoginActivity;
 
-public class MainActivity extends AppCompatActivity {
+@QBingLayout(R.layout.activity_main)
+public class MainActivity extends BaseQiShuiActivity {
+
+    @QBindView(R.id.btn1)
+    Button btn1;
+    @QBindView(R.id.btn2)
+    Button btn2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initEvent(Bundle savedInstanceState) {
+        initPermissions();
 
+        btn1.setText("Hello");
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toast("~~~~~~~~~~~~~~~~~~~~~~");
+            }
+        });
+
+        new HeadHolder(0).getView();
+    }
+
+    void  initPermissions(){
         PermissionUtils.with(this).
                 addPermissions(PermissionUtils.GROUP_STORAGE)
                 .addPermissions(PermissionUtils.GROUP_CAMERA)
@@ -33,18 +51,6 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
-
-
-    }
-
-    public void onclick1(View view) {
-
-        startActivity(new Intent(this,QiShuiLoginActivity.class));
-
-    }
-
-    public void onclick2(View view) {
-
     }
 
 }
