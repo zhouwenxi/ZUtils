@@ -23,6 +23,7 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
 
         //设置屏幕方向 垂直
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(initLayout());
         AnnotationUtils.initBinds(this);
         initEvent(savedInstanceState);
     }
@@ -32,8 +33,7 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
      *
      * @return
      */
-    //protected abstract int initLayout();
-
+    protected  abstract int initLayout();
     /**
      * 处理事件
      *
@@ -42,38 +42,40 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
     protected abstract void initEvent(Bundle savedInstanceState);
 
 
-
     /**
      * 获取文本
+     *
      * @param tv
      * @return
      */
-    public String getText(TextView tv){
-        return tv==null?"":tv.getText().toString().trim();
+    public String getText(TextView tv) {
+        return tv == null ? "" : tv.getText().toString().trim();
     }
 
-    public String getText(EditText editText){
-        return editText==null?"":editText.getText().toString().trim();
+    public String getText(EditText editText) {
+        return editText == null ? "" : editText.getText().toString().trim();
     }
 
     /**
      * 提示框
+     *
      * @param message
      */
-    public void toast(String message){
+    public void toast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     /**
      * 跳转下一页
+     *
      * @param clazz
      */
-    public void startActivity(Class clazz){
-        startActivity(new Intent(this,clazz));
+    public void startActivity(Class clazz) {
+        startActivity(new Intent(this, clazz));
     }
 
-    public void startActivityFinish(Class clazz){
-        startActivity(new Intent(this,clazz));
+    public void startActivityFinish(Class clazz) {
+        startActivity(new Intent(this, clazz));
         finish();
     }
 

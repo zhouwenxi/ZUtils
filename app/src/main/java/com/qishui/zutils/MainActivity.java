@@ -6,17 +6,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.annotation.QBindView;
-import com.qishui.commontoolslibrary.annotation.QBingLayout;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
 
-@QBingLayout(R.layout.activity_main)
+
 public class MainActivity extends BaseQiShuiActivity {
 
     @QBindView(R.id.btn1)
     Button btn1;
     @QBindView(R.id.btn2)
     Button btn2;
+
+    @Override
+    protected int initLayout() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void initEvent(Bundle savedInstanceState) {
@@ -30,10 +34,9 @@ public class MainActivity extends BaseQiShuiActivity {
             }
         });
 
-        new HeadHolder(0).getView();
     }
 
-    void  initPermissions(){
+    void initPermissions() {
         PermissionUtils.with(this).
                 addPermissions(PermissionUtils.GROUP_STORAGE)
                 .addPermissions(PermissionUtils.GROUP_CAMERA)

@@ -18,7 +18,6 @@ public class AnnotationUtils {
      * @param activity
      */
     public static void initBinds(AppCompatActivity activity) {
-        initBindLayout(activity);
         initBindView(activity);
         initBindOnclick(activity);
     }
