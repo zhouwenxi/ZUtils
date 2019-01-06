@@ -19,6 +19,10 @@ public class MainFragment extends BaseQiShuiFragment {
     @QBindView(R.id.fragment_tv2)
     TextView tv2;
 
+    @Override
+    public Boolean loadStateLayout() {
+        return true;
+    }
 
     @Override
     protected int initLayout() {
@@ -37,10 +41,12 @@ public class MainFragment extends BaseQiShuiFragment {
     void test(View view) {
         if (view.getId() == R.id.fragment_tv1) {
             toast("!!!!!!!!!!!!!!!!!!!!");
+            getStatusLayoutManager().showLoading();
         }
 
         if (view.getId() == R.id.fragment_tv2) {
             toast("222222222222222");
+            getStatusLayoutManager().showNetWorkError();
         }
     }
 }

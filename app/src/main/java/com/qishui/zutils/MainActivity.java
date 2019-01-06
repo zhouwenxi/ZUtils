@@ -18,6 +18,11 @@ public class MainActivity extends BaseQiShuiActivity {
     Button btn2;
 
     @Override
+    public Boolean loadStateLayout() {
+        return true;
+    }
+
+    @Override
     protected int initLayout() {
         return R.layout.activity_main;
     }
@@ -30,7 +35,15 @@ public class MainActivity extends BaseQiShuiActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getStatusLayoutManager().showLoading();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 toast("~~~~~~~~~~~~~~~~~~~~~~");
+
+                getStatusLayoutManager().showEmptyData();
             }
         });
 
