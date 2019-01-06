@@ -411,3 +411,48 @@ OnClickListener
         }
     }));
 
+annotation
+----------
+1、QBindView、QBindOnclick 可用在activity或者fragment,需要继承基类或则单独初始化。
+
+    public class MainFragment extends BaseQiShuiFragment {
+
+        @QBindView(R.id.fragment_tv1)
+        TextView tv;
+        @QBindView(R.id.fragment_tv2)
+        TextView tv2;
+
+
+        @Override
+        protected int initLayout() {
+            return R.layout.fragment_main_test;
+        }
+
+        @Override
+        protected void initEvent(Bundle savedInstanceState) {
+
+            tv.setText("Hello");
+            tv2.setText("world");
+
+        }
+
+        @QBindOnclick({R.id.fragment_tv1, R.id.fragment_tv2})
+        void test(View view) {
+            if (view.getId() == R.id.fragment_tv1) {
+                toast("!!!!!!!!!!!!!!!!!!!!");
+            }
+
+            if (view.getId() == R.id.fragment_tv2) {
+                toast("222222222222222");
+            }
+        }
+    }
+
+静态加载fragment
+
+        <fragment
+        android:name="com.qishui.zutils.MainFragment"
+        android:id="@+id/fragment1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
