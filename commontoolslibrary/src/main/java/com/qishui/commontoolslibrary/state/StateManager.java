@@ -62,6 +62,11 @@ public class StateManager implements StateInterface {
 
     private StateManager(Builder builder) {
 
+        initParams(builder);
+        init();
+    }
+
+    private void initParams(Builder builder) {
         context = builder.context;
         targetView = builder.loadingTargetView;
         loadingMessage = builder.loadingMessage;
@@ -86,21 +91,22 @@ public class StateManager implements StateInterface {
         if (builder.customEmptyView != null) {
             emptyView = builder.customEmptyView;
         }
-
-        init();
     }
 
     /**
-     * 替换布局
+     * 替换布局，初始化一次即可
      */
     private void init() {
         inflater = LayoutInflater.from(context);
         params = targetView.getLayoutParams();
+
+
         if (targetView.getParent() != null) {
             parentView = (ViewGroup) targetView.getParent();
         } else {
             parentView = targetView.getRootView().findViewById(android.R.id.content);
         }
+
         int count = parentView.getChildCount();
         for (int i = 0; i < count; i++) {
             if (targetView == parentView.getChildAt(i)) {

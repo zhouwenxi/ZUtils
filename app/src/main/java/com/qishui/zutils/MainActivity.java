@@ -37,20 +37,15 @@ public class MainActivity extends BaseQiShuiActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingController.showError();
+
+
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toast("~~~~~~~~~~~~~~~~~~~~~~");
-                loadingController.showLoading();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingController.showError();
-                    }
-                },3000);
+
 
 
             }
@@ -63,9 +58,15 @@ public class MainActivity extends BaseQiShuiActivity {
                 .setOnNetworkErrorRetryClickListener(new StateManager.CallBack() {
                     @Override
                     public void onClick() {
-                        if(loadingController!=null){
-                            loadingController.showError();
-                        }
+
+                        loadingController.showLoading();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadingController.showError();
+                            }
+                        },3000);
+
                     }
                 })
                 .setOnErrorRetryClickListener("点我重试", new StateManager.CallBack() {
@@ -75,6 +76,9 @@ public class MainActivity extends BaseQiShuiActivity {
                     }
                 })
                 .with();
+        loadingController.showError();
+
+
 
     }
 
