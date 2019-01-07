@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.telephony.TelephonyManager;
 
 import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
@@ -46,16 +45,11 @@ public class NetworkUtils {
 
     /**
      * 打开网络设置界面
-     * <p>3.0以下打开设置界面</p>
      *
      * @param context 上下文
      */
     public static void openWirelessSettings(Context context) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
-            context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-        } else {
-            context.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
-        }
+        context.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
     }
 
 
@@ -79,12 +73,10 @@ public class NetworkUtils {
      * @return
      */
     public static boolean isWifiAvailable(Context context) {
-        if (context != null) {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            if (ni != null) {
-                return ni.isAvailable();
-            }
+        ConnectivityManager cm = (ConnectivityManager) BaseQiShuiApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (ni != null) {
+            return ni.isAvailable();
         }
         return false;
     }
@@ -114,12 +106,10 @@ public class NetworkUtils {
 
     /**
      * 获取精确网络类型
-     *
-     * @param context
      * @return
      */
-    public static int getExactNetworkType(final Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static int getExactNetworkType() {
+        ConnectivityManager cm = (ConnectivityManager) BaseQiShuiApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (cm == null) {
             return TYPE_UNKNOW;

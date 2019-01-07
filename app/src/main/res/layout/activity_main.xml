@@ -22,6 +22,21 @@
         android:layout_height="wrap_content"
         android:text="x=修复" />
 
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/ll_state">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123 Hello"/>
+
+
+    </LinearLayout>
+
     <fragment
         android:name="com.qishui.zutils.MainFragment"
         android:id="@+id/fragment1"
