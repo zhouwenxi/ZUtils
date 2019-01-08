@@ -15,8 +15,10 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.2'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.3'
     }
+    
+    3、注册BaseQiShuiApplication或则实现BaseQiShuiApplication初始化方法
 
 permisssion
 ---
@@ -456,3 +458,41 @@ annotation
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+state
+---
+页面布局切换
+
+1、设置属性,可以自定义加载视图(加载中、加载失败、网络出错、数据为空),可以设置默认视图背景颜色、文字提示、图片资源、监听回调视图等。
+
+ll 为要显示状态变化的viewGroup控件
+
+    layoutManager = StateLayoutManager
+                .with(ll)
+                .setLoadingColor(0xffFF4081)
+                .setNetErrorColor(0xffFF4081);
+调用
+
+    //加载中
+    stateLayoutManager.showLoading();   
+    
+    //处理视图为空，并回调处理
+    stateLayoutManager.setCallBack(new StateLayoutManager.CallBack() {
+                                @Override
+                                public void handle(View view) {
+                                    view.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Toast.makeText(MainActivity.this, "xxoxoxoxoxoxo", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).showDataEmpty();   
+       
+    //网络错误
+    layoutManager.showNetworkError();
+    
+    //数据加载错误
+    layoutManager.showDataError();
+    
+    //加载原来视图
+    layoutManager.showContent();
