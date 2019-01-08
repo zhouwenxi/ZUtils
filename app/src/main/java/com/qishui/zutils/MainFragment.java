@@ -43,29 +43,14 @@ public class MainFragment extends BaseQiShuiFragment {
     @Override
     protected void initEvent(Bundle savedInstanceState) {
 
-        tv.setText("Hello");
-        tv2.setText("world");
-
-
+        layoutManager.showLoading();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layoutManager.showNetworkError();
+            }
+        }, 5000);
 
     }
 
-    @QBindOnclick({R.id.fragment_tv1, R.id.fragment_tv2})
-    void test(View view) {
-        if (view.getId() == R.id.fragment_tv1) {
-            toast("!!!!!!!!!!!!!!!!!!!!");
-            layoutManager.showLoading();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    layoutManager.showNetworkError();
-                }
-            }, 5000);
-        }
-
-        if (view.getId() == R.id.fragment_tv2) {
-            toast("222222222222222");
-            layoutManager.showDataError();
-        }
-    }
 }

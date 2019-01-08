@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
@@ -12,16 +13,15 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:id="@+id/fragment_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:textColor="@color/colorBlack"
-            android:text="12344"
             android:id="@+id/fragment_tv2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="12344"
+            android:textColor="@color/colorBlack" />
     </LinearLayout>
 </LinearLayout>

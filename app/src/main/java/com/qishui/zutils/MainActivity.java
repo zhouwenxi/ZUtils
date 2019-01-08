@@ -37,38 +37,23 @@ public class MainActivity extends BaseQiShuiActivity {
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
 
-        btn1.setText("Hello");
-        btn1.setOnClickListener(new View.OnClickListener() {
+        stateLayoutManager.showLoading();
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-
-                stateLayoutManager.showLoading();
-                new Handler().postDelayed(new Runnable() {
+            public void run() {
+                stateLayoutManager.setCallBack(new StateLayoutManager.CallBack() {
                     @Override
-                    public void run() {
-                        stateLayoutManager.setCallBack(new StateLayoutManager.CallBack() {
+                    public void handle(View view) {
+                        view.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void handle(View view) {
-                                view.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Toast.makeText(MainActivity.this, "xxoxoxoxoxoxo", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "xxoxoxoxoxoxo", Toast.LENGTH_SHORT).show();
                             }
-                        }).showDataEmpty();
+                        });
                     }
-                }, 2000);
+                }).showDataEmpty();
             }
-        });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toast("~~~~~~~~~~~~~~~~~~~~~~");
-                stateLayoutManager.showContent();
-
-            }
-        });
+        }, 2000);
 
 
     }

@@ -5,6 +5,8 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -91,9 +93,12 @@ public class StateLayoutManager {
      * @param targetView
      */
     private StateLayoutManager(View targetView) {
+
+
         this.targetView = targetView;
         params = targetView.getLayoutParams();
-        if (targetView instanceof ViewGroup) {
+
+        if (targetView.getParent() !=null) {
             parentView = (ViewGroup) targetView.getParent();
         } else {
             parentView = targetView.getRootView().findViewById(android.R.id.content);
@@ -442,6 +447,16 @@ public class StateLayoutManager {
      */
     public void showContent() {
         showView(targetView);
+    }
+
+    public static void removeParent(View v){
+        //  先找到爹 在通过爹去移除孩子
+        ViewParent parent = v.getParent();
+        //所有的控件 都有爹  爹一般情况下 就是ViewGoup
+        if(parent instanceof ViewGroup){
+            ViewGroup group=(ViewGroup) parent;
+            group.removeView(v);
+        }
     }
 
 
