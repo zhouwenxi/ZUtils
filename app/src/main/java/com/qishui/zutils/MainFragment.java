@@ -32,12 +32,21 @@ public class MainFragment extends BaseQiShuiFragment {
     }
 
     @Override
+    public void setStateLayoutAttrs() {
+
+        layoutManager = StateLayoutManager
+                .with(ll)
+                .setLoadingColor(0xffFF4081)
+                .setNetErrorColor(0xffFF4081);
+    }
+
+    @Override
     protected void initEvent(Bundle savedInstanceState) {
 
         tv.setText("Hello");
         tv2.setText("world");
 
-        layoutManager = StateLayoutManager.with(ll);
+
 
     }
 
@@ -49,13 +58,14 @@ public class MainFragment extends BaseQiShuiFragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    layoutManager.showContent();
+                    layoutManager.showNetworkError();
                 }
             }, 5000);
         }
 
         if (view.getId() == R.id.fragment_tv2) {
             toast("222222222222222");
+            layoutManager.showDataError();
         }
     }
 }

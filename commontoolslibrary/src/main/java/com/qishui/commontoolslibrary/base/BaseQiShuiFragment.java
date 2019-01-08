@@ -24,13 +24,11 @@ public abstract class BaseQiShuiFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = null;
-
-        view = inflater.inflate(initLayout(), null);
-
+        View view = inflater.inflate(initLayout(), null);
         AnnotationUtils.initBinds(this, view);
+        //设置状态属性
+        setStateLayoutAttrs();
         initEvent(savedInstanceState);
-
         if (view != null) {
             return view;
         }
@@ -38,7 +36,12 @@ public abstract class BaseQiShuiFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    /**
+     * 设置布局管理器属性
+     */
+    public void setStateLayoutAttrs() {
 
+    }
 
     /**
      * 加载布局

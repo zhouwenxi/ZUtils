@@ -29,11 +29,13 @@ public class MainActivity extends BaseQiShuiActivity {
     }
 
     @Override
+    public void setStateLayoutAttrs() {
+        stateLayoutManager = StateLayoutManager.with(ll_state);
+    }
+
+    @Override
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
-
-
-        stateLayoutManager = StateLayoutManager.with(ll_state).setLoadingTip("====加载中=======");
 
         btn1.setText("Hello");
         btn1.setOnClickListener(new View.OnClickListener() {

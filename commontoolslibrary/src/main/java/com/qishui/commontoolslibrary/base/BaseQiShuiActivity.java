@@ -25,10 +25,21 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         //设置屏幕方向 垂直
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(initLayout());
+        //绑定注解
         AnnotationUtils.initBinds(this);
+        //设置状态属性
+        setStateLayoutAttrs();
+
         initEvent(savedInstanceState);
     }
 
+    /**
+     * 重写
+     * @return
+     */
+    public void setStateLayoutAttrs() {
+
+    }
 
     /**
      * 加载布局

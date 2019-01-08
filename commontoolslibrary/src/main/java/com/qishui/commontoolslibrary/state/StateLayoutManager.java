@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
@@ -62,7 +62,14 @@ public class StateLayoutManager {
     private int dataEmptryResID;
     //自定义数据出错图片
     private int dataErrorResID;
-
+    //自定义加载中 背景颜色
+    private int loadingColor=0;
+    //自定义网络错误 背景颜色
+    private int netErrorColor=0;
+    //自定义数据为空 背景颜色
+    private int dataEmptryColor=0;
+    //自定义数据出错 背景颜色
+    private int dataErrorColor=0;
     // targetView  的父布局
     private ViewGroup parentView;
     // targetView 在父布局中的位置
@@ -70,10 +77,19 @@ public class StateLayoutManager {
     // targetView LayoutParams
     private ViewGroup.LayoutParams params;
 
+    /**
+     * 获取对象
+     * @param targetView
+     * @return
+     */
     public static StateLayoutManager with(View targetView) {
         return new StateLayoutManager(targetView);
     }
 
+    /**
+     * 初始化
+     * @param targetView
+     */
     private StateLayoutManager(View targetView) {
         this.targetView = targetView;
         params = targetView.getLayoutParams();
@@ -134,6 +150,10 @@ public class StateLayoutManager {
         //加载中
         if (index == INDEX_LOADINGVIEW) {
 
+            if (loadingColor != 0) {
+                LinearLayout ll = getView(view, R.id.state_data_loading_ll);
+                ll.setBackgroundColor(loadingColor);
+            }
             if (!TextUtils.isEmpty(loadingTip)) {
                 TextView tv = getView(view, R.id.state_data_loading_tv);
                 tv.setText(loadingTip);
@@ -142,6 +162,10 @@ public class StateLayoutManager {
         //网络错误
         if (index == INDEX_LOADNETWORK_ERROR_VIEW) {
 
+            if (netErrorColor != 0) {
+                LinearLayout ll = getView(view, R.id.state_data_network_error_ll);
+                ll.setBackgroundColor(netErrorColor);
+            }
             if (netErrorResID != 0) {
                 ImageView iv = getView(view, R.id.state_data_network_error_iv);
                 iv.setImageResource(netErrorResID);
@@ -154,6 +178,11 @@ public class StateLayoutManager {
         }
         //数据为空
         if (index == INDEX_LOADDATAEMPTYVIEW) {
+
+            if (dataEmptryColor != 0) {
+                LinearLayout ll = getView(view, R.id.state_data_empty_ll);
+                ll.setBackgroundColor(dataEmptryColor);
+            }
 
             if (dataEmptryResID != 0) {
                 ImageView iv = getView(view, R.id.state_data_empty_iv);
@@ -168,6 +197,10 @@ public class StateLayoutManager {
         //数据错误
         if (index == INDEX_LOADDATAERRORVIEW) {
 
+            if (dataErrorColor != 0) {
+                LinearLayout ll = getView(view, R.id.state_data_error_ll);
+                ll.setBackgroundColor(dataErrorColor);
+            }
             if (dataErrorResID != 0) {
                 ImageView iv = getView(view, R.id.state_data_error_iv);
                 iv.setImageResource(dataErrorResID);
@@ -184,6 +217,26 @@ public class StateLayoutManager {
         if (callBack != null && index != INDEX_LOADINGVIEW && index != INDEX_CUSTOM_LOADINGVIEW) {
             callBack.handle(view);
         }
+    }
+
+    public StateLayoutManager setLoadingColor(int loadingColor) {
+        this.loadingColor = loadingColor;
+        return this;
+    }
+
+    public StateLayoutManager setNetErrorColor(int netErrorColor) {
+        this.netErrorColor = netErrorColor;
+        return this;
+    }
+
+    public StateLayoutManager setDataEmptryColor(int dataEmptryColor) {
+        this.dataEmptryColor = dataEmptryColor;
+        return this;
+    }
+
+    public StateLayoutManager setDataErrorColor(int dataErrorColor) {
+        this.dataErrorColor = dataErrorColor;
+        return this;
     }
 
     /**
