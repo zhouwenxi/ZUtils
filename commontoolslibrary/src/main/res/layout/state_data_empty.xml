@@ -5,26 +5,18 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
     <ImageView
-        android:id="@+id/iv_error"
+        android:id="@+id/state_data_empty_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         />
+        android:src="@drawable/add_white"/>
 
     <TextView
-        android:id="@+id/tv_errorMessage"
+        android:id="@+id/state_data_empty_tv"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="网络错误"
-        android:textColor="@android:color/tertiary_text_dark"
-        android:textSize="15sp" />
-
-    <Button
-        android:id="@+id/btn_retry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="重试" />
+        android:text="暂无数据" />
 
 </LinearLayout>

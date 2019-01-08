@@ -33,7 +33,7 @@ public class MainActivity extends BaseQiShuiActivity {
         initPermissions();
 
 
-        stateLayoutManager = StateLayoutManager.with(ll_state);
+        stateLayoutManager = StateLayoutManager.with(ll_state).setLoadingTip("====加载中=======");
 
         btn1.setText("Hello");
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +44,17 @@ public class MainActivity extends BaseQiShuiActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stateLayoutManager.showDataEmpty();
+                        stateLayoutManager.setCallBack(new StateLayoutManager.CallBack() {
+                            @Override
+                            public void handle(View view) {
+                                view.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toast.makeText(MainActivity.this, "xxoxoxoxoxoxo", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }).showDataEmpty();
                     }
                 }, 2000);
             }

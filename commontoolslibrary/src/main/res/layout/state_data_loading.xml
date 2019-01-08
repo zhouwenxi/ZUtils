@@ -5,9 +5,18 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/state_data_loading_pb"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateDrawable="@drawable/progress" />
+
     <TextView
+        android:id="@+id/state_data_loading_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="数据异常" />
+        android:text="加载中"
+        android:textColor="@android:color/tertiary_text_dark"
+      />
 
 </LinearLayout>
