@@ -54,7 +54,7 @@ public class MainFragment extends BaseQiShuiFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                layoutManager.showNetworkError();
+                layoutManager.showDataEmpty();
             }
         }, 5000);
 

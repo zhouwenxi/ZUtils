@@ -31,7 +31,7 @@ public class MainActivity extends BaseQiShuiActivity {
 
     @Override
     public void setStateLayoutAttrs() {
-        stateLayoutManager = StateLayoutManager.with(ll_state);
+        stateLayoutManager = StateLayoutManager.with(ll_state).setLoadDataEmptyViewID(R.layout.empty);
     }
 
     @Override

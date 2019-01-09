@@ -30,7 +30,7 @@ public class FileUtils {
     /**
      * 总目录
      */
-    public static final String KEY_BASE_PATH = getSDPath()+"/qishui";
+    public static final String KEY_BASE_PATH = getSDPath() + "/qishui";
 
     /**
      * 日志目录
@@ -51,6 +51,10 @@ public class FileUtils {
      * 缓存目录
      */
     public static final String KEY_FILE_CACHE = KEY_BASE_PATH + "/cache/";
+    /**
+     * Crash目录
+     */
+    public static final String KEY_FILE_CRASH = KEY_BASE_PATH + "/crash/";
 
 
     /**
@@ -232,7 +236,7 @@ public class FileUtils {
      * @return
      */
     public static String createNewPngFile() {
-        return createFileDelOld( KEY_FILE_PICTURE, "_" + System.currentTimeMillis() + ".png");
+        return createFileDelOld(KEY_FILE_PICTURE, "_" + System.currentTimeMillis() + ".png");
     }
 
     /**
@@ -360,8 +364,22 @@ public class FileUtils {
     public static void writeLog(String text) {
         long currentTimeMillis = System.currentTimeMillis();
         String format = new SimpleDateFormat("yyyy年MM月dd日").format(currentTimeMillis);
-        String dir =  KEY_FILE_LOG + format;
+        String dir = KEY_FILE_LOG + format;
         String name = new SimpleDateFormat("HH").format(currentTimeMillis) + ".log";
+        String last = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(currentTimeMillis) + "\n" + text;
+        write(dir, name, last);
+    }
+
+    /**
+     * desc 记录crash文件
+     *
+     * @param text
+     */
+    public static void writeCrash(String text) {
+        long currentTimeMillis = System.currentTimeMillis();
+        String format = new SimpleDateFormat("yyyy年MM月dd日").format(currentTimeMillis);
+        String dir = KEY_FILE_CRASH + format;
+        String name = new SimpleDateFormat("HH时mm分").format(currentTimeMillis) + ".log";
         String last = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(currentTimeMillis) + "\n" + text;
         write(dir, name, last);
     }
@@ -420,7 +438,7 @@ public class FileUtils {
      */
     public static File copyAssestFile(String name) {
 
-        String dir =KEY_FILE_ASSEST;
+        String dir = KEY_FILE_ASSEST;
         String filePath = createFileDelOld(dir, name);
 
         try {
