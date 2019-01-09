@@ -15,6 +15,7 @@ import com.qishui.commontoolslibrary.state.StateLayoutManager;
 
 public class MainActivity extends BaseQiShuiActivity {
 
+    private static final String TAG = "MainActivity";
     @QBindView(R.id.btn1)
     Button btn1;
     @QBindView(R.id.btn2)
@@ -36,6 +37,7 @@ public class MainActivity extends BaseQiShuiActivity {
     @Override
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
+
 
         stateLayoutManager.showLoading();
         new Handler().postDelayed(new Runnable() {
@@ -77,5 +79,9 @@ public class MainActivity extends BaseQiShuiActivity {
                     }
                 });
     }
+
+
+
+
 
 }

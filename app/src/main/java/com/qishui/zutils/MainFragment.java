@@ -2,13 +2,18 @@ package com.qishui.zutils;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.annotation.QBindOnclick;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
+import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.state.StateLayoutManager;
 
 /**
@@ -31,26 +36,39 @@ public class MainFragment extends BaseQiShuiFragment {
         return R.layout.fragment_main_test;
     }
 
+
     @Override
-    public void setStateLayoutAttrs() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         layoutManager = StateLayoutManager
                 .with(ll)
                 .setLoadingColor(0xffFF4081)
                 .setNetErrorColor(0xffFF4081);
+
+    }
+
+    @Override
+    public void setStateLayoutAttrs() {
+
+
     }
 
     @Override
     protected void initEvent(Bundle savedInstanceState) {
 
+
         layoutManager.showLoading();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                layoutManager.showNetworkError();
-            }
-        }, 5000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                layoutManager.showNetworkError();
+//            }
+//        }, 5000);
 
     }
+
+
+
 
 }

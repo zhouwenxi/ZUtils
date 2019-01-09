@@ -8,11 +8,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.annotation.AnnotationUtils;
+import com.qishui.commontoolslibrary.state.StateLayoutManager;
 
 /**
  * Created by zhou on 2018/12/22.
@@ -24,16 +30,18 @@ public abstract class BaseQiShuiFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(initLayout(), null);
-        AnnotationUtils.initBinds(this, view);
+       // View view = inflater.inflate(R.layout.fragment_base, null);
+       // FrameLayout frameLayout = view.findViewById(R.id.fragment_root);
+        View contentView = inflater.inflate(initLayout(), null);
+       // frameLayout.addView(contentView);
+
+
+        AnnotationUtils.initBinds(this, contentView);
         //设置状态属性
         setStateLayoutAttrs();
         initEvent(savedInstanceState);
-        if (view != null) {
-            return view;
-        }
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return contentView;
     }
 
     /**

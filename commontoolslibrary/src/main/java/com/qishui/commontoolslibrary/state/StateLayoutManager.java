@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +15,7 @@ import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
 
 /**
  * Created by zhou on 2019/1/7.
+ * 当处于fragment根目录 targetView 时无效,需要包裹一层viewgroup
  */
 
 public class StateLayoutManager {
@@ -65,13 +65,13 @@ public class StateLayoutManager {
     //自定义数据出错图片
     private int dataErrorResID;
     //自定义加载中 背景颜色
-    private int loadingColor=0;
+    private int loadingColor = 0;
     //自定义网络错误 背景颜色
-    private int netErrorColor=0;
+    private int netErrorColor = 0;
     //自定义数据为空 背景颜色
-    private int dataEmptryColor=0;
+    private int dataEmptryColor = 0;
     //自定义数据出错 背景颜色
-    private int dataErrorColor=0;
+    private int dataErrorColor = 0;
     // targetView  的父布局
     private ViewGroup parentView;
     // targetView 在父布局中的位置
@@ -81,6 +81,7 @@ public class StateLayoutManager {
 
     /**
      * 获取对象
+     *
      * @param targetView
      * @return
      */
@@ -90,23 +91,21 @@ public class StateLayoutManager {
 
     /**
      * 初始化
+     *
      * @param targetView
      */
     private StateLayoutManager(View targetView) {
 
 
         this.targetView = targetView;
-        params = targetView.getLayoutParams();
 
-        if (targetView.getParent() !=null) {
-            parentView = (ViewGroup) targetView.getParent();
-        } else {
-            parentView = targetView.getRootView().findViewById(android.R.id.content);
-        }
+        params = targetView.getLayoutParams();
+        parentView = (ViewGroup) targetView.getParent();
 
         if (parentView == null) {
             return;
         }
+
         int count = parentView.getChildCount();
         for (int i = 0; i < count; i++) {
             if (targetView == parentView.getChildAt(i)) {
@@ -137,6 +136,7 @@ public class StateLayoutManager {
             parentView.addView(view, currentViewIndex, params);
         }
     }
+
 
     /**
      * 緩存view
@@ -449,12 +449,12 @@ public class StateLayoutManager {
         showView(targetView);
     }
 
-    public static void removeParent(View v){
+    public static void removeParent(View v) {
         //  先找到爹 在通过爹去移除孩子
         ViewParent parent = v.getParent();
         //所有的控件 都有爹  爹一般情况下 就是ViewGoup
-        if(parent instanceof ViewGroup){
-            ViewGroup group=(ViewGroup) parent;
+        if (parent instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) parent;
             group.removeView(v);
         }
     }
