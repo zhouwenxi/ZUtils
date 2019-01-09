@@ -15,7 +15,7 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.3'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.4'
     }
     
     3、注册BaseQiShuiApplication或则实现BaseQiShuiApplication初始化方法
@@ -464,7 +464,7 @@ state
 
 1、设置属性,可以自定义加载视图(加载中、加载失败、网络出错、数据为空),可以设置默认视图背景颜色、文字提示、图片资源、监听回调视图等。
 
-注释:当处于fragment根目录 targetView 时无效,需要包裹一层viewgroup;待完善。
+注释:当处于fragment根目录，需要继承BaseQiShuiFragment或则在控件外面包裹一层布局即可。
 
 ll 为要显示状态变化的viewGroup控件
 
