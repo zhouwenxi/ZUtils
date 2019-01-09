@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -102,7 +103,7 @@ public class StateLayoutManager {
         params = targetView.getLayoutParams();
         parentView = (ViewGroup) targetView.getParent();
 
-        if (parentView == null) {
+        if (parentView == null || params == null) {
             return;
         }
 
@@ -122,9 +123,10 @@ public class StateLayoutManager {
      */
     private void showView(View view) {
 
-        if (parentView == null) {
+        if (parentView == null || params == null) {
             return;
         }
+
         // 如果当前状态和要切换的状态相同，则不做处理，反之切换
         if (parentView.getChildAt(currentViewIndex) != view) {
             // 先把view从父布局移除

@@ -30,18 +30,22 @@ public abstract class BaseQiShuiFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-       // View view = inflater.inflate(R.layout.fragment_base, null);
-       // FrameLayout frameLayout = view.findViewById(R.id.fragment_root);
+        View view = inflater.inflate(R.layout.fragment_base, null);
+        FrameLayout frameLayout = view.findViewById(R.id.fragment_root);
         View contentView = inflater.inflate(initLayout(), null);
-       // frameLayout.addView(contentView);
+        frameLayout.addView(contentView);
 
+        return frameLayout;
+    }
 
-        AnnotationUtils.initBinds(this, contentView);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        AnnotationUtils.initBinds(this, view);
         //设置状态属性
         setStateLayoutAttrs();
         initEvent(savedInstanceState);
-
-        return contentView;
     }
 
     /**

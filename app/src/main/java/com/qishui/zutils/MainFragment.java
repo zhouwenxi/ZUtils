@@ -38,9 +38,7 @@ public class MainFragment extends BaseQiShuiFragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void setStateLayoutAttrs() {
         layoutManager = StateLayoutManager
                 .with(ll)
                 .setLoadingColor(0xffFF4081)
@@ -49,22 +47,16 @@ public class MainFragment extends BaseQiShuiFragment {
     }
 
     @Override
-    public void setStateLayoutAttrs() {
-
-
-    }
-
-    @Override
     protected void initEvent(Bundle savedInstanceState) {
 
 
         layoutManager.showLoading();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                layoutManager.showNetworkError();
-//            }
-//        }, 5000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layoutManager.showNetworkError();
+            }
+        }, 5000);
 
     }
 
