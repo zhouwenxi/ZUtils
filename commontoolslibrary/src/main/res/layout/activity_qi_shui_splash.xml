@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/qishui_splash_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMain"
-    android:id="@+id/qishui_splash_rl">
+    android:background="@color/colorMain">
 
 
     <ImageView
@@ -15,18 +15,27 @@
 
 
     <TextView
-        android:textSize="12sp"
         android:id="@+id/qishui_splash_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_marginBottom="10dp"
-        android:padding="5dp"
         android:gravity="center"
-        android:text="当前版本 1.0.0"
-        android:textColor="#99ffffff" />
+        android:padding="3dp"
+        android:textColor="#99ffffff"
+        android:textSize="12sp" />
 
 
+    <TextView
+        android:id="@+id/qishui_splash_tv_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/qishui_splash_tv"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="#99ffffff"
+        android:textSize="14sp" />
 
 </RelativeLayout>
