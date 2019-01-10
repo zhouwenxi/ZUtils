@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.QiShuiCrashActivity">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.qishui.commontoolslibrary.view.HeadView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/qishui_crash_tv"/>
-</android.support.constraint.ConstraintLayout>
+        android:background="@color/colorMain"
+        app:leftText="退出"
+        app:middleText="提示" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/colorRed99"
+            android:id="@+id/qishui_crash_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+</LinearLayout>

@@ -93,4 +93,15 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * 跳转
+     * @param className
+     */
+    public void startActivityFinish(String className) {
+        Intent intent=new Intent();
+        intent.setClassName(this, className);
+        startActivity(intent);
+        finish();
+    }
+
 }

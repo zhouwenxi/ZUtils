@@ -1,15 +1,12 @@
 package com.qishui.commontoolslibrary.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
-import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.CrashUtils;
 import com.qishui.commontoolslibrary.core.FileUtils;
-import com.qishui.commontoolslibrary.core.LogUtils;
 
 public class QiShuiCrashActivity extends BaseQiShuiActivity {
 

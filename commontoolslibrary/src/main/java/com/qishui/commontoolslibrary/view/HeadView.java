@@ -84,15 +84,15 @@ public class HeadView extends RelativeLayout {
             String right = attributes.getString(R.styleable.HeadView_rightText);
             int rightIcon = attributes.getInteger(R.styleable.HeadView_rightIcon, 0);
 
-            if (TextUtils.isEmpty(left)) {
+            if (!TextUtils.isEmpty(left)) {
                 mHead_left_tv.setText(left);
             }
 
-            if (TextUtils.isEmpty(middle)) {
+            if (!TextUtils.isEmpty(middle)) {
                 mHead_middle_tv.setText(middle);
             }
 
-            if (TextUtils.isEmpty(right)) {
+            if (!TextUtils.isEmpty(right)) {
                 mHead_right_tv.setVisibility(View.VISIBLE);
                 mHead_right_iv.setVisibility(View.INVISIBLE);
                 mHead_right_tv.setText(right);
