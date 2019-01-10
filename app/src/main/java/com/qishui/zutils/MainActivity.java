@@ -52,7 +52,7 @@ public class MainActivity extends BaseQiShuiActivity {
                             }
                         });
                     }
-                }).showDataEmpty();
+                }).showNetworkError();
             }
         }, 2000);
 

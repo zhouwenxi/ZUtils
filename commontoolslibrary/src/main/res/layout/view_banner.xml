@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/qishui_banner_vp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/colorBlack" />
+
+
+    <TextView
+        android:id="@+id/qishui_banner_tv_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right"
+        android:padding="10dp"
+        android:text="3/7"
+        android:textColor="@color/colorWhite" />
+
+    <TextView
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/qishui_banner_tv_num"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="123dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        android:textColor="@color/colorWhite" />
+
+</RelativeLayout>
