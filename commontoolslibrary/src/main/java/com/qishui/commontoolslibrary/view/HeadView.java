@@ -1,5 +1,6 @@
 package com.qishui.commontoolslibrary.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ public class HeadView extends RelativeLayout {
     private TextView mHead_right_tv;
     private ImageView mHead_right_iv;
     private RelativeLayout head_left_rl;
+
 
     private void bindViews(View view) {
 
@@ -56,16 +58,44 @@ public class HeadView extends RelativeLayout {
      * @param context
      * @param attrs
      */
-    private void init(Context context, AttributeSet attrs) {
+    private void init(final Context context, AttributeSet attrs) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.view_head, this, true);
         bindViews(view);
         //默认不可见
         mHead_right_tv.setVisibility(View.INVISIBLE);
         mHead_right_iv.setVisibility(View.INVISIBLE);
-
         getAttrs(context, attrs);
+        setBack(context);
 
+
+    }
+
+    /**
+     * 设置回退
+     * @param context
+     */
+    private void setBack(final Context context) {
+        mHead_left_iv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //沒有回调处理
+                if(context instanceof Activity && callBack ==null){
+                    //点击回调退
+                    ((Activity) context).finish();
+                }
+            }
+        });
+        mHead_left_tv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //沒有回调处理
+                if(context instanceof Activity && callBack ==null){
+                    //点击回调退
+                    ((Activity) context).finish();
+                }
+            }
+        });
     }
 
     /**
@@ -194,6 +224,7 @@ public class HeadView extends RelativeLayout {
         return this;
     }
 
+    private CallBack callBack;
 
     /**
      * 回调处理
@@ -208,6 +239,8 @@ public class HeadView extends RelativeLayout {
      * 点击事件
      */
     public HeadView setOnClickListener(final CallBack callBack) {
+
+        this.callBack=callBack;
 
         mHead_left_iv.setOnClickListener(new QiShuiClick(new OnClickListener() {
             @Override

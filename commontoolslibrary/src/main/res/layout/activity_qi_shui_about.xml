@@ -1,32 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMain"
-    android:id="@+id/qishui_splash_rl">
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
+    <com.qishui.commontoolslibrary.view.HeadView
+        android:id="@+id/qishui_about_hv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftText="返回"
+        app:middleText="关于" />
 
     <ImageView
-        android:id="@+id/qishui_splash_iv"
+        android:id="@+id/qishui_about_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:src="@drawable/logo" />
 
 
-    <TextView
-        android:textSize="12sp"
-        android:id="@+id/qishui_splash_tv"
+    <com.qishui.commontoolslibrary.view.ItemView1
+        android:id="@+id/qishui_about_itemview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp"
-        android:gravity="center"
-        android:text="当前版本 1.0.0"
-        android:textColor="#99ffffff" />
+        app:itemLeftIcon="@drawable/qq"
+        app:itemMiddleText="QQ:798150439" />
 
+    <com.qishui.commontoolslibrary.view.ItemView1
+        android:id="@+id/qishui_about_itemview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemLeftIcon="@drawable/tel"
+        app:itemMiddleText="Tel:18770813363" />
 
+    <com.qishui.commontoolslibrary.view.ItemView1
+        android:id="@+id/qishui_about_itemview3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemLeftIcon="@drawable/email"
+        app:itemMiddleText="Email:qishuichixi@126.com" />
 
-</RelativeLayout>
+    <com.qishui.commontoolslibrary.view.ItemView1
+        android:id="@+id/qishui_about_itemview4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemLeftIcon="@drawable/github"
+        app:itemMiddleText="Github:zhouwenxi.github.com" />
+
+    <com.qishui.commontoolslibrary.view.ItemView1
+        android:id="@+id/qishui_about_itemview5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemLeftIcon="@drawable/website"
+        app:itemMiddleText="website:zhouwenxi.top" />
+
+</LinearLayout>

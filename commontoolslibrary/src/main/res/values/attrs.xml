@@ -8,4 +8,11 @@
         <attr name="rightIcon" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="ItemView1">
+        <attr name="itemBgColor" format="color" />
+        <attr name="itemLeftIcon" format="reference" />
+        <attr name="itemMiddleText" format="string" />
+        <attr name="itemRightIcon" format="reference" />
+    </declare-styleable>
+
 </resources>
