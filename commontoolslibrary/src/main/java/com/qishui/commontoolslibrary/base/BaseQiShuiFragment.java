@@ -43,15 +43,16 @@ public abstract class BaseQiShuiFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         AnnotationUtils.initBinds(this, view);
+
         //设置状态属性
-        setStateLayoutAttrs();
-        initEvent(savedInstanceState);
+        setStateLayoutAttrs(view);
+        initEvent(view);
     }
 
     /**
      * 设置布局管理器属性
      */
-    public void setStateLayoutAttrs() {
+    public void setStateLayoutAttrs(View view) {
 
     }
 
@@ -65,9 +66,9 @@ public abstract class BaseQiShuiFragment extends Fragment {
     /**
      * 处理事件
      *
-     * @param savedInstanceState
+     * @param view
      */
-    protected abstract void initEvent(Bundle savedInstanceState);
+    protected abstract void initEvent(View view);
 
 
     /**

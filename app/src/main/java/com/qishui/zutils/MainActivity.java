@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.qishui.commontoolslibrary.activity.QiShuiMainStyle01Activity;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
@@ -37,6 +38,12 @@ public class MainActivity extends BaseQiShuiActivity {
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
 
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(QiShuiMainStyle01Activity.class);
+            }
+        });
 
         stateLayoutManager.showLoading();
         new Handler().postDelayed(new Runnable() {
