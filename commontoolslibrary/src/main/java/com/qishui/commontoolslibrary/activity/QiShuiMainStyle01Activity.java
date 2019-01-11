@@ -22,7 +22,7 @@ import com.qishui.commontoolslibrary.fragment.HomeFragment4;
 public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
 
     private TabLayout mTabLayout;
-    private Fragment[]mFragmensts;
+    private Fragment[] mFragmensts;
 
     @Override
     protected int initLayout() {
@@ -36,10 +36,10 @@ public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
         mTabLayout = findViewById(R.id.bottom_tab_layout);
         mTabLayout.addOnTabSelectedListener(new MyTabSelectedListener());
         // 提供自定义的布局添加Tab
-        for(int i=0;i<mFragmensts.length;i++){
+        for (int i = 0; i < mFragmensts.length; i++) {
             TabLayout.Tab tab = mTabLayout.newTab();
-            tab.setCustomView(DataGenerator.getTabView(0,i));
-            LinearLayout layout=tab.view;
+            tab.setCustomView(DataGenerator.getTabView(0, i));
+            LinearLayout layout = tab.view;
             layout.setBackgroundColor(UiUtils.getColor(R.color.colorWhite));
             mTabLayout.addTab(tab);
         }
@@ -49,15 +49,18 @@ public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
     /**
      * 监听事件
      */
-    class MyTabSelectedListener implements TabLayout.OnTabSelectedListener{
+    class MyTabSelectedListener implements TabLayout.OnTabSelectedListener {
 
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             onTabItemSelected(tab.getPosition());
             // Tab 选中之后，改变各个Tab的状态
-            for (int position=0;position<mTabLayout.getTabCount();position++){
-                View view = mTabLayout.getTabAt(position).getCustomView();
-                DataGenerator.setAttrs(tab.getPosition(), position, view);
+            for (int position = 0; position < mTabLayout.getTabCount(); position++) {
+                TabLayout.Tab layoutTabAt = mTabLayout.getTabAt(position);
+                if(layoutTabAt!=null){
+                    View view = layoutTabAt.getCustomView();
+                    DataGenerator.setAttrs(tab.getPosition(), position, view);
+                }
             }
         }
 
@@ -73,14 +76,14 @@ public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
     }
 
 
-
     /**
      * 切换
+     *
      * @param position
      */
-    private void onTabItemSelected(int position){
+    private void onTabItemSelected(int position) {
         Fragment fragment = null;
-        switch (position){
+        switch (position) {
             case 0:
                 fragment = mFragmensts[0];
                 break;
@@ -94,8 +97,8 @@ public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
                 fragment = mFragmensts[3];
                 break;
         }
-        if(fragment!=null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.home_container,fragment).commit();
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_container, fragment).commit();
         }
     }
 
@@ -104,11 +107,11 @@ public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
      */
     public static class DataGenerator {
 
-        public static final int []mTabRes = new int[]{R.drawable.tab_home_selector,R.drawable.tab_home_selector,R.drawable.tab_home_selector,R.drawable.tab_home_selector};
-        public static final int []mTabResPressed = new int[]{R.drawable.ic_tab_strip_icon_feed_selected,R.drawable.ic_tab_strip_icon_feed_selected,R.drawable.ic_tab_strip_icon_feed_selected,R.drawable.ic_tab_strip_icon_feed_selected};
-        public static final String []mTabTitle = new String[]{"首页","发现","关注","我的"};
+        public static final int[] mTabRes = new int[]{R.drawable.tab_home_selector, R.drawable.tab_home_selector, R.drawable.tab_home_selector, R.drawable.tab_home_selector};
+        public static final int[] mTabResPressed = new int[]{R.drawable.ic_tab_strip_icon_feed_selected, R.drawable.ic_tab_strip_icon_feed_selected, R.drawable.ic_tab_strip_icon_feed_selected, R.drawable.ic_tab_strip_icon_feed_selected};
+        public static final String[] mTabTitle = new String[]{"首页", "发现", "关注", "我的"};
 
-        public static Fragment[] getFragments(){
+        public static Fragment[] getFragments() {
             Fragment fragments[] = new Fragment[4];
             fragments[0] = new HomeFragment1();
             fragments[1] = new HomeFragment2();
@@ -119,34 +122,34 @@ public class QiShuiMainStyle01Activity extends BaseQiShuiActivity {
 
         /**
          * 获取Tab 显示的内容
+         *
          * @param position
          * @return
          */
-        public static View getTabView(int curPosition,int position){
-            View view =UiUtils.inflate(R.layout.home_tab_content);
-            setAttrs(curPosition,position,view);
+        public static View getTabView(int curPosition, int position) {
+            View view = UiUtils.inflate(R.layout.home_tab_content);
+            setAttrs(curPosition, position, view);
             return view;
         }
 
         /**
          * 设置属性
+         *
          * @param curPosition
          * @param position
          * @param view
          */
         private static void setAttrs(int curPosition, int position, View view) {
-            ImageView icon = UiUtils.findViewById(view,R.id.tab_content_image);
-            TextView text = UiUtils.findViewById(view,R.id.tab_content_text);
+            ImageView icon = UiUtils.findViewById(view, R.id.tab_content_image);
+            TextView text = UiUtils.findViewById(view, R.id.tab_content_text);
             text.setText(mTabTitle[position]);
-            if(position == curPosition){ // 选中状态
+            if (position == curPosition) { // 选中状态
                 icon.setImageResource(DataGenerator.mTabResPressed[position]);
                 text.setTextColor(UiUtils.getColor(android.R.color.black));
-            }else{// 未选中状态
+            } else {// 未选中状态
                 icon.setImageResource(DataGenerator.mTabRes[position]);
                 text.setTextColor(UiUtils.getColor(android.R.color.darker_gray));
             }
         }
     }
-
-
 }
