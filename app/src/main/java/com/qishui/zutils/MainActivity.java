@@ -7,9 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.qishui.commontoolslibrary.activity.QiShuiMainStyle01Activity;
-import com.qishui.commontoolslibrary.activity.QiShuiMainStyle02Activity;
-import com.qishui.commontoolslibrary.activity.QiShuiMainStyle03Activity;
+import com.qishui.commontoolslibrary.activity.QiShuiMainStyle04Activity;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
@@ -43,7 +41,7 @@ public class MainActivity extends BaseQiShuiActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(QiShuiMainStyle03Activity.class);
+                startActivity(QiShuiMainStyle04Activity.class);
             }
         });
 

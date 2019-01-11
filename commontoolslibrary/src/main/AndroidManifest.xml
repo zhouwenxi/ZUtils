@@ -43,7 +43,8 @@
         <activity android:name=".activity.QiShuiMainStyle03Activity" />
         <activity android:name=".activity.QiShuiSeeBigPictureActivity" />
         <activity android:name=".mvp.sample.QiShuiLoginActivity" />
-        <activity android:name=".activity.QiShuiCrashActivity"></activity>
+        <activity android:name=".activity.QiShuiCrashActivity" />
+        <activity android:name=".activity.QiShuiMainStyle04Activity"></activity>
     </application>
 
 </manifest>
