@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qishui.commontoolslibrary.activity.QiShuiMainStyle03Activity">
+    android:clipChildren="false"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/home_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:alpha="0.6"
+        android:background="@android:color/darker_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false">
+
+        <RadioGroup
+            android:id="@+id/radio_group_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_button_home"
+                style="@style/RadioGroupButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/tab_home_selector"
+                android:text="首页" />
+
+            <RadioButton
+                android:id="@+id/radio_button_discovery"
+                style="@style/RadioGroupButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/tab_home_selector"
+                android:text="发现" />
+
+
+            <ImageView
+                android:id="@+id/radio_middle_iv"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/send" />
+
+            <RadioButton
+                android:id="@+id/radio_button_attention"
+                style="@style/RadioGroupButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/tab_home_selector"
+                android:text="关注" />
+
+            <RadioButton
+                android:id="@+id/radio_button_profile"
+                style="@style/RadioGroupButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/tab_home_selector"
+                android:text="我的" />
+        </RadioGroup>
+    </RelativeLayout>
+</LinearLayout>
+
+

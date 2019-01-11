@@ -50,6 +50,10 @@ public class QiShuiMainStyle02Activity extends BaseQiShuiActivity {
     }
 
 
+    /**
+     * 点击切换
+     * @param id
+     */
     private void onTabItemSelected(int id) {
         Fragment fragment = null;
         if (id == R.id.tab_menu_home) {
@@ -79,7 +83,7 @@ public class QiShuiMainStyle02Activity extends BaseQiShuiActivity {
      * 设置数据
      */
     public Fragment[] getFragments() {
-        Fragment fragments[] = new Fragment[5];
+        Fragment fragments[] = new Fragment[4];
         fragments[0] = new HomeFragment1();
         fragments[1] = new HomeFragment2();
         fragments[2] = new HomeFragment3();

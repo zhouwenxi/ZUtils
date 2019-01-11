@@ -17,10 +17,7 @@ public class HomeFragment5 extends BaseQiShuiFragment {
     @Override
     public void setStateLayoutAttrs(View view) {
         rl=view.findViewById(R.id.home_fragment_rl);
-        layoutManager = StateLayoutManager
-                .with(rl)
-                .setLoadingColor(0xffFF4081)
-                .setNetErrorColor(0xffFF4081);
+        layoutManager = StateLayoutManager.with(rl);
     }
 
     @Override
@@ -31,7 +28,7 @@ public class HomeFragment5 extends BaseQiShuiFragment {
     @Override
     protected void initEvent(View view) {
 
-        layoutManager.showLoading();
+        layoutManager.showDataError();
 
     }
 }
