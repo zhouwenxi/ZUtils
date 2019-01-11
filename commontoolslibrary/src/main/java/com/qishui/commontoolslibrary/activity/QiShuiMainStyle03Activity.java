@@ -54,6 +54,7 @@ public class QiShuiMainStyle03Activity extends BaseQiShuiActivity {
         mRadioGroup = findViewById(R.id.radio_group_button);
         mRadioButtonHome = findViewById(R.id.radio_button_home);
         mRadioButtonHome.setChecked(true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.home_container,  mFragments[0]).commit();
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             Fragment mFragment = null;
 
