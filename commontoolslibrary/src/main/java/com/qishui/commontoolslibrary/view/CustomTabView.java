@@ -23,6 +23,7 @@ public class CustomTabView extends LinearLayout {
      * 保存TabView
      */
     private List<View> mTabViews;
+    private ArrayList<Integer> mHistoryPosition;
 
 
     /**
@@ -66,6 +67,7 @@ public class CustomTabView extends LinearLayout {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
         mTabViews = new ArrayList<>();
+        mHistoryPosition = new ArrayList<>();
     }
 
     public CustomTabView(Context context) {
@@ -89,6 +91,10 @@ public class CustomTabView extends LinearLayout {
             @Override
             public void onClick(View view) {
                 int position = (int) view.getTag();
+                if (getLastPosition() == position) {
+                    return;
+                }
+                mHistoryPosition.add(position);
                 updateState(position);
             }
         }));
@@ -125,15 +131,17 @@ public class CustomTabView extends LinearLayout {
      *
      * @param curPosition
      */
-    public CustomTabView setCurrentItem(int curPosition) {
+    public void setCurrentItem(int curPosition) {
 
         if (curPosition >= mTabViews.size()) {
-            return this;
+            return;
         }
         View view = mTabViews.get(curPosition);
         if (view == null) {
-            return this;
+            return;
         }
+        mHistoryPosition.add(curPosition);
+
         //初始化属性
         if (mOnTabCheckListener != null) {
             mOnTabCheckListener.onSetTabAttrs(mTabViews);
@@ -142,7 +150,7 @@ public class CustomTabView extends LinearLayout {
         if (flag) {
             updateState(curPosition);
         }
-        return this;
+
     }
 
 
@@ -166,12 +174,27 @@ public class CustomTabView extends LinearLayout {
         }
     }
 
+    /**
+     * 获取最后点击位置
+     * @return
+     */
+    public int getLastPosition() {
+        int position = 0;
+        if (mHistoryPosition != null && mHistoryPosition.size() > 0) {
+            position = mHistoryPosition.get(mHistoryPosition.size() - 1);
+        }
+        return position;
+    }
+
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (mTabViews != null) {
             mTabViews.clear();
+        }
+        if (mHistoryPosition != null) {
+            mHistoryPosition.clear();
         }
     }
 
@@ -187,8 +210,6 @@ public class CustomTabView extends LinearLayout {
             params.gravity = Gravity.CENTER;
             view.setLayoutParams(params);
         }
-
-
     }
 }
 

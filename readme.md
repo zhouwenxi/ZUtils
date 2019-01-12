@@ -15,7 +15,7 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.4'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.5'
     }
     
     3、注册BaseQiShuiApplication或则实现BaseQiShuiApplication初始化方法
@@ -266,7 +266,8 @@ MVP
     }
 3、QiShuiLoginPresenter业务处理
 
-    public class QiShuiLoginPresenter extends MvpBasePresenter<QiShuiMVPContract.ILoginView,QiShuiLoginModel> implements QiShuiMVPContract.IPresenter{
+    public class QiShuiLoginPresenter extends MvpBasePresenter<QiShuiMVPContract.ILoginView,QiShuiLoginModel> implements
+    QiShuiMVPContract.IPresenter{
     
         public QiShuiLoginPresenter(QiShuiLoginModel qiShuiLoginModel) {
             super(qiShuiLoginModel);
@@ -328,7 +329,9 @@ MVP
 
 4、页面转移 MVP 使用实例 login
 
-    public class QiShuiLoginActivity extends MvpBaseActivity<QiShuiMVPContract.ILoginView, QiShuiLoginModel, QiShuiLoginPresenter> implements QiShuiMVPContract.ILoginView {
+    public class QiShuiLoginActivity
+    extends MvpBaseActivity<QiShuiMVPContract.ILoginView, QiShuiLoginModel, QiShuiLoginPresenter>
+    implements QiShuiMVPContract.ILoginView {
     
         private EditText etName;
         private EditText etPassword;
@@ -359,7 +362,8 @@ MVP
          * 登录
          */
         public void login() {
-            findViewById(R.id.qishui_login_btn).setOnClickListener(new QiShuiClick(new View.OnClickListener() {
+            findViewById(R.id.qishui_login_btn)
+            .setOnClickListener(new QiShuiClick(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (getPresenter() != null) {
@@ -479,16 +483,15 @@ ll 为要显示状态变化的viewGroup控件
     
     //处理视图为空，并回调处理
     stateLayoutManager.setCallBack(new StateLayoutManager.CallBack() {
-                                @Override
-                                public void handle(View view) {
-                                    view.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Toast.makeText(MainActivity.this, "xxoxoxoxoxoxo", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }).showDataEmpty();   
+                @Override
+                public void handle(View view) {
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    });
+                }
+            }).showDataEmpty();
        
     //网络错误
     layoutManager.showNetworkError();
@@ -498,3 +501,289 @@ ll 为要显示状态变化的viewGroup控件
     
     //加载原来视图
     layoutManager.showContent();
+
+主页面框架 更新时间 2019年1月12日 14点17分
+
+1、TabLayout + Fragment 实现主页框架QiShuiMainStyle01Activity.class
+
+     // 提供自定义的布局添加Tab
+            for (int i = 0; i < mFragmensts.length; i++) {
+                TabLayout.Tab tab = mTabLayout.newTab();
+                tab.setCustomView(DataGenerator.getTabView(0, i));
+                LinearLayout layout = tab.view;
+                layout.setBackgroundColor(UiUtils.getColor(R.color.colorWhite));
+                mTabLayout.addTab(tab);
+            }
+
+2、BottomNavigationView + Fragment 实现主页框架QiShuiMainStyle02Activity.class
+
+     <android.support.design.widget.BottomNavigationView
+            android:background="@color/colorWhite"
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/colorWhite"
+            app:labelVisibilityMode="labeled"
+            app:elevation="2dp"
+            app:itemTextColor="@android:color/black"
+            app:itemIconTint="@android:color/black"
+            app:menu="@menu/navigation_menu"
+            />
+
+3、RadioGroup + RadioButton + Fragment 实现主页框架QiShuiMainStyle03Activity.class
+
+    子view是否裁剪 android:clipChildren="false"
+
+        <!--主页rg样式-->
+        <style name="RadioGroupButtonStyle" >
+            <!-- 这个属性是去掉button 默认样式-->
+            <item name="android:button">@null</item>
+            <item name="android:background">"@color/colorTransparent</item>
+            <item name="android:gravity">center</item>
+            <item name="android:layout_width">0dp</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_weight">1</item>
+            <item name="android:textSize">12sp</item>
+            <item name="android:textColor">@drawable/color_selector</item>
+        </style>
+
+4、自定义CustomTabView实现主页面框架QiShuiMainStyle04Activity.class
+
+       <com.qishui.commontoolslibrary.view.CustomTabView
+            android:id="@+id/custom_tab_container"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"/>
+
+
+     customTabView = findViewById(R.id.custom_tab_container);
+            customTabView.addTabView(R.layout.view_custom, 4)
+            .setOnTabCheckListener(new CustomTabView.OnTabCheckListener() {
+
+                @Override
+                public void onSetTabAttrs(List<View> mTabViews) {
+                    for (int position = 0; position < mTabViews.size(); position++) {
+                        TextView textView = mTabViews.get(position).findViewById(R.id.custom_tv);
+                        textView.setText(mTabTitle[position]);
+                    }
+                }
+
+                @Override
+                public void onTabSelected(View view, int position) {
+
+                    TextView textView = view.findViewById(R.id.custom_tv);
+                    ImageView iv = view.findViewById(R.id.custom_iv);
+                    textView.setTextColor(Color.RED);
+                    iv.setImageResource(R.drawable.ic_tab_strip_icon_feed_selected);
+                    toast(mTabTitle[position]);
+                }
+
+                @Override
+                public void onTabUnSelected(View view, int position) {
+
+                    TextView textView = view.findViewById(R.id.custom_tv);
+                    ImageView iv = view.findViewById(R.id.custom_iv);
+                    textView.setTextColor(Color.BLUE);
+                    iv.setImageResource(R.drawable.ic_tab_strip_icon_feed);
+                }
+            }).setCurrentItem(0);
+
+实现view
+
+        public class CustomTabView extends LinearLayout {
+
+            /**
+             * 保存TabView
+             */
+            private List<View> mTabViews;
+            private ArrayList<Integer> mHistoryPosition;
+
+
+            /**
+             * 点击回调
+             */
+            private OnTabCheckListener mOnTabCheckListener;
+
+            public interface OnTabCheckListener {
+
+                /**
+                 * 设置属性
+                 *
+                 * @param mTabViews
+                 */
+                void onSetTabAttrs(List<View> mTabViews);
+
+                /**
+                 * 选中
+                 *
+                 * @param view
+                 * @param position
+                 */
+                void onTabSelected(View view, int position);
+
+                /**
+                 * 未选择
+                 *
+                 * @param view
+                 * @param position
+                 */
+                void onTabUnSelected(View view, int position);
+            }
+
+            public CustomTabView setOnTabCheckListener(OnTabCheckListener onTabCheckListener) {
+                mOnTabCheckListener = onTabCheckListener;
+                return this;
+            }
+
+            public CustomTabView(Context context, @Nullable AttributeSet attrs) {
+                super(context, attrs);
+                setOrientation(HORIZONTAL);
+                setGravity(Gravity.CENTER);
+                mTabViews = new ArrayList<>();
+                mHistoryPosition = new ArrayList<>();
+            }
+
+            public CustomTabView(Context context) {
+                this(context, null);
+            }
+
+
+            /**
+             * 添加自定义视图
+             *
+             * @param layoutResId
+             * @return
+             */
+            public CustomTabView addTabView(int layoutResId) {
+                View tempView = UiUtils.inflate(layoutResId);
+                tempView.setTag(mTabViews.size());
+                if (tempView == null) {
+                    return this;
+                }
+                tempView.setOnClickListener(new QiShuiClick(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int position = (int) view.getTag();
+                        if (getLastPosition() == position) {
+                            return;
+                        }
+                        mHistoryPosition.add(position);
+                        updateState(position);
+                    }
+                }));
+                mTabViews.add(tempView);
+                //添加到容器里面
+                addView(tempView);
+                return this;
+            }
+
+            /**
+             * 一次添加多个view
+             *
+             * @param layoutResId
+             * @param num
+             * @return
+             */
+            public CustomTabView addTabView(int layoutResId, int num) {
+                if (num <= 0) {
+                    return this;
+                }
+                //限制最大数量
+                if (num > 5) {
+                    num = 5;
+                }
+
+                for (int i = 0; i < num; i++) {
+                    addTabView(layoutResId);
+                }
+                return this;
+            }
+
+            /**
+             * 设置选中Tab
+             *
+             * @param curPosition
+             */
+            public void setCurrentItem(int curPosition) {
+
+                if (curPosition >= mTabViews.size()) {
+                    return;
+                }
+                View view = mTabViews.get(curPosition);
+                if (view == null) {
+                    return;
+                }
+                mHistoryPosition.add(curPosition);
+
+                //初始化属性
+                if (mOnTabCheckListener != null) {
+                    mOnTabCheckListener.onSetTabAttrs(mTabViews);
+                }
+                boolean flag = view.performClick();
+                if (flag) {
+                    updateState(curPosition);
+                }
+
+            }
+
+
+            /**
+             * 更新状态
+             *
+             * @param curPosition
+             */
+            private void updateState(int curPosition) {
+
+                if (mTabViews == null) {
+                    return;
+                }
+                for (int position = 0; position < mTabViews.size(); position++) {
+                    View view = mTabViews.get(position);
+                    if (mOnTabCheckListener != null && curPosition == position) {
+                        mOnTabCheckListener.onTabSelected(view, curPosition);
+                    } else if (mOnTabCheckListener != null && curPosition != position) {
+                        mOnTabCheckListener.onTabUnSelected(view, curPosition);
+                    }
+                }
+            }
+
+            /**
+             * 获取最后点击位置
+             * @return
+             */
+            public int getLastPosition() {
+                int position = 0;
+                if (mHistoryPosition != null && mHistoryPosition.size() > 0) {
+                    position = mHistoryPosition.get(mHistoryPosition.size() - 1);
+                }
+                return position;
+            }
+
+
+            @Override
+            protected void onDetachedFromWindow() {
+                super.onDetachedFromWindow();
+                if (mTabViews != null) {
+                    mTabViews.clear();
+                }
+                if (mHistoryPosition != null) {
+                    mHistoryPosition.clear();
+                }
+            }
+
+            @Override
+            protected void onAttachedToWindow() {
+                super.onAttachedToWindow();
+                // 调整每个Tab的大小
+                int size = mTabViews.size();
+                for (int i = 0; i < size; i++) {
+                    View view = mTabViews.get(i);
+                    int width = getResources().getDisplayMetrics().widthPixels / size;
+                    LayoutParams params = new LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
+                    params.gravity = Gravity.CENTER;
+                    view.setLayoutParams(params);
+                }
+            }
+        }
+
+

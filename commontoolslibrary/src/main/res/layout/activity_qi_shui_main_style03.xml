@@ -35,18 +35,12 @@
             <RadioButton
                 android:id="@+id/radio_button_home"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
                 android:drawableTop="@drawable/tab_home_selector"
                 android:text="首页" />
 
             <RadioButton
                 android:id="@+id/radio_button_discovery"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
                 android:drawableTop="@drawable/tab_home_selector"
                 android:text="发现" />
 
@@ -57,25 +51,17 @@
                 android:layout_height="60dp"
                 android:layout_marginBottom="20dp"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
                 android:src="@drawable/send" />
 
             <RadioButton
                 android:id="@+id/radio_button_attention"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
                 android:drawableTop="@drawable/tab_home_selector"
                 android:text="关注" />
 
             <RadioButton
                 android:id="@+id/radio_button_profile"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
                 android:drawableTop="@drawable/tab_home_selector"
                 android:text="我的" />
         </RadioGroup>
