@@ -15,7 +15,7 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.5'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.6'
     }
     
     3、注册BaseQiShuiApplication或则实现BaseQiShuiApplication初始化方法
@@ -266,7 +266,8 @@ MVP
     }
 3、QiShuiLoginPresenter业务处理
 
-    public class QiShuiLoginPresenter extends MvpBasePresenter<QiShuiMVPContract.ILoginView,QiShuiLoginModel> implements
+    public class QiShuiLoginPresenter
+    extends MvpBasePresenter<QiShuiMVPContract.ILoginView,QiShuiLoginModel> implements
     QiShuiMVPContract.IPresenter{
     
         public QiShuiLoginPresenter(QiShuiLoginModel qiShuiLoginModel) {
