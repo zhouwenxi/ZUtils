@@ -2,10 +2,10 @@ package com.qishui.commontoolslibrary.fragment;
 
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
+import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.state.StateLayoutManager;
 
 public class HomeFragment1 extends BaseQiShuiFragment {
@@ -33,6 +33,7 @@ public class HomeFragment1 extends BaseQiShuiFragment {
     protected void initEvent(View view) {
 
         layoutManager.showNetworkError();
+        LogUtils.e("HomeFragment1 initEvent");
 
     }
 }

@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
+import com.qishui.commontoolslibrary.core.LogUtils;
 
 public class HomeFragment4 extends Fragment {
 
     private String mFrom;
     public static HomeFragment4 newInstance(String from){
+        LogUtils.e("HomeFragment4 newInstance");
         HomeFragment4 fragment = new HomeFragment4();
         Bundle bundle = new Bundle();
         bundle.putString("from",from);
