@@ -1,17 +1,19 @@
 package com.qishui.zutils;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.activity.QiShuiMainStyle04Activity;
 import com.qishui.commontoolslibrary.annotation.QBindView;
+import com.qishui.commontoolslibrary.banner.BannerView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-import com.qishui.commontoolslibrary.state.StateLayoutManager;
+import com.qishui.commontoolslibrary.core.UiUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends BaseQiShuiActivity {
@@ -20,19 +22,14 @@ public class MainActivity extends BaseQiShuiActivity {
     Button btn1;
     @QBindView(R.id.btn2)
     Button btn2;
-    @QBindView(R.id.ll_state)
-    LinearLayout ll_state;
-    StateLayoutManager stateLayoutManager;
+    @QBindView(R.id.banner)
+    BannerView bannerView;
 
     @Override
     protected int initLayout() {
         return R.layout.activity_main;
     }
 
-    @Override
-    public void setStateLayoutAttrs() {
-        stateLayoutManager = StateLayoutManager.with(ll_state);
-    }
 
     @Override
     protected void initEvent(Bundle savedInstanceState) {
@@ -45,23 +42,6 @@ public class MainActivity extends BaseQiShuiActivity {
             }
         });
 
-        stateLayoutManager.showLoading();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                stateLayoutManager.setCallBack(new StateLayoutManager.CallBack() {
-                    @Override
-                    public void handle(View view) {
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, "xxoxoxoxoxoxo", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).showNetworkError();
-            }
-        }, 2000);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +50,13 @@ public class MainActivity extends BaseQiShuiActivity {
             }
         });
 
+
+        List<View> list = new ArrayList<>();
+        list.add(UiUtils.inflate(R.layout.state_data_empty));
+        list.add(UiUtils.inflate(R.layout.state_data_error));
+        list.add(UiUtils.inflate(R.layout.state_data_loading));
+        list.add(UiUtils.inflate(R.layout.state_data_network_error));
+        bannerView.setListViews(list).showView();
     }
 
     void initPermissions() {
@@ -91,9 +78,6 @@ public class MainActivity extends BaseQiShuiActivity {
                     }
                 });
     }
-
-
-
 
 
 }

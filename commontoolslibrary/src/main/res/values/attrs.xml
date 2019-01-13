@@ -15,4 +15,9 @@
         <attr name="itemRightIcon" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="BannerView">
+        <attr name="bannerTime" format="integer" />
+        <attr name="bannerLooper" format="boolean" />
+    </declare-styleable>
+
 </resources>
