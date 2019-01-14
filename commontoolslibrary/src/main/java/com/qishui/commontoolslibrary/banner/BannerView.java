@@ -2,11 +2,9 @@ package com.qishui.commontoolslibrary.banner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -18,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 import com.qishui.commontoolslibrary.R;
-import com.qishui.commontoolslibrary.click.QiShuiClick;
 import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.UiUtils;
 
@@ -32,6 +29,7 @@ import java.util.List;
 
 public class BannerView extends RelativeLayout {
 
+    private static final String TAG = BannerView.class.getSimpleName();
     private List<View> mList;
     private int delayTime = 3000;
     private boolean isAutoPlay = true;
@@ -72,35 +70,18 @@ public class BannerView extends RelativeLayout {
     /**
      * 设置展示列表
      *
-     * @param mList
      * @return
      */
-    public BannerView setListViews(List<View> mList) {
-
-        this.count = mList.size();
-        if (count == 0) {
-            return this;
-        }
-        //保证数量不少于3
-        if (count == 1) {
-            View view = mList.get(0);
-            mList.add(view);
-            mList.add(view);
-        } else if (count == 2) {
-            View view0 = mList.get(0);
-            View view1 = mList.get(1);
-            mList.add(view0);
-            mList.add(view1);
-        }
-        this.mList = mList;
-
+    public BannerView setListViews(List<View> list) {
+        this.count = list.size();
+        this.mList = list;
         return this;
     }
 
     public void showView() {
         viewPager.setAdapter(new MyViewPagerAdapter(mList));
         viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
-        int targetItemPosition = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % count;
+        int targetItemPosition = Integer.MAX_VALUE / 2 ;
         currentItem = targetItemPosition;
         viewPager.setCurrentItem(targetItemPosition);
         setSliderTransformDuration(1000);
@@ -206,11 +187,15 @@ public class BannerView extends RelativeLayout {
     }
 
     @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (isAutoPlay) {
             stopPlay();
-            LogUtils.e("onDetachedFromWindow stopPlay");
         }
     }
 
@@ -219,7 +204,6 @@ public class BannerView extends RelativeLayout {
         super.onAttachedToWindow();
         if (isAutoPlay) {
             stratPlay();
-            LogUtils.e("onAttachedToWindow stratPlay");
         }
     }
 
@@ -230,6 +214,7 @@ public class BannerView extends RelativeLayout {
         @Override
         public void onPageSelected(int position) {
             currentItem = position;
+            LogUtils.e("位置:" + position);
         }
     }
 
@@ -258,33 +243,18 @@ public class BannerView extends RelativeLayout {
         @Override
         public Object instantiateItem(@NonNull final ViewGroup container, int position) {
 
-            View tempView = null;
-            if (mList.size() > 0) {
-                //position % view.size()是指虚拟的position会在[0，view.size()）之间循环
-                tempView = mList.get(position % size);
-                //添加view之前，先移除
-                if (container.equals(tempView.getParent())) {
-                    container.removeView(tempView);
-                }
-                container.addView(tempView);
-                //设置点击事件
-                tempView.setOnClickListener(new QiShuiClick(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (callBack != null) {
-                            callBack.click(view);
-                        }
-                    }
-                }));
-
-                return tempView;
+            View view = mList.get(position % count);
+            if (container.getChildCount() == count) {
+                container.removeView(view);
             }
-            throw new RuntimeException();
+            container.addView(view);
+            return view;
+
         }
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-
+            // container.removeView((View) object);
         }
     }
 
@@ -345,29 +315,4 @@ public class BannerView extends RelativeLayout {
     }
 
 
-    /**
-     * 辅助
-     */
-    public static class BannerFragment extends Fragment {
-
-        public BannerFragment() {
-        }
-
-        @Override
-        public void onStart() {
-            super.onStart();
-
-        }
-
-        @Override
-        public void onStop() {
-            super.onStop();
-        }
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setRetainInstance(true);
-        }
-    }
 }
