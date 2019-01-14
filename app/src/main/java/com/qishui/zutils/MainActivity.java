@@ -54,8 +54,8 @@ public class MainActivity extends BaseQiShuiActivity {
         List<View> list = new ArrayList<>();
         list.add(UiUtils.inflate(R.layout.state_data_empty));
         list.add(UiUtils.inflate(R.layout.state_data_error));
-        list.add(UiUtils.inflate(R.layout.state_data_loading));
-        list.add(UiUtils.inflate(R.layout.state_data_network_error));
+//        list.add(UiUtils.inflate(R.layout.state_data_loading));
+//        list.add(UiUtils.inflate(R.layout.state_data_network_error));
         bannerView.setListViews(list).showView();
     }
 
@@ -80,4 +80,15 @@ public class MainActivity extends BaseQiShuiActivity {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bannerView.stratPlay();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        bannerView.stopPlay();
+    }
 }
