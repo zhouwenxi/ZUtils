@@ -51,11 +51,12 @@ public class MainActivity extends BaseQiShuiActivity {
         });
 
 
+     //   List<Integer> list = new ArrayList<>();
+       // list.add((R.layout.state_data_network_error));
+       // bannerView.setListResIds(list).showView();
+
         List<View> list = new ArrayList<>();
-        list.add(UiUtils.inflate(R.layout.state_data_empty));
-        list.add(UiUtils.inflate(R.layout.state_data_error));
-//        list.add(UiUtils.inflate(R.layout.state_data_loading));
-//        list.add(UiUtils.inflate(R.layout.state_data_network_error));
+        list.add(UiUtils.inflate(R.layout.state_data_network_error));
         bannerView.setListViews(list).showView();
     }
 

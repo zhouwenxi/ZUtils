@@ -33,10 +33,11 @@
         android:orientation="vertical">
 
         <com.qishui.commontoolslibrary.banner.BannerView
+            android:background="@color/colorRed"
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/colorBlack"/>
+           />
 
 
     </LinearLayout>

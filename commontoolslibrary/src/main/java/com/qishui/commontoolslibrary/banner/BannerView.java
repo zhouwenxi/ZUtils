@@ -12,11 +12,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 import com.qishui.commontoolslibrary.R;
-import com.qishui.commontoolslibrary.core.LogUtils;
+import com.qishui.commontoolslibrary.click.QiShuiClick;
 import com.qishui.commontoolslibrary.core.UiUtils;
 
 import java.lang.reflect.Field;
@@ -29,13 +30,12 @@ import java.util.List;
 
 public class BannerView extends RelativeLayout {
 
-    private static final String TAG = BannerView.class.getSimpleName();
     private List<View> mList;
     private int delayTime = 3000;
     private boolean isAutoPlay = true;
-    private RelativeLayout rl;
     private ViewPager viewPager;
     private int count = 0;
+    //当前位置
     private int currentItem;
     private int WHAT_AUTO_PLAY = 1000;
 
@@ -54,6 +54,9 @@ public class BannerView extends RelativeLayout {
         mList = new ArrayList<>();
     }
 
+    /**
+     * 处理循环
+     */
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -72,19 +75,82 @@ public class BannerView extends RelativeLayout {
      *
      * @return
      */
-    public BannerView setListViews(List<View> list) {
+    public BannerView setListViews(List<Object> list) {
         this.count = list.size();
-        this.mList = list;
+        if(count==1){
+            Object value = list.get(0);
+            mList.add(getImageView(value));
+            mList.add(getImageView(value));
+            mList.add(getImageView(value));
+        }else if(count==2){
+            Object value1 = list.get(0);
+            Object value2 = list.get(1);
+            mList.add(getImageView(value1));
+            mList.add(getImageView(value2));
+        }else {
+            for (int i = 0; i <list.size() ; i++) {
+                mList.add(getImageView(list.get(i)));
+            }
+        }
+        this.count = mList.size();
+
         return this;
     }
 
+    /**
+     * 转换ImageView
+     * @param url
+     * @return
+     */
+    private ImageView getImageView(Object url) {
+        ImageView imageView = new ImageView(getContext());
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        if(imageLoader!=null){
+            imageLoader.show(getContext(), url, imageView);
+        }
+        return imageView;
+    }
+
+    /**
+     * 添加布局
+     * @param list
+     * @return
+     */
+    public BannerView setListResIds(List<Integer> list) {
+        this.count = list.size();
+        if(count==1){
+            Integer id = list.get(0);
+            list.add(id);
+            list.add(id);
+            list.add(id);
+        }else if(count==2){
+            Integer id0 = list.get(0);
+            Integer id1= list.get(1);
+            list.add(id0);
+            list.add(id1);
+            list.add(id0);
+            list.add(id1);
+        }
+        for (int i :list) {
+            mList.add(UiUtils.inflate(i));
+        }
+        this.count = mList.size();
+        return this;
+    }
+
+    /**
+     * 设置属性
+     */
     public void showView() {
-        viewPager.setAdapter(new MyViewPagerAdapter(mList));
-        viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
-        int targetItemPosition = Integer.MAX_VALUE / 2 ;
-        currentItem = targetItemPosition;
-        viewPager.setCurrentItem(targetItemPosition);
-        setSliderTransformDuration(1000);
+
+        if(count>0){
+            viewPager.setAdapter(new MyViewPagerAdapter(mList));
+            viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
+            int targetItemPosition = Integer.MAX_VALUE / 2- Integer.MAX_VALUE / 2%count;
+            currentItem = targetItemPosition;
+            viewPager.setCurrentItem(targetItemPosition);
+            setSliderTransformDuration(1000);
+        }
     }
 
     /**
@@ -161,7 +227,6 @@ public class BannerView extends RelativeLayout {
     private void init(Context context, AttributeSet attrs) {
 
         View view = UiUtils.inflate(R.layout.view_banner, this, true);
-        rl = UiUtils.findViewById(view, R.id.qishui_banner_rl);
         viewPager = UiUtils.findViewById(view, R.id.qishui_banner_vp);
 
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.BannerView);
@@ -186,10 +251,6 @@ public class BannerView extends RelativeLayout {
         return super.dispatchTouchEvent(ev);
     }
 
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        super.onWindowVisibilityChanged(visibility);
-    }
 
     @Override
     protected void onDetachedFromWindow() {
@@ -214,11 +275,12 @@ public class BannerView extends RelativeLayout {
         @Override
         public void onPageSelected(int position) {
             currentItem = position;
-            LogUtils.e("位置:" + position);
         }
     }
 
-
+    /**
+     * 适配器
+     */
     class MyViewPagerAdapter extends PagerAdapter {
 
         private List<View> mList;
@@ -243,13 +305,21 @@ public class BannerView extends RelativeLayout {
         @Override
         public Object instantiateItem(@NonNull final ViewGroup container, int position) {
 
-            View view = mList.get(position % count);
-            if (container.getChildCount() == count) {
+            final int relPos = position % size;
+            View view = mList.get(relPos);
+            if (container.equals(view.getParent())) {
                 container.removeView(view);
             }
             container.addView(view);
+            view.setOnClickListener(new QiShuiClick(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (callBack != null) {
+                        callBack.click(v, relPos);
+                    }
+                }
+            }));
             return view;
-
         }
 
         @Override
@@ -266,7 +336,6 @@ public class BannerView extends RelativeLayout {
             mScroller.set(viewPager, scroller);
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
@@ -303,6 +372,9 @@ public class BannerView extends RelativeLayout {
         }
     }
 
+    /**
+     * 点击回调处理
+     */
     private CallBack callBack;
 
     public BannerView setCallBack(CallBack callBack) {
@@ -311,8 +383,22 @@ public class BannerView extends RelativeLayout {
     }
 
     public interface CallBack {
-        void click(View view);
+        void click(View view,int position);
     }
 
+
+    /**
+     * 设置图片展示
+     */
+    private ImageLoader imageLoader;
+
+    public BannerView setImageLoader(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
+        return this;
+    }
+
+    public interface ImageLoader {
+        void show(Context context,Object obj,ImageView view);
+    }
 
 }
