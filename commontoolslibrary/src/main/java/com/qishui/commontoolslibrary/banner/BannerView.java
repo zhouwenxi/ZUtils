@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
@@ -30,14 +31,18 @@ import java.util.List;
 
 public class BannerView extends RelativeLayout {
 
+    //延迟时间
     private int delayTime = 3000;
+    //是否轮播
     private boolean isAutoPlay = true;
     private ViewPager viewPager;
+    //列表数量
     private int count = 0;
     //传入数量
     private int relCount = 0;
     //当前位置
     private int currentItem;
+    //信息标志
     private int WHAT_AUTO_PLAY = 1000;
     //加载imageview
     private static final int TYPE_IMAGEVIEW = 0;
@@ -47,10 +52,21 @@ public class BannerView extends RelativeLayout {
     private static int TYPE = TYPE_IMAGEVIEW;
     //最后view
     private List<View> mList;
+    //指示器
+    private List<View> mListPoints;
+    //选中资源
+    private int selectId;
+    //未选择资源指示器
+    private int unSelectId;
     //
     List<Integer> tempLayout;
     List<Object> tempImageView;
     private View loadView;
+    /**
+     * 初始化空间
+     */
+    private View view;
+    private LinearLayout bannerLl;
 
     public BannerView(Context context) {
         this(context, null);
@@ -66,6 +82,7 @@ public class BannerView extends RelativeLayout {
         mList = new ArrayList<>();
         tempLayout = new ArrayList<>();
         tempImageView = new ArrayList<>();
+        mListPoints = new ArrayList<>();
     }
 
     /**
@@ -129,7 +146,8 @@ public class BannerView extends RelativeLayout {
     public void showView() {
         bindViews();
         setData();
-        if (count > 0 && viewPager!=null) {
+        setBannerPoint();
+        if (count > 0 && viewPager != null) {
             viewPager.setAdapter(new MyViewPagerAdapter(mList));
             viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
             currentItem = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % count;
@@ -142,15 +160,28 @@ public class BannerView extends RelativeLayout {
     }
 
     /**
-     * 初始化空间
+     * 设置指示点
      */
-    private View view;
+    private void setBannerPoint() {
+        if (bannerLl != null && relCount > 1 && selectId != 0) {
+            for (int i = 0; i < relCount; i++) {
+                View view = new View(getContext());
+                view.setBackgroundResource(selectId);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(UiUtils.dp2px(10), UiUtils.dp2px(10));
+                params.leftMargin=UiUtils.dp2px(5);
+                mListPoints.add(view);
+                bannerLl.addView(view,params);
+            }
+        }
+    }
+
 
     private void bindViews() {
 
         if (loadView == null) {
             view = UiUtils.inflate(R.layout.view_banner, this, true);
             viewPager = UiUtils.findViewById(view, R.id.qishui_banner_vp);
+            bannerLl = UiUtils.findViewById(view, R.id.qishui_banner_ll);
         } else {
             view = loadView;
         }
@@ -164,7 +195,7 @@ public class BannerView extends RelativeLayout {
         //加载布局
         if (TYPE == TYPE_LAYOUT) {
             this.count = tempLayout.size();
-            this.relCount=this.count;
+            this.relCount = this.count;
 
             if (count == 1) {
                 Integer id = tempLayout.get(0);
@@ -187,7 +218,7 @@ public class BannerView extends RelativeLayout {
         //加载图片
         if (TYPE == TYPE_IMAGEVIEW) {
             this.count = tempImageView.size();
-            this.relCount=this.count;
+            this.relCount = this.count;
 
             if (count == 1) {
                 Object value = tempImageView.get(0);
@@ -219,6 +250,28 @@ public class BannerView extends RelativeLayout {
 
     public BannerView setViewPager(ViewPager viewPager) {
         this.viewPager = viewPager;
+        return this;
+    }
+
+    /**
+     * 设置选中资源
+     *
+     * @param selectId
+     * @return
+     */
+    public BannerView setSelectId(int selectId) {
+        this.selectId = selectId;
+        return this;
+    }
+
+    /**
+     * 设置未选中资源
+     *
+     * @param unSelectId
+     * @return
+     */
+    public BannerView setUnSelectId(int unSelectId) {
+        this.unSelectId = unSelectId;
         return this;
     }
 
@@ -390,7 +443,6 @@ public class BannerView extends RelativeLayout {
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            // container.removeView((View) object);
         }
     }
 

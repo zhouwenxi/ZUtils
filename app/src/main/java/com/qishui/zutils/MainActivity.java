@@ -1,7 +1,6 @@
 package com.qishui.zutils;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -60,7 +59,8 @@ public class MainActivity extends BaseQiShuiActivity {
         //数据
         List<Object> list = new ArrayList<>();
         list.add(R.drawable.banner);
-        bannerView.setListViews(list).setImageLoader(new BannerView.ImageLoader() {
+        list.add(R.drawable.banner);
+        bannerView.setSelectId(R.drawable.red_point).setListViews(list).setImageLoader(new BannerView.ImageLoader() {
             @Override
             public void show(Context context, Object obj, ImageView iv) {
                 iv.setImageResource((Integer) obj);
