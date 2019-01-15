@@ -787,4 +787,74 @@ ll 为要显示状态变化的viewGroup控件
             }
         }
 
+banner 支持添加布局、ImageView滑动、自定义滑动样式
+---
+
+1、默认
+
+        //数据
+        List<Object> list = new ArrayList<>();
+        list.add(R.drawable.banner);
+        bannerView.setListViews(list).setImageLoader(new BannerView.ImageLoader() {
+            @Override
+            public void show(Context context, Object obj, ImageView iv) {
+                iv.setImageResource((Integer) obj);
+            }
+        }).setBannerClick(new BannerView.BannerCallBack() {
+            @Override
+            public void click(View view, int position) {
+                toast("QQQQQQQQQQQQQQQ");
+            }
+        }).showView();
+
+2、自定义
+
+        //数据
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(R.layout.state_data_empty);
+        list2.add(R.layout.state_data_error);
+
+        final List<String> listTitle = new ArrayList<>();
+        listTitle.add("康熙有多数老年人都存在的“不服输”的心理。虽然年龄摆在那儿了，但是仍然不承认自己力不从心");
+        listTitle.add("年迈的狮子是最敏感的");
+
+        //控件
+        bannerView2.setLoadView(R.layout.view_banner_1);
+        View bannerView = bannerView2.getBannerView();
+        ViewPager vp = UiUtils.findViewById(bannerView, R.id.banner_vp);
+        final TextView titleTv = UiUtils.findViewById(bannerView, R.id.banner_tv);
+        titleTv.setText(listTitle.get(0));
+        bannerView2.setViewPager(vp).setListResIds(list2).setDelayTime(3500).sePageChangeListenert(new BannerView.PageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                titleTv.setText(listTitle.get(position));
+            }
+        }).showView();
+        
+需要在生命周期时调用
+
+      @Override
+        protected void onStart() {
+            super.onStart();
+            if(bannerView!=null){
+              bannerView.stratPlay();
+            }
+            if(bannerView2!=null){
+              bannerView2.stratPlay();
+            }
+
+        }
+    
+        @Override
+        protected void onStop() {
+            super.onStop();
+             if(bannerView!=null){
+                 bannerView.stopPlay();
+             }
+            if(bannerView!=null){
+               bannerView2.stopPlay();
+            }
+        }
+        
+更新时间：2019年1月15日17:24:10 
 

@@ -1,8 +1,13 @@
 package com.qishui.zutils;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.activity.QiShuiMainStyle04Activity;
@@ -24,6 +29,8 @@ public class MainActivity extends BaseQiShuiActivity {
     Button btn2;
     @QBindView(R.id.banner)
     BannerView bannerView;
+    @QBindView(R.id.banner2)
+    BannerView bannerView2;
 
     @Override
     protected int initLayout() {
@@ -50,14 +57,42 @@ public class MainActivity extends BaseQiShuiActivity {
             }
         });
 
+        //数据
+        List<Object> list = new ArrayList<>();
+        list.add(R.drawable.banner);
+        bannerView.setListViews(list).setImageLoader(new BannerView.ImageLoader() {
+            @Override
+            public void show(Context context, Object obj, ImageView iv) {
+                iv.setImageResource((Integer) obj);
+            }
+        }).setBannerClick(new BannerView.BannerCallBack() {
+            @Override
+            public void click(View view, int position) {
+                toast("QQQQQQQQQQQQQQQ");
+            }
+        }).showView();
 
-     //   List<Integer> list = new ArrayList<>();
-       // list.add((R.layout.state_data_network_error));
-       // bannerView.setListResIds(list).showView();
+        //数据
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(R.layout.state_data_empty);
+        list2.add(R.layout.state_data_error);
 
-        List<View> list = new ArrayList<>();
-        list.add(UiUtils.inflate(R.layout.state_data_network_error));
-        bannerView.setListViews(list).showView();
+        final List<String> listTitle = new ArrayList<>();
+        listTitle.add("康熙有多数老年人都存在的“不服输”的心理。虽然年龄摆在那儿了，但是仍然不承认自己力不从心");
+        listTitle.add("年迈的狮子是最敏感的");
+
+        //控件
+        bannerView2.setLoadView(R.layout.view_banner_1);
+        View bannerView = bannerView2.getBannerView();
+        ViewPager vp = UiUtils.findViewById(bannerView, R.id.banner_vp);
+        final TextView titleTv = UiUtils.findViewById(bannerView, R.id.banner_tv);
+        titleTv.setText(listTitle.get(0));
+        bannerView2.setViewPager(vp).setListResIds(list2).setDelayTime(3500).sePageChangeListenert(new BannerView.PageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                titleTv.setText(listTitle.get(position));
+            }
+        }).showView();
     }
 
     void initPermissions() {
@@ -85,11 +120,13 @@ public class MainActivity extends BaseQiShuiActivity {
     protected void onStart() {
         super.onStart();
         bannerView.stratPlay();
+        bannerView2.stratPlay();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         bannerView.stopPlay();
+        bannerView2.stopPlay();
     }
 }
