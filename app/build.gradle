@@ -6,8 +6,8 @@ android {
         applicationId "com.qishui.zutils"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 74
-        versionName "1.0.6"
+        versionCode 82
+        versionName "1.0.7"
     }
     buildTypes {
         release {
