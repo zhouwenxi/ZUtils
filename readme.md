@@ -15,7 +15,7 @@
     2、Add the dependency
 
     dependencies {
-    	api 'com.github.zhouwenxi:ZUtils:1.0.6'
+    	api 'com.github.zhouwenxi:ZUtils:1.0.7'
     }
     
     3、注册BaseQiShuiApplication或则实现BaseQiShuiApplication初始化方法
