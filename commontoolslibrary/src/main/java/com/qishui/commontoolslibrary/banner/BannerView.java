@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,9 @@ public class BannerView extends RelativeLayout {
     List<Integer> tempLayout;
     List<Object> tempImageView;
     private View loadView;
+
+    //设置位置 mListPoints
+    private int location;
     /**
      * 初始化空间
      */
@@ -147,7 +151,8 @@ public class BannerView extends RelativeLayout {
         bindViews();
         setData();
         setBannerPoint();
-        if (count > 0 && viewPager != null) {
+
+        if (relCount > 0 && viewPager != null) {
             viewPager.setAdapter(new MyViewPagerAdapter(mList));
             viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
             currentItem = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % count;
@@ -160,17 +165,41 @@ public class BannerView extends RelativeLayout {
     }
 
     /**
+     * 设置点的位置
+     *
+     * @return
+     */
+    public BannerView setLocationRight() {
+        this.location = Gravity.RIGHT;
+        return this;
+    }
+
+    public BannerView setLocationLeft() {
+        this.location = Gravity.LEFT;
+        return this;
+    }
+
+    public BannerView setLocationCenter() {
+        this.location = Gravity.CENTER;
+        return this;
+    }
+
+    /**
      * 设置指示点
      */
     private void setBannerPoint() {
-        if (bannerLl != null && relCount > 1 && selectId != 0) {
+
+        if (bannerLl != null && relCount > 1 && unSelectId != 0) {
             for (int i = 0; i < relCount; i++) {
                 View view = new View(getContext());
-                view.setBackgroundResource(selectId);
+                view.setBackgroundResource(unSelectId);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(UiUtils.dp2px(10), UiUtils.dp2px(10));
-                params.leftMargin=UiUtils.dp2px(5);
+                params.leftMargin = UiUtils.dp2px(5);
                 mListPoints.add(view);
-                bannerLl.addView(view,params);
+                bannerLl.addView(view, params);
+            }
+            if (location != 0) {
+                bannerLl.setGravity(location);
             }
         }
     }
@@ -391,9 +420,26 @@ public class BannerView extends RelativeLayout {
         public void onPageSelected(int position) {
             currentItem = position;
             final int relPos = position % relCount;
+
+            for (int index = 0; index < relCount; index++) {
+                if (index == relPos) {
+                    if (selectId != 0) {
+                        mListPoints.get(index).setBackgroundResource(selectId);
+                    }
+                } else {
+                    if (unSelectId != 0) {
+                        mListPoints.get(index).setBackgroundResource(unSelectId);
+                    }
+                    if (listener != null) {
+                        listener.onPageUnSelected(index);
+                    }
+                }
+            }
+
             if (listener != null) {
                 listener.onPageSelected(relPos);
             }
+
         }
     }
 
@@ -536,6 +582,13 @@ public class BannerView extends RelativeLayout {
          * @param position
          */
         void onPageSelected(int position);
+
+        /**
+         * 没选择
+         *
+         * @param position
+         */
+        void onPageUnSelected(int position);
     }
 
 }

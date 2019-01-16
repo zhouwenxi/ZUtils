@@ -792,20 +792,22 @@ banner 支持添加布局、ImageView滑动、自定义滑动样式
 
 1、默认
 
-        //数据
-        List<Object> list = new ArrayList<>();
-        list.add(R.drawable.banner);
-        bannerView.setListViews(list).setImageLoader(new BannerView.ImageLoader() {
-            @Override
-            public void show(Context context, Object obj, ImageView iv) {
-                iv.setImageResource((Integer) obj);
-            }
-        }).setBannerClick(new BannerView.BannerCallBack() {
-            @Override
-            public void click(View view, int position) {
-                toast("QQQQQQQQQQQQQQQ");
-            }
-        }).showView();
+       //数据
+       List<Object> list = new ArrayList<>();
+       list.add(R.drawable.banner);
+       list.add(R.drawable.banner);
+       list.add(R.drawable.banner);
+       bannerView.setUnSelectId(R.drawable.white_point).setSelectId(R.drawable.red_point).setLocationLeft().setListViews(list).setImageLoader(new BannerView.ImageLoader() {
+           @Override
+           public void show(Context context, Object obj, ImageView iv) {
+               iv.setImageResource((Integer) obj);
+           }
+       }).setBannerClick(new BannerView.BannerCallBack() {
+           @Override
+           public void click(View view, int position) {
+               toast("QQQQQQQQQQQQQQQ");
+           }
+       }).setAutoPlay(false).showView();
 
 2、自定义
 
