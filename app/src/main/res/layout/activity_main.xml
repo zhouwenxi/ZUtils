@@ -26,20 +26,6 @@
         android:text="x=修复" />
 
 
-    <com.qishui.commontoolslibrary.banner.BannerView
-        android:background="@color/colorRed"
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        />
 
-
-    <com.qishui.commontoolslibrary.banner.BannerView
-        android:layout_marginTop="10dp"
-        android:background="@color/colorRed"
-        android:id="@+id/banner2"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        />
 
 </LinearLayout>

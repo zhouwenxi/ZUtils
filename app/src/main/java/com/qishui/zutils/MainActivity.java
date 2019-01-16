@@ -1,8 +1,12 @@
 package com.qishui.zutils;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.activity.QiShuiMainStyle04Activity;
@@ -10,6 +14,10 @@ import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.banner.BannerView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
+import com.qishui.commontoolslibrary.core.UiUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends BaseQiShuiActivity {
@@ -18,10 +26,7 @@ public class MainActivity extends BaseQiShuiActivity {
     Button btn1;
     @QBindView(R.id.btn2)
     Button btn2;
-    @QBindView(R.id.banner)
-    BannerView bannerView;
-    @QBindView(R.id.banner2)
-    BannerView bannerView2;
+
 
     @Override
     protected int initLayout() {
@@ -47,6 +52,13 @@ public class MainActivity extends BaseQiShuiActivity {
                 startActivity(AboutActivity.class);
             }
         });
+
+        //数据
+        List<Object> list = new ArrayList<>();
+        list.add(R.drawable.banner);
+        list.add(R.drawable.banner);
+        list.add(R.drawable.banner);
+
 
     }
 
