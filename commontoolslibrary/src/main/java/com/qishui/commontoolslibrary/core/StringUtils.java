@@ -47,7 +47,7 @@ public class StringUtils {
      * @return
      */
     public static String String2Xml(String xmlString) {
-        String xml = "";
+
         try {
             StringReader reader = new StringReader(xmlString);
             Source oldData = new StreamSource(reader);
@@ -56,11 +56,11 @@ public class StringUtils {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             transformer.transform(oldData, newData);
-            xml = newData.getWriter().toString();
+            return newData.getWriter().toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return xml;
+        return "";
     }
 
 

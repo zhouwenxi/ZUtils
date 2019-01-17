@@ -1,7 +1,6 @@
 package com.qishui.commontoolslibrary.http.easyhttp;
 
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.DelayQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -11,9 +10,6 @@ public class HttpThreadPoolManager {
 
     //一个由链表结构组成的双向阻塞队列，即可以从队列的两端插入和移除元素
     private LinkedBlockingDeque<Runnable> queue = new LinkedBlockingDeque<>();
-
-    //延时队列
-    private DelayQueue delayQueue = new DelayQueue<>();
 
     //添加任务就是添加线程
     public void excute(Runnable runnable) {
@@ -86,6 +82,16 @@ public class HttpThreadPoolManager {
         threadPoolExecutor = new ThreadPoolExecutor(5, 20, 35, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4), rejectedExecutionHandler);
         //开启传动带
         threadPoolExecutor.execute(runnable);
+    }
+
+    /**
+     * 取消任务
+     * @param runnable
+     */
+    public void cancel(Runnable runnable) {
+        if (threadPoolExecutor != null && !threadPoolExecutor.isShutdown() && !threadPoolExecutor.isTerminated()) {
+            threadPoolExecutor.remove(runnable);
+        }
     }
 
     //写成单列模式
