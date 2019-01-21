@@ -17,7 +17,6 @@ import com.qishui.commontoolslibrary.annotation.AnnotationUtils;
 
 public abstract class BaseQiShuiActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +34,7 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
 
     /**
      * 重写
+     *
      * @return
      */
     public void setStateLayoutAttrs() {
@@ -95,10 +95,11 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
 
     /**
      * 跳转
+     *
      * @param className
      */
     public void startActivityFinish(String className) {
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         intent.setClassName(this, className);
         startActivity(intent);
         finish();

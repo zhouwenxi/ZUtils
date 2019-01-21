@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.qishui.commontoolslibrary.cache.CacheManager;
+import com.qishui.commontoolslibrary.core.AdapterScreenUtils;
 import com.qishui.commontoolslibrary.core.CrashUtils;
 import com.qishui.commontoolslibrary.http.HttpManager;
 import com.qishui.commontoolslibrary.http.easyhttp.HttpThreadPoolManager;
@@ -26,17 +27,20 @@ public class BaseQiShuiApplication extends Application {
     private static LinkedList<Activity> activityLinkedList = new LinkedList<>();
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
         CrashUtils.with(this);
-
+        //适配注册
+        AdapterScreenUtils.setup(this);
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 activityLinkedList.add(activity);
+                if (activity != null) {
+                    AdapterScreenUtils.match(activity, 360, AdapterScreenUtils.MATCH_BASE_WIDTH, AdapterScreenUtils.MATCH_UNIT_DP);
+                }
             }
 
             @Override
@@ -53,7 +57,9 @@ public class BaseQiShuiApplication extends Application {
 
             @Override
             public void onActivityStopped(Activity activity) {
-
+                if (activity != null) {
+                    AdapterScreenUtils.cancelMatch(activity,  AdapterScreenUtils.MATCH_UNIT_DP);
+                }
             }
 
             @Override

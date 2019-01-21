@@ -94,5 +94,27 @@ public class UiUtils {
         return (int) (dp * density+0.5f);
     }
 
+    /**
+     * Value of pt to value of px.
+     *
+     * @param ptValue The value of pt.
+     * @return value of px
+     */
+    public static int pt2Px(float ptValue) {
+        DisplayMetrics metrics = BaseQiShuiApplication.getContext().getResources().getDisplayMetrics();
+        return (int) (ptValue * metrics.xdpi / 72f + 0.5);
+    }
+
+    /**
+     * Value of px to value of pt.
+     *
+     * @param pxValue The value of px.
+     * @return value of pt
+     */
+    public static int px2Pt(float pxValue) {
+        DisplayMetrics metrics = BaseQiShuiApplication.getContext().getResources().getDisplayMetrics();
+        return (int) (pxValue * 72 / metrics.xdpi + 0.5);
+    }
+
 
 }
