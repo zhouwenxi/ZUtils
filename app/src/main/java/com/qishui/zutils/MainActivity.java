@@ -1,23 +1,14 @@
 package com.qishui.zutils;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.activity.QiShuiMainStyle04Activity;
 import com.qishui.commontoolslibrary.annotation.QBindView;
-import com.qishui.commontoolslibrary.banner.BannerView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-import com.qishui.commontoolslibrary.core.UiUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends BaseQiShuiActivity {
@@ -49,15 +40,9 @@ public class MainActivity extends BaseQiShuiActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(AboutActivity.class);
+
             }
         });
-
-        //数据
-        List<Object> list = new ArrayList<>();
-        list.add(R.drawable.banner);
-        list.add(R.drawable.banner);
-        list.add(R.drawable.banner);
 
 
     }
@@ -81,7 +66,6 @@ public class MainActivity extends BaseQiShuiActivity {
                     }
                 });
     }
-
 
 
 }
