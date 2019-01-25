@@ -9,6 +9,7 @@ import com.qishui.commontoolslibrary.exception.ErrorHandle;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -55,6 +56,11 @@ public class FileUtils {
      * Crash目录
      */
     public static final String KEY_FILE_CRASH = KEY_BASE_PATH + "/crash/";
+
+    /**
+     * 下载目录
+     */
+    public static final String KEY_FILE_DOWNLOAD = KEY_BASE_PATH + "/download/";
 
 
     /**
@@ -604,4 +610,24 @@ public class FileUtils {
     }
 
 
+    /**
+     * 关流
+     *
+     * @param closeables
+     */
+    public static void close(Closeable... closeables) {
+
+        if (closeables == null) {
+            return;
+        }
+        try {
+            for (Closeable closeable : closeables) {
+                if (closeable != null) {
+                    closeable.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

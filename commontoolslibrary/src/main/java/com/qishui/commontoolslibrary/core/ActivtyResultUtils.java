@@ -20,9 +20,6 @@ public class ActivtyResultUtils {
     private static final String TAG = "ACTIVTYRESULTUTILS";
     private ResultBackFragment mResultBackFragment;
 
-    private ActivtyResultUtils(Fragment fragment) {
-        this(fragment.getActivity());
-    }
 
     private ActivtyResultUtils(FragmentActivity activity) {
         mResultBackFragment = getFragment(activity.getSupportFragmentManager());
@@ -39,7 +36,7 @@ public class ActivtyResultUtils {
     }
 
     public static ActivtyResultUtils with(Fragment fragment) {
-        return new ActivtyResultUtils(fragment);
+        return new ActivtyResultUtils(fragment.getActivity());
     }
 
     /**

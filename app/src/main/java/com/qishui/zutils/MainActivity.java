@@ -9,6 +9,7 @@ import com.qishui.commontoolslibrary.activity.QiShuiMainStyle04Activity;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
+import com.qishui.commontoolslibrary.update.UpdateCheckUtils;
 
 
 public class MainActivity extends BaseQiShuiActivity {
@@ -41,6 +42,14 @@ public class MainActivity extends BaseQiShuiActivity {
             @Override
             public void onClick(View v) {
 
+                String url = "http://www.mzict.com:8081/tongtaiOA/api/android/download?filepath=2019011704051248241.apk&filename=OA9_last.apk";
+
+                UpdateCheckUtils.with(MainActivity.this)
+                        .setMode(UpdateCheckUtils.VERSONCODE)
+                        .setVersionCode(90)
+                        .setUrl(url)
+                        .check();
+
             }
         });
 
@@ -48,8 +57,8 @@ public class MainActivity extends BaseQiShuiActivity {
     }
 
     void initPermissions() {
-        PermissionUtils.with(this).
-                addPermissions(PermissionUtils.GROUP_STORAGE)
+        PermissionUtils.with(this)
+                .addPermissions(PermissionUtils.GROUP_STORAGE)
                 .addPermissions(PermissionUtils.GROUP_CAMERA)
                 .addPermissions(PermissionUtils.GROUP_LOCATION)
                 .request()

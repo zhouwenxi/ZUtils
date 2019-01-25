@@ -35,11 +35,11 @@ public class AppUtils {
      * 获取版本号
      * @return
      */
-    public static long getAppVirsionCode() {
+    public static int getAppVirsionCode() {
 
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            return packageInfo.getLongVersionCode();
+            return packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return 1;

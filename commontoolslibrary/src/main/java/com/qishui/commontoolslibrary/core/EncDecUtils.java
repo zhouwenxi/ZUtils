@@ -1,6 +1,12 @@
 package com.qishui.commontoolslibrary.core;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by zhou on 2018/12/22.
@@ -116,6 +122,36 @@ public class EncDecUtils {
             arrOut[i / 2] = (byte) Integer.parseInt(strTmp, 16);
         }
         return arrOut;
+    }
+
+
+    /**
+     * MD5加密文件
+     *
+     * @param file 文件
+     * @return 文件的MD5校验码
+     */
+    public static String encryptMD5File(File file) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            FileChannel channel = fis.getChannel();
+            MappedByteBuffer buffer = channel.map(FileChannel.MapMode.READ_ONLY, 0, file.length());
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(buffer);
+            return new String(md.digest(), "utf-8");
+        } catch (NoSuchAlgorithmException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
 }

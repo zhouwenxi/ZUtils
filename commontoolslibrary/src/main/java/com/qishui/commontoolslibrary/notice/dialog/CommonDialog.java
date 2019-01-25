@@ -12,15 +12,16 @@ import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.click.QiShuiClick;
+import com.qishui.commontoolslibrary.core.LogUtils;
 
 /**
-* author： qishui
-* date: 2019/1/2  16:28
-* email: qihsuichixi@163.com
-* qq: 798150439
-* blog: http://zhouwenxi.top
-* desc:
-*/
+ * author： qishui
+ * date: 2019/1/2  16:28
+ * email: qihsuichixi@163.com
+ * qq: 798150439
+ * blog: http://zhouwenxi.top
+ * desc:
+ */
 public class CommonDialog extends BaseQishuiDialog {
 
     private LinearLayout mDialog_common_ll;
@@ -33,42 +34,43 @@ public class CommonDialog extends BaseQishuiDialog {
     private String mRight;
     private String mTitle;
     //ios
-    public static String STYLE_IOS="01";
+    public static String STYLE_IOS = "01";
     //android
-    public static String STYLE_ANDROID="02";
+    public static String STYLE_ANDROID = "02";
     //类型
     private static String STYLE;
+
     private void bindViews() {
 
         mDialog_common_ll = findViewById(R.id.dialog_common_ll);
         mDialog_common_tv_content = findViewById(R.id.dialog_common_tv_content);
         mDialog_common_tv_left = findViewById(R.id.dialog_common_tv_left);
         mDialog_common_tv_right = findViewById(R.id.dialog_common_tv_right);
-        mDialog_common_tv_title=findViewById(R.id.dialog_common_tv_title);
+        mDialog_common_tv_title = findViewById(R.id.dialog_common_tv_title);
     }
 
-    public static CommonDialog with(Activity activity){
+    public static CommonDialog with(Activity activity) {
         return new CommonDialog(activity);
     }
 
-    public static CommonDialog with(Activity activity,String style){
-        return new CommonDialog(activity,style);
+    public static CommonDialog with(Activity activity, String style) {
+        return new CommonDialog(activity, style);
     }
 
     private CommonDialog(@NonNull Activity activity) {
         super(activity);
-        STYLE=STYLE_IOS;
+        STYLE = STYLE_IOS;
     }
 
-    private CommonDialog(@NonNull Activity activity,String style) {
+    private CommonDialog(@NonNull Activity activity, String style) {
         super(activity);
-        this.STYLE=style;
+        this.STYLE = style;
     }
 
     @Override
     protected int initLayout() {
 
-        if(TextUtils.equals(STYLE,STYLE_IOS)){
+        if (TextUtils.equals(STYLE, STYLE_IOS)) {
             return R.layout.dialog_common_style1;
         }
         return R.layout.dialog_common_style2;
@@ -82,7 +84,9 @@ public class CommonDialog extends BaseQishuiDialog {
         clickOut();
         clickLeft();
         clickRight();
+
     }
+
 
     /**
      * 设置文本
@@ -98,6 +102,7 @@ public class CommonDialog extends BaseQishuiDialog {
      * 点击外面部分，关闭dialog
      */
     private void clickOut() {
+
         getDialogRoot().setOnClickListener(new QiShuiClick(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
@@ -153,6 +158,7 @@ public class CommonDialog extends BaseQishuiDialog {
 
     /**
      * 获取标题
+     *
      * @return
      */
     public TextView getDialogTitleTv() {
@@ -175,9 +181,10 @@ public class CommonDialog extends BaseQishuiDialog {
      * @return
      */
     public CommonDialog setDialogContent(String text) {
-        this.mContent=text;
+        this.mContent = text;
         return this;
     }
+
 
     /**
      * 获取左边控件
@@ -195,7 +202,7 @@ public class CommonDialog extends BaseQishuiDialog {
      * @return
      */
     public CommonDialog setDialogLeftText(String text) {
-        this.mLeft=text;
+        this.mLeft = text;
         return this;
     }
 
@@ -215,17 +222,18 @@ public class CommonDialog extends BaseQishuiDialog {
      * @return
      */
     public CommonDialog setDialogRightText(String text) {
-        this.mRight=text;
+        this.mRight = text;
         return this;
     }
 
     /**
      * 设置标题
+     *
      * @param text
      * @return
      */
     public CommonDialog setDialogTitle(String text) {
-        this.mTitle=text;
+        this.mTitle = text;
         return this;
     }
 

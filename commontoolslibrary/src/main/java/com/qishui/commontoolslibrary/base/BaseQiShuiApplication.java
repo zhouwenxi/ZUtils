@@ -105,4 +105,6 @@ public class BaseQiShuiApplication extends Application {
         // 杀死当前的进程
         android.os.Process.killProcess(android.os.Process.myPid());
     }
+
+
 }
