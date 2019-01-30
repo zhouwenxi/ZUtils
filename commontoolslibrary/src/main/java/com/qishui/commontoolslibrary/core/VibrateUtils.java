@@ -15,7 +15,7 @@ import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
  *
  * Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
  * long[] patter = {1000, 1000, 2000, 50};
- * vibrator.start(patter, 0);
+ * vibrator.strat(patter, 0);
  *
  * 最后一行中vibrate的第二参数表示从哪里开始循环，比如这里的0表示这个数组在第一次循环完之后会从下标0开始循环到最后，这里的如果是-1表示不循环。
  *

@@ -154,21 +154,21 @@ public class UpdateCheckUtils {
         HttpManager.with().getProxy().downloadFile(url, FileUtils.KEY_FILE_DOWNLOAD, "test.apk", new FileCallBack() {
             @Override
             protected void onEasyInProgress(float progress) {
-                isDownLoad=true;
+                isDownLoad = true;
                 LogUtils.e("下載进度：" + progress);
             }
 
             @Override
             protected void onEasySuccess(File file) {
                 ToastUtils.show("下载成功!");
-                isDownLoad=false;
+                isDownLoad = false;
                 InstallUtil.install(mActivity, file.getAbsolutePath());
             }
 
             @Override
             protected void onEasyError(String message) {
                 ToastUtils.show("下载失败..." + message);
-                isDownLoad=false;
+                isDownLoad = false;
                 LogUtils.e(message + "  " + url);
             }
         });
