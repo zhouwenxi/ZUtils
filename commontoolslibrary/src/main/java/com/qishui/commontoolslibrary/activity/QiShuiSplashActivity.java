@@ -147,7 +147,7 @@ public abstract class QiShuiSplashActivity extends BaseQiShuiActivity {
         qishui_splash_tv_copyright.setText(copyrightMsg);
 
         if (TextUtils.isEmpty(msg)) {
-            msg="当前版本: "+AppUtils.getAppVirsionName();
+            msg="当前版本: "+AppUtils.getAppVersionName();
         }
         qishui_splash_tv.setText(msg);
 

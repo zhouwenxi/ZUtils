@@ -20,7 +20,7 @@ import java.io.File;
 public class UpdateCheckUtils {
 
     //本地版本名
-    public static String localVersonName = AppUtils.getAppVirsionName();
+    public static String localVersonName = AppUtils.getAppVersionName();
     //本地版本号
     public static int localVersonCode = AppUtils.getAppVersionCode();
     //设置升级方式

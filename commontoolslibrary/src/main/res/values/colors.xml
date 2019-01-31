@@ -20,4 +20,9 @@
     <color name="color06">#aa060606</color>
     <color name="color07">#ff070707</color>
     <color name="color51">#515151</color>
+
+    <color name="secondary_text">#757575</color>
+    <color name="text_primary_dark">#de000000</color>
+
+
 </resources>

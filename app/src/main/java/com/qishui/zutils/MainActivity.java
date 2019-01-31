@@ -3,13 +3,12 @@ package com.qishui.zutils;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-import com.qishui.commontoolslibrary.core.TimerUtils;
+import com.qishui.commontoolslibrary.notice.dialog.BottomDialogFragment;
 import com.qishui.commontoolslibrary.update.UpdateCheckUtils;
 
 
@@ -19,14 +18,6 @@ public class MainActivity extends BaseQiShuiActivity {
     Button btn1;
     @QBindView(R.id.btn2)
     Button btn2;
-    @QBindView(R.id.tv_timer)
-    TextView tv_timer;
-    @QBindView(R.id.tv_timer2)
-    TextView tv_timer2;
-
-
-    TimerUtils timer;
-    TimerUtils timer2;
 
     @Override
     protected int initLayout() {
@@ -38,36 +29,25 @@ public class MainActivity extends BaseQiShuiActivity {
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
 
-        timer = TimerUtils.with();
-        timer2 = TimerUtils.with();
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.setCallBack(new TimerUtils.CallBack() {
 
+                BottomDialogFragment.with(R.layout.dialog_frgment_share).setCallBack(new BottomDialogFragment.CallBack() {
                     @Override
-                    public void updateUI(String time) {
-                        tv_timer.setText("倒計時：" + time + " s");
+                    public void handle(View view) {
+
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                toast("Hello world ");
+                                BottomDialogFragment.getInstance().dismissDialog();
+                            }
+                        });
                     }
+                }).showDialog(MainActivity.this);
 
-                    @Override
-                    public void endUI() {
 
-                        toast("结束倒计时!");
-                    }
-                }).countdownStart(60, 1);
-
-                timer2.setCallBack(new TimerUtils.CallBack() {
-                    @Override
-                    public void updateUI(String time) {
-                        tv_timer2.setText("计时：" + time);
-                    }
-
-                    @Override
-                    public void endUI() {
-
-                    }
-                }).strat(1);
             }
         });
 
@@ -111,16 +91,4 @@ public class MainActivity extends BaseQiShuiActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (timer != null) {
-            timer.cancel();
-        }
-
-        if (timer2 != null) {
-            timer2.cancel();
-        }
-    }
 }
