@@ -60,6 +60,16 @@ public class UiUtils {
     }
 
     /**
+     * 获取资源
+     *
+     * @param id
+     * @return
+     */
+    public static String getString(int id) {
+        return context.getResources().getString(id);
+    }
+
+    /**
      * 延迟发生消息
      *
      * @param runnable
@@ -91,7 +101,7 @@ public class UiUtils {
     public static int dp2px(int dp) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         float density = metrics.density;
-        return (int) (dp * density+0.5f);
+        return (int) (dp * density + 0.5f);
     }
 
     /**
@@ -132,4 +142,16 @@ public class UiUtils {
     }
 
 
+    /**
+     * 将当前线程睡眠指定毫秒数。
+     *
+     * @param millis 睡眠的时长，单位毫秒。
+     */
+    public static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

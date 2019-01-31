@@ -4,6 +4,7 @@ import org.xml.sax.InputSource;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -61,6 +62,15 @@ public class StringUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * 获取一串uuid
+     *
+     * @return
+     */
+    public static String getUUID() {
+        return  UUID.randomUUID().toString().replace("-", "").toUpperCase();
     }
 
 

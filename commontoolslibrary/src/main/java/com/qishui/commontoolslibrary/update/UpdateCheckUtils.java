@@ -22,7 +22,7 @@ public class UpdateCheckUtils {
     //本地版本名
     public static String localVersonName = AppUtils.getAppVirsionName();
     //本地版本号
-    public static int localVersonCode = AppUtils.getAppVirsionCode();
+    public static int localVersonCode = AppUtils.getAppVersionCode();
     //设置升级方式
     public static int VERSONNAME = 0;
     public static int VERSONCODE = 1;

@@ -1,8 +1,10 @@
 package com.qishui.commontoolslibrary.core;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 
 import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
 
@@ -19,7 +21,7 @@ public class AppUtils {
      *
      * @return
      */
-    public static String getAppVirsionName() {
+    public static String getAppVersionName() {
 
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -33,9 +35,10 @@ public class AppUtils {
 
     /**
      * 获取版本号
+     *
      * @return
      */
-    public static int getAppVirsionCode() {
+    public static int getAppVersionCode() {
 
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -46,5 +49,38 @@ public class AppUtils {
         }
 
     }
+
+    /**
+     * 是否安装应用
+     *
+     * @param packageName
+     * @return
+     */
+    public static Boolean isInstalled(String packageName) {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return packageInfo != null;
+    }
+
+    /**
+     * 获取应用图标
+     *
+     * @return
+     */
+    public static Drawable getAppIcon() {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0);
+            return packageManager.getApplicationIcon(applicationInfo);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

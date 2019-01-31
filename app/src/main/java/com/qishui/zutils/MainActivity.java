@@ -60,7 +60,7 @@ public class MainActivity extends BaseQiShuiActivity {
                 timer2.setCallBack(new TimerUtils.CallBack() {
                     @Override
                     public void updateUI(String time) {
-                        tv_timer2.setText("计时：" + time );
+                        tv_timer2.setText("计时：" + time);
                     }
 
                     @Override
