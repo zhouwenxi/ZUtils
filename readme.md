@@ -128,6 +128,44 @@ dialog
         }
     }
 
+4、分享、支付、拍照片等底部弹出框(2019年2月1日 17点37分 添加)
+
+方式一
+
+    BottomDialogFragment.with(R.layout.dialog_frgment_share)
+      .setCallBack(new BottomDialogFragment.CallBack() {
+                        @Override
+                        public void handle(View view) {
+
+                            view.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    toast("Hello world ");
+                                    BottomDialogFragment.getInstance().dismissDialog();
+                                }
+                            });
+                        }
+                    }).showDialog(MainActivity.this);
+
+方式二
+
+    BottomDialog.with(MainActivity.this, R.layout.dialog_frgment_share)
+          .setCallBack(new BottomDialog.CallBack() {
+                        @Override
+                        public void handle(View view) {
+
+                            view.findViewById(R.id.tv_bottom_sheet_heading)
+                            .setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    toast("TTTTTTTTTTTTTtt");
+                                    BottomDialog.getInstance().dismissDialog();
+                                }
+                            });
+
+                        }
+                    }).showDialog();
+
 http
 ---
 

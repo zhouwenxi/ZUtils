@@ -6,10 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.qishui.commontoolslibrary.R;
+import com.qishui.commontoolslibrary.core.UiUtils;
 
 /**
  * Created by zhou on 2018/12/22.
@@ -32,15 +34,16 @@ public abstract class BaseQishuiDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(initLayout());
-        initEvent(savedInstanceState);
+        View inflate = UiUtils.inflate(initLayout());
+        setContentView(inflate);
+        initEvent(inflate);
         setWidthAndHeight();
     }
 
     /**
      * 设置dialog宽高
      */
-    private void setWidthAndHeight() {
+    public Window setWidthAndHeight() {
         Window window = this.getWindow();
         //可设置dialog的位置
         //window.setGravity(Gravity.BOTTOM);
@@ -52,6 +55,7 @@ public abstract class BaseQishuiDialog extends Dialog {
         window.setAttributes(lp);
         //设置背景透明
         window.setBackgroundDrawableResource(R.color.colorTransparent);
+        return window;
     }
 
     /**
@@ -85,7 +89,7 @@ public abstract class BaseQishuiDialog extends Dialog {
     public void dismissDialog() {
 
         //检查环境是否允许
-        if (mContext != null && !mContext.isDestroyed() ) {
+        if (mContext != null && !mContext.isDestroyed()) {
             dismiss();
         }
     }
@@ -122,9 +126,9 @@ public abstract class BaseQishuiDialog extends Dialog {
     /**
      * 处理事件
      *
-     * @param savedInstanceState
+     * @param inflate
      */
-    protected abstract void initEvent(Bundle savedInstanceState);
+    protected abstract void initEvent(View inflate);
 
 
 }

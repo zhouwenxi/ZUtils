@@ -2,22 +2,18 @@ package com.qishui.commontoolslibrary.notice.dialog;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.click.QiShuiClick;
-import com.qishui.commontoolslibrary.core.LogUtils;
+import com.qishui.commontoolslibrary.notice.bean.QiShuiDialogBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +72,7 @@ public class ListDialog<T extends QiShuiDialogBean> extends BaseQishuiDialog {
     }
 
     @Override
-    protected void initEvent(Bundle savedInstanceState) {
+    protected void initEvent(View view) {
 
         bindView();
         setText();

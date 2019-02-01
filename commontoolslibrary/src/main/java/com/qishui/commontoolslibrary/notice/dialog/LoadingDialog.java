@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
@@ -43,7 +44,7 @@ public class LoadingDialog extends BaseQishuiDialog {
     }
 
     @Override
-    protected void initEvent(Bundle savedInstanceState) {
+    protected void initEvent(View view) {
 
         setCanceledOnTouchOutside(false);
         TextView tv = findViewById(R.id.dialog_loading_tv);

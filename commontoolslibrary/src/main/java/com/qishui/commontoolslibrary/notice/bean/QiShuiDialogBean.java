@@ -1,4 +1,4 @@
-package com.qishui.commontoolslibrary.notice.dialog;
+package com.qishui.commontoolslibrary.notice.bean;
 
 /**
 * author： qishui

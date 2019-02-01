@@ -77,7 +77,7 @@ public class CommonDialog extends BaseQishuiDialog {
     }
 
     @Override
-    protected void initEvent(Bundle savedInstanceState) {
+    protected void initEvent(View view) {
 
         bindViews();
         setText();
