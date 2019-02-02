@@ -13,13 +13,13 @@ android {
         release {
             keyAlias 'qishui'
             keyPassword 'zhou123456'
-            storeFile file('E:\\jks\\zhou.jks')
+            storeFile file('zhou.jks')
             storePassword 'zhou123456'
         }
         config {
             keyAlias 'qishui'
             keyPassword 'zhou123456'
-            storeFile file('E:\\jks\\zhou.jks')
+            storeFile file('zhou.jks')
             storePassword 'zhou123456'
         }
     }
