@@ -25,16 +25,13 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--震动-->
+    <!-- 震动 -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!--安裝apk-->
+    <!-- 安裝apk -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
-
-    <application
-        android:networkSecurityConfig="@xml/network_security_config"
-        >
+    <application android:networkSecurityConfig="@xml/network_security_config">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.android7.fileprovider"
@@ -50,7 +47,6 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-
         <activity android:name=".activity.QiShuiMainStyle01Activity" />
         <activity android:name=".activity.QiShuiMainStyle02Activity" />
         <activity android:name=".activity.QiShuiMainStyle03Activity" />
@@ -58,6 +54,7 @@
         <activity android:name=".mvp.sample.QiShuiLoginActivity" />
         <activity android:name=".activity.QiShuiCrashActivity" />
         <activity android:name=".activity.QiShuiMainStyle04Activity" />
+        <activity android:name=".activity.QiShuiContactActivity"></activity>
     </application>
 
 </manifest>

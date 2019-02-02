@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
-import com.qishui.commontoolslibrary.notice.dialog.BottomDialog;
 import com.qishui.commontoolslibrary.update.UpdateCheckUtils;
 
 
@@ -33,20 +32,7 @@ public class MainActivity extends BaseQiShuiActivity {
             @Override
             public void onClick(View v) {
 
-                BottomDialog.with(MainActivity.this, R.layout.dialog_frgment_share).setCallBack(new BottomDialog.CallBack() {
-                    @Override
-                    public void handle(View view) {
 
-                        view.findViewById(R.id.tv_bottom_sheet_heading).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                toast("TTTTTTTTTTTTTtt");
-                                BottomDialog.getInstance().dismissDialog();
-                            }
-                        });
-
-                    }
-                }).showDialog();
             }
         });
 

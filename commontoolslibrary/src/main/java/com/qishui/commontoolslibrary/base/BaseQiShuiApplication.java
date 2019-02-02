@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 
 import com.qishui.commontoolslibrary.cache.CacheManager;
 import com.qishui.commontoolslibrary.core.AdapterScreenUtils;
@@ -26,6 +27,11 @@ public class BaseQiShuiApplication extends Application {
 
     private static LinkedList<Activity> activityLinkedList = new LinkedList<>();
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
