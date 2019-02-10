@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.core.AppUtils;
 import com.qishui.commontoolslibrary.core.FileUtils;
 import com.qishui.commontoolslibrary.core.LogUtils;
@@ -36,7 +37,7 @@ public class UpdateCheckUtils {
     private String message;
 
     //是否正在下載
-    private static Boolean isDownLoad = false;
+    private static Boolean state = false;
 
     /**
      * 获取对象
@@ -90,17 +91,21 @@ public class UpdateCheckUtils {
         if (TextUtils.isEmpty(url)) {
             return;
         }
-        if (isDownLoad) {
-            ToastUtils.show("正在下载...");
+        if (state) {
+            ToastUtils.showToastOnUiThread(R.string.downloading);
             return;
         }
         if (mode == VERSONNAME) {
             if (!TextUtils.equals(localVersonName, versionName)) {
                 showDownDialog();
+            }else {
+                ToastUtils.showToastOnUiThread(R.string.last_version);
             }
         } else if (mode == VERSONCODE) {
             if (versionCode > localVersonCode) {
                 showDownDialog();
+            }else {
+                ToastUtils.showToastOnUiThread(R.string.last_version);
             }
         }
 
@@ -154,21 +159,20 @@ public class UpdateCheckUtils {
         HttpManager.with().getProxy().downloadFile(url, FileUtils.KEY_FILE_DOWNLOAD, "test.apk", new FileCallBack() {
             @Override
             protected void onEasyInProgress(float progress) {
-                isDownLoad = true;
-                LogUtils.e("下載进度：" + progress);
+                state = true;
             }
 
             @Override
             protected void onEasySuccess(File file) {
                 ToastUtils.show("下载成功!");
-                isDownLoad = false;
+                state = false;
                 InstallUtil.install(mActivity, file.getAbsolutePath());
             }
 
             @Override
             protected void onEasyError(String message) {
                 ToastUtils.show("下载失败..." + message);
-                isDownLoad = false;
+                state = false;
                 LogUtils.e(message + "  " + url);
             }
         });
