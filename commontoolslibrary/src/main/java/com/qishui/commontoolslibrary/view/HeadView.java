@@ -112,7 +112,7 @@ public class HeadView extends RelativeLayout {
             String left = attributes.getString(R.styleable.HeadView_leftText);
             String middle = attributes.getString(R.styleable.HeadView_middleText);
             String right = attributes.getString(R.styleable.HeadView_rightText);
-            int rightIcon = attributes.getInteger(R.styleable.HeadView_rightIcon, 0);
+            int rightIcon = attributes.getResourceId(R.styleable.HeadView_rightIcon, 0);
 
             if (!TextUtils.isEmpty(left)) {
                 mHead_left_tv.setText(left);

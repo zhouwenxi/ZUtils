@@ -2,13 +2,16 @@ package com.qishui.zutils;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
+import com.qishui.commontoolslibrary.notice.PopupUtils;
 import com.qishui.commontoolslibrary.update.UpdateCheckUtils;
+import com.qishui.commontoolslibrary.view.HeadView;
 
 
 public class MainActivity extends BaseQiShuiActivity {
@@ -17,6 +20,9 @@ public class MainActivity extends BaseQiShuiActivity {
     Button btn1;
     @QBindView(R.id.btn2)
     Button btn2;
+    @QBindView(R.id.hv)
+    HeadView hv;
+
 
     @Override
     protected int initLayout() {
@@ -32,7 +38,23 @@ public class MainActivity extends BaseQiShuiActivity {
             @Override
             public void onClick(View v) {
 
+                PopupUtils.with(MainActivity.this)
+                        .setTargetView(btn2)
+                        .setContentView(R.layout.popup_left_right_center)
+                        .setBackGroundLevel(0.8f)
+                        .setWidth(ViewGroup.LayoutParams.WRAP_CONTENT)
+                        .setCallBack(new PopupUtils.CallBack() {
+                            @Override
+                            public void dissmiss() {
 
+                            }
+
+                            @Override
+                            public void handle(View view) {
+
+                            }
+                        })
+                        .show(PopupUtils.Position.top_left);
             }
         });
 

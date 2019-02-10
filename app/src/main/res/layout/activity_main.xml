@@ -10,6 +10,8 @@
     <com.qishui.commontoolslibrary.view.HeadView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/hv"
+        app:rightIcon="@drawable/add_white"
         app:leftText="退出"
         app:middleText="主页" />
 
@@ -20,28 +22,11 @@
         android:text="点击有bug" />
 
     <Button
+        android:layout_gravity="center"
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="x=修复" />
 
-
-    <TextView
-        android:id="@+id/tv_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:padding="20dp"
-        tools:text="123"
-        android:textColor="@color/colorWhite"/>
-
-    <TextView
-        android:id="@+id/tv_timer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:padding="20dp"
-        tools:text="123"
-        android:textColor="@color/colorWhite"/>
 
 </LinearLayout>
