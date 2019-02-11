@@ -102,7 +102,6 @@ public class PopupUtils {
         return this;
     }
 
-
     /**
      * 显示位置
      *
@@ -135,7 +134,6 @@ public class PopupUtils {
         this.height = height;
         return this;
     }
-
 
     /**
      * 显示
@@ -193,9 +191,7 @@ public class PopupUtils {
         }
 
         PopupWindowCompat.showAsDropDown(window, targetView, offsetX, offsetY, gravity);
-
     }
-
 
     /**
      * 构建一个窗口
@@ -218,7 +214,6 @@ public class PopupUtils {
             // 设置PopupWindow的视图内容
             popupWindow.setContentView(popupView);
         }
-
         //点击空白区域PopupWindow消失，这里必须先设置setBackgroundDrawable，否则点击无反应
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         popupWindow.setTouchable(touchable);
@@ -245,11 +240,8 @@ public class PopupUtils {
                 }
             }
         });
-
         measureWidthAndHeight(popupView);
-
         return popupWindow;
-
     }
 
     /**
@@ -276,7 +268,6 @@ public class PopupUtils {
     public interface CallBack {
         void handle(PopupWindow popupWindow, View view);
     }
-
 
     /**
      * 处理关闭
@@ -305,5 +296,4 @@ public class PopupUtils {
         top_left,
         top_right
     }
-
 }
