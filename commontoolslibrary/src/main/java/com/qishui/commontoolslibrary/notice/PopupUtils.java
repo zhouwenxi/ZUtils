@@ -137,59 +137,63 @@ public class PopupUtils {
     }
 
 
+    /**
+     * 显示
+     *
+     * @param position
+     */
     public void show(Position position) {
-        PopupWindow window = create();
-        int offsetX = 0;
-        int offsetY = 0;
-        int gravity = Gravity.START;
 
-        if (targetView == null || popupView == null) {
+        PopupWindow window = create();
+        int with = window.getContentView().getMeasuredWidth();
+        int height = window.getContentView().getMeasuredHeight();
+        int offsetX = 0;
+        int offsetY = 15;
+        int gravity = Gravity.START;
+        //判定条件
+        if (targetView == null || popupView == null || activity == null || activity.isFinishing()) {
             return;
         }
-
-        //左下居中 类似QQ、微信左下 居中显示
+        //左下 类似QQ、微信左下 居中显示
         if (position == Position.bottom_left) {
-            offsetX = -window.getContentView().getMeasuredWidth() + targetView.getWidth() / 2;
-            offsetY = 10;
+            offsetX = -with + targetView.getWidth() / 2;
         }
-
-        //右下居中
+        //右下
         if (position == Position.bootom_right) {
             offsetX = targetView.getWidth() / 2;
-            offsetY = 10;
         }
-
+        //下方
+        if (position == Position.bottom) {
+            offsetX = -Math.abs(targetView.getWidth() - with) / 2;
+        }
         //同水平线左边 控件左边类似于微信点赞
         if (position == Position.left) {
-            offsetX =-window.getContentView().getMeasuredWidth();
-            offsetY = -(window.getContentView().getMeasuredHeight() + targetView.getHeight()) / 2;;
+            offsetX = -with;
+            offsetY = -(height + targetView.getHeight()) / 2;
         }
-
         //同水平线右边
         if (position == Position.right) {
-            offsetY =  -(window.getContentView().getMeasuredHeight() + targetView.getHeight()) / 2;
+            offsetY = -(height + targetView.getHeight()) / 2;
             gravity = Gravity.END;
         }
-
         //上右
-        if(position==Position.top_right){
-            offsetX = targetView.getWidth()/2;
-            offsetY = -(window.getContentView().getMeasuredHeight()+targetView.getHeight());
+        if (position == Position.top_right) {
+            offsetX = targetView.getWidth() / 2;
+            offsetY = -(height + targetView.getHeight());
         }
-
         //上方
-        if(position==Position.top){
-            offsetX = -Math.abs(targetView.getWidth()-window.getContentView().getMeasuredWidth())/2;
-            offsetY = -(window.getContentView().getMeasuredHeight()+targetView.getHeight());
+        if (position == Position.top) {
+            offsetX = -Math.abs(targetView.getWidth() - with) / 2;
+            offsetY = -(height + targetView.getHeight());
         }
-
         //上左
-        if(position==Position.top_left){
-            offsetX = -(targetView.getWidth()+window.getContentView().getMeasuredWidth())/2;
-            offsetY = -(window.getContentView().getMeasuredHeight()+targetView.getHeight());
+        if (position == Position.top_left) {
+            offsetX = -(targetView.getWidth() + with) / 2;
+            offsetY = -(height + targetView.getHeight());
         }
 
         PopupWindowCompat.showAsDropDown(window, targetView, offsetX, offsetY, gravity);
+
     }
 
 
@@ -214,15 +218,11 @@ public class PopupUtils {
             // 设置PopupWindow的视图内容
             popupWindow.setContentView(popupView);
         }
-        if (touchable) {
-            //点击空白区域PopupWindow消失，这里必须先设置setBackgroundDrawable，否则点击无反应
-            popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
-            popupWindow.setTouchable(true);
-            popupWindow.setFocusable(true);
-        } else {
-            popupWindow.setTouchable(false);
-            popupWindow.setFocusable(false);
-        }
+
+        //点击空白区域PopupWindow消失，这里必须先设置setBackgroundDrawable，否则点击无反应
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+        popupWindow.setTouchable(touchable);
+        popupWindow.setFocusable(touchable);
 
         if (animationStyle != 0) {
             popupWindow.setAnimationStyle(animationStyle);
@@ -230,9 +230,8 @@ public class PopupUtils {
 
         popupWindow.setClippingEnabled(clippingEnabled);
 
-
         if (callBack != null && popupView != null) {
-            callBack.handle(popupWindow.getContentView());
+            callBack.handle(popupWindow, popupView);
         }
 
         //设置PopupWindow消失监听
@@ -241,8 +240,8 @@ public class PopupUtils {
             public void onDismiss() {
                 //恢复背景
                 setBackGroundLevel(1.0f);
-                if (callBack != null) {
-                    callBack.dissmiss();
+                if (dismissCallBack != null) {
+                    dismissCallBack.close();
                 }
             }
         });
@@ -265,7 +264,7 @@ public class PopupUtils {
     }
 
     /**
-     * 处理事件
+     * 处理弹出事件
      */
     private CallBack callBack;
 
@@ -275,9 +274,22 @@ public class PopupUtils {
     }
 
     public interface CallBack {
-        void dissmiss();
+        void handle(PopupWindow popupWindow, View view);
+    }
 
-        void handle(View view);
+
+    /**
+     * 处理关闭
+     */
+    private DismissCallBack dismissCallBack;
+
+    public PopupUtils setDismissCallBack(DismissCallBack dismissCallBack) {
+        this.dismissCallBack = dismissCallBack;
+        return this;
+    }
+
+    public interface DismissCallBack {
+        void close();
     }
 
     /**

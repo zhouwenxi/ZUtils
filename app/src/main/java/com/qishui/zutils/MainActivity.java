@@ -3,7 +3,9 @@ package com.qishui.zutils;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.annotation.QBindView;
@@ -34,27 +36,30 @@ public class MainActivity extends BaseQiShuiActivity {
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        hv.getRightIv().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 PopupUtils.with(MainActivity.this)
-                        .setTargetView(btn2)
-                        .setContentView(R.layout.popup_left_right_center)
+                        .setTargetView(hv.getRightIv())
+                        .setContentView(R.layout.popup_share)
                         .setBackGroundLevel(0.8f)
-                        .setWidth(ViewGroup.LayoutParams.WRAP_CONTENT)
+                        .setAnimationStyle(R.style.popup_bottom_left)
                         .setCallBack(new PopupUtils.CallBack() {
                             @Override
-                            public void dissmiss() {
+                            public void handle(final PopupWindow popupWindow, View view) {
 
-                            }
+                                view.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 
-                            @Override
-                            public void handle(View view) {
+                                        toast("eee");
+                                        popupWindow.dismiss();
+                                    }
+                                });
 
                             }
                         })
-                        .show(PopupUtils.Position.top_left);
+                        .show(PopupUtils.Position.bottom_left);
             }
         });
 

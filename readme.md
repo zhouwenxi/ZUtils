@@ -3,6 +3,7 @@
 2019年1月3日16:51:40
 
 使用方式(最低api为19)
+---
 
     1、Add it in your root build.gradle at the end of repositories:
 
@@ -19,6 +20,8 @@
     }
     
     3、注册BaseQiShuiApplication或则实现BaseQiShuiApplication初始化方法
+
+<!--more-->
 
 permisssion
 ---
@@ -165,6 +168,48 @@ dialog
 
                         }
                     }).showDialog();
+
+
+popup
+-----
+1、实现PopupWindow，控制设置显示view位置及透明度、动画、处理事件回调等
+
+       PopupUtils.with(MainActivity.this)
+                .setTargetView(hv.getRightIv())
+                .setContentView(R.layout.popup_share)
+                .setBackGroundLevel(0.8f)
+                .setAnimationStyle(R.style.popup_bottom_left)
+                .setCallBack(new PopupUtils.CallBack() {
+                    @Override
+                    public void handle(final PopupWindow popupWindow, View view) {
+
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                toast("eee");
+                                popupWindow.dismiss();
+                            }
+                        });
+                }
+            })
+            .show(PopupUtils.Position.bottom_left);
+
+
+2.实现位置有在控件上方、下方、左边、右边、下左、下右、上左、上右
+
+        public enum Position {
+            top,
+            bottom,
+            left,
+            right,
+            bottom_left,
+            bootom_right,
+            top_left,
+            top_right
+        }
+
+ 注释：更新时间 2019年2月11日13:33:57
 
 http
 ---
@@ -835,7 +880,9 @@ banner 支持添加布局、ImageView滑动、自定义滑动样式
        list.add(R.drawable.banner);
        list.add(R.drawable.banner);
        list.add(R.drawable.banner);
-       bannerView.setUnSelectId(R.drawable.white_point).setSelectId(R.drawable.red_point).setLocationLeft().setListViews(list).setImageLoader(new BannerView.ImageLoader() {
+       bannerView.setUnSelectId(R.drawable.white_point)
+       .setSelectId(R.drawable.red_point).setLocationLeft()
+       .setListViews(list).setImageLoader(new BannerView.ImageLoader() {
            @Override
            public void show(Context context, Object obj, ImageView iv) {
                iv.setImageResource((Integer) obj);
@@ -864,7 +911,8 @@ banner 支持添加布局、ImageView滑动、自定义滑动样式
         ViewPager vp = UiUtils.findViewById(bannerView, R.id.banner_vp);
         final TextView titleTv = UiUtils.findViewById(bannerView, R.id.banner_tv);
         titleTv.setText(listTitle.get(0));
-        bannerView2.setViewPager(vp).setListResIds(list2).setDelayTime(3500).sePageChangeListenert(new BannerView.PageChangeListener() {
+        bannerView2.setViewPager(vp).setListResIds(list2)
+        .setDelayTime(3500).sePageChangeListenert(new BannerView.PageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 titleTv.setText(listTitle.get(position));
@@ -896,5 +944,5 @@ banner 支持添加布局、ImageView滑动、自定义滑动样式
             }
         }
         
-更新时间：2019年1月15日17:24:10 
+注释：更新时间：2019年1月15日17:24:10
 
