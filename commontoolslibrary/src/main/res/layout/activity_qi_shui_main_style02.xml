@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/home_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-       />
+        android:layout_weight="1" />
 
-    <View android:layout_width="match_parent"
+    <View
+        android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:alpha="0.6"
-        android:background="@android:color/darker_gray"
-        />
+        android:background="@android:color/darker_gray" />
 
 
     <android.support.design.widget.BottomNavigationView
-        android:background="@color/colorWhite"
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/colorWhite"
-        app:labelVisibilityMode="labeled"
+        android:background="@color/colorWhite"
         app:elevation="2dp"
-        app:itemTextColor="@android:color/black"
+        app:itemBackground="@color/colorWhite"
         app:itemIconTint="@android:color/black"
-        app:menu="@menu/navigation_menu"
-        />
-
-
+        app:itemTextColor="@android:color/black"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/navigation_menu" />
 
 </LinearLayout>
