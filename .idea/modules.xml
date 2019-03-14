@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZUtils.iml" filepath="$PROJECT_DIR$/ZUtils.iml" />
+      <module fileurl="file://D:\huitong_project\zutils\ZUtils\ZUtils.iml" filepath="D:\huitong_project\zutils\ZUtils\ZUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\huitong_project\zutils\ZUtils\app\app.iml" filepath="D:\huitong_project\zutils\ZUtils\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/commontoolslibrary/commontoolslibrary.iml" filepath="$PROJECT_DIR$/commontoolslibrary/commontoolslibrary.iml" />
+      <module fileurl="file://D:\huitong_project\zutils\ZUtils\commontoolslibrary\commontoolslibrary.iml" filepath="D:\huitong_project\zutils\ZUtils\commontoolslibrary\commontoolslibrary.iml" />
     </modules>
   </component>
 </project>

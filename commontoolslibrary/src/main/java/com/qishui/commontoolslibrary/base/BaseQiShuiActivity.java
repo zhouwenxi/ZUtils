@@ -10,6 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.annotation.AnnotationUtils;
+import com.qishui.commontoolslibrary.bean.EventBean;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by zhou on 2018/12/22.
@@ -28,6 +33,11 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         AnnotationUtils.initBinds(this);
         //设置状态属性
         setStateLayoutAttrs();
+        //注册
+        EventBus eventBus = EventBus.getDefault();
+        if (!eventBus.isRegistered(this)) {
+            eventBus.register(this);
+        }
 
         initEvent(savedInstanceState);
     }
@@ -104,5 +114,46 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        EventBus.getDefault().removeAllStickyEvents();
+        //反注册
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    /**
+     * 添加人: add by qishui
+     * 添加时间: 2019/3/8  17:24
+     * 添加注释: 处理消息 UI线程
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void uiEvent(EventBean eventBean) {
+
+    }
+
+    /**
+     * 添加人: add by qishui
+     * 添加时间: 2019/3/8  17:26
+     * 添加注释: 处理消息 子线程
+     */
+    @Subscribe(threadMode = ThreadMode.BACKGROUND, sticky = true)
+    public void threadEvent(EventBean eventBean) {
+
+    }
+
+
+    /**
+     * 添加人: add by qishui
+     * 添加时间: 2019/3/8  17:23
+     * 添加注释: 发送粘性事件
+     */
+    public void postSticky(EventBean eventBean) {
+        EventBus.getDefault().postSticky(eventBean);
+    }
+
 
 }
