@@ -1,23 +1,17 @@
 package com.qishui.commontoolslibrary.state;
 
+import android.app.Activity;
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
-import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
-
-/**
- * Created by zhou on 2019/1/7.
- * 当处于fragment根目录 targetView 时无效,需要包裹一层viewgroup
- */
 
 public class StateLayoutManager {
 
@@ -80,39 +74,71 @@ public class StateLayoutManager {
     // targetView LayoutParams
     private ViewGroup.LayoutParams params;
 
+    private Context mContext;
+
     /**
      * 获取对象
-     *
-     * @param targetView
-     * @return
      */
-    public static StateLayoutManager with(View targetView) {
-        return new StateLayoutManager(targetView);
+    public static StateLayoutManager with(Object object) {
+        return new StateLayoutManager(object);
     }
 
     /**
      * 初始化
      *
-     * @param targetView
+     * @param activityOrFragmentOrView
      */
-    private StateLayoutManager(View targetView) {
+    private StateLayoutManager(Object activityOrFragmentOrView) {
 
-        this.targetView = targetView;
+        if (activityOrFragmentOrView instanceof Activity) {
+            Activity activity = (Activity) activityOrFragmentOrView;
+            mContext = activity;
+            parentView = (ViewGroup) activity.findViewById(android.R.id.content);
+            targetView = parentView.getChildAt(0);
+        } else if (activityOrFragmentOrView instanceof android.support.v4.app.Fragment) {
+            android.support.v4.app.Fragment fragment = (android.support.v4.app.Fragment) activityOrFragmentOrView;
+            mContext = fragment.getActivity();
+            targetView = fragment.getView();
+            if (targetView != null) {
+                parentView = (ViewGroup) (targetView.getParent());
+            }
+        } else if (activityOrFragmentOrView instanceof android.app.Fragment) {
+            android.app.Fragment fragment = (android.app.Fragment) activityOrFragmentOrView;
+            mContext = fragment.getActivity();
+            targetView = fragment.getView();
+            if (targetView != null) {
+                parentView = (ViewGroup) (targetView.getParent());
+            }
+        } else if (activityOrFragmentOrView instanceof View) {
+            targetView = (View) activityOrFragmentOrView;
+            parentView = (ViewGroup) (targetView.getParent());
+            mContext = targetView.getContext();
+        } else {
+            throw new IllegalArgumentException();
+        }
 
-        params = targetView.getLayoutParams();
-        parentView = (ViewGroup) targetView.getParent();
-
-        if (parentView == null || params == null) {
+        if (targetView == null || parentView == null) {
             return;
         }
 
-        int count = parentView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            if (targetView == parentView.getChildAt(i)) {
-                currentViewIndex = i;
-                break;
-            }
+        params = parentView.getLayoutParams();
+
+        if (params == null) {
+            return;
         }
+
+        if (activityOrFragmentOrView instanceof View) {
+            int count = parentView.getChildCount();
+            for (int i = 0; i < count; i++) {
+                if (targetView == parentView.getChildAt(i)) {
+                    currentViewIndex = i;
+                    break;
+                }
+            }
+        } else {
+            currentViewIndex = 0;
+        }
+
     }
 
     /**
@@ -150,7 +176,7 @@ public class StateLayoutManager {
         //加载缓存view
         View view = sparseArray.get(index);
         if (view == null) {
-            view = loadView(resID);
+            view = loadView(mContext, resID);
             sparseArray.put(index, view);
         }
         //加载中
@@ -372,8 +398,8 @@ public class StateLayoutManager {
      * @param resId
      * @return
      */
-    private View loadView(int resId) {
-        return LayoutInflater.from(BaseQiShuiApplication.getContext()).inflate(resId, null);
+    private View loadView(Context context, int resId) {
+        return LayoutInflater.from(context).inflate(resId, null);
     }
 
 
@@ -448,19 +474,6 @@ public class StateLayoutManager {
      */
     public void showContent() {
         showView(targetView);
-    }
-
-    public void removeParent(View v) {
-        //  先找到爹 在通过爹去移除孩子
-        ViewParent parent = v.getParent();
-        if(parent==null){
-            return;
-        }
-        //所有的控件 都有爹  爹一般情况下 就是ViewGoup
-        if (parent instanceof ViewGroup) {
-            ViewGroup group = (ViewGroup) parent;
-            group.removeView(v);
-        }
     }
 
 
