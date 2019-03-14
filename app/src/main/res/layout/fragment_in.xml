@@ -11,4 +11,10 @@
         app:leftText="退出"
         app:middleText="内部表现实例" />
 
+    <ListView
+        android:id="@+id/in_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </LinearLayout>

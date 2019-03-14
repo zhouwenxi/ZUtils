@@ -16,10 +16,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-/**
- * Created by zhou on 2018/12/22.
- */
 
+/**
+ * 添加人: add by qishui
+ * 添加时间: 2019/3/14  17:15
+ * 添加注释:
+ */
 public abstract class BaseQiShuiActivity extends AppCompatActivity {
 
     @Override
@@ -31,8 +33,6 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         setContentView(initLayout());
         //绑定注解
         AnnotationUtils.initBinds(this);
-        //设置状态属性
-        setStateLayoutAttrs();
         //注册
         EventBus eventBus = EventBus.getDefault();
         if (!eventBus.isRegistered(this)) {
@@ -40,6 +40,8 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         }
 
         initEvent(savedInstanceState);
+        //设置状态属性
+        setStateLayoutAttrs();
     }
 
     /**
