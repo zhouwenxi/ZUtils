@@ -2,15 +2,18 @@ package com.qishui.commontoolslibrary.http.proxy;
 
 import com.qishui.commontoolslibrary.http.callback.ICallBack;
 import com.qishui.commontoolslibrary.http.callback.IHttp;
+import com.qishui.commontoolslibrary.http.okhttp.OkHttp;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by zhou on 2018/12/27.
- */
 
+/**
+ * 添加人: add by qishui
+ * 添加时间: 2019/3/15  20:12
+ * 添加注释: 代理OKHttp
+ */
 public class OKHttpProxy implements IHttp {
 
     @Override
@@ -34,7 +37,7 @@ public class OKHttpProxy implements IHttp {
     }
 
     @Override
-    public void postJson(String url,  String json, ICallBack callBack) {
+    public void postJson(String url, String json, ICallBack callBack) {
 
     }
 
