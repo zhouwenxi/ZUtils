@@ -6,8 +6,8 @@ android {
         applicationId "com.qishui.zutils"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 95
-        versionName "1.0.9"
+        versionCode 100
+        versionName "1.1.0"
     }
     signingConfigs {
         release {
