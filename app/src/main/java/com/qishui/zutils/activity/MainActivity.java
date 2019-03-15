@@ -63,7 +63,7 @@ public class MainActivity extends BaseQiShuiActivity {
 
                 TextView textView = view.findViewById(R.id.custom_tv);
                 ImageView iv = view.findViewById(R.id.custom_iv);
-                textView.setTextColor(Color.RED);
+                textView.setTextColor(Color.BLUE);
                 iv.setImageResource(R.drawable.ic_tab_strip_icon_feed_selected);
                 vp.setCurrentItem(position, false);
             }
@@ -73,7 +73,7 @@ public class MainActivity extends BaseQiShuiActivity {
 
                 TextView textView = view.findViewById(R.id.custom_tv);
                 ImageView iv = view.findViewById(R.id.custom_iv);
-                textView.setTextColor(Color.BLUE);
+                textView.setTextColor(Color.BLACK);
                 iv.setImageResource(R.drawable.ic_tab_strip_icon_feed);
             }
         }).setCurrentItem(0);

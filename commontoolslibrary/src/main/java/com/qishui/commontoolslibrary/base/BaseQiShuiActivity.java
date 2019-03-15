@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.qishui.commontoolslibrary.annotation.AnnotationUtils;
 import com.qishui.commontoolslibrary.bean.EventBean;
+import com.qishui.commontoolslibrary.constant.Keys;
+import com.qishui.commontoolslibrary.core.StatusBarUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,6 +32,7 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
 
         //设置屏幕方向 垂直
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setContentView(initLayout());
         //绑定注解
         AnnotationUtils.initBinds(this);
@@ -42,6 +45,8 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         initEvent(savedInstanceState);
         //设置状态属性
         setStateLayoutAttrs();
+        //设置底部导航栏颜色
+        StatusBarUtils.setNavigationBarColor(this, Keys.KEY_MAIN_COLOR);
     }
 
     /**

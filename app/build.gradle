@@ -4,10 +4,10 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.qishui.zutils"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 28
-        versionCode 94
-        versionName "1.0.8"
+        versionCode 95
+        versionName "1.0.9"
     }
     signingConfigs {
         release {

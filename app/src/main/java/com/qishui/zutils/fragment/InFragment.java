@@ -8,6 +8,9 @@ import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
 import com.qishui.zutils.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 添加人: add by qishui
  * 添加时间: 2019/3/14  17:18
@@ -26,10 +29,18 @@ public class InFragment extends BaseQiShuiFragment {
     @Override
     protected void initEvent(View view) {
 
-        lv.setAdapter(new CommonLvAdapter<String>(getActivity(),null,0) {
+        List<String> list = new ArrayList<>();
+        list.add("网络请求");
+        list.add("banner处理");
+        list.add("页面state处理");
+        list.add("缓存处理");
+        list.add("权限处理");
+
+        lv.setAdapter(new CommonLvAdapter<String>(getActivity(), list, R.layout.item_single_text) {
             @Override
             public void setData(BaseHolder holder, String item, int position) {
 
+                holder.setText(R.id.tv, item);
             }
         });
     }

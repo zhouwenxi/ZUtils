@@ -22,4 +22,7 @@ public class Keys {
      */
     public static final String KEY_MESSAGE = "message";
 
+
+    public static final int KEY_MAIN_COLOR = 0x55ACEF;
+
 }
