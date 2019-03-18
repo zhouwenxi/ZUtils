@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_view_iv_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
-    android:padding="3dp"
-    android:id="@+id/item_view_iv_ll"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="3dp">
 
         <ImageView
             android:id="@+id/item_view_iv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:paddingLeft="5dp"
             android:src="@drawable/plane" />
 
@@ -32,20 +33,20 @@
 
 
         <ImageView
-            android:gravity="center_horizontal"
             android:id="@+id/item_view_iv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center_horizontal"
             android:paddingRight="5dp"
             android:src="@drawable/right_small" />
     </LinearLayout>
 
     <View
         android:id="@+id/item_view_iv_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:background="@color/colorLine" />
 </LinearLayout>

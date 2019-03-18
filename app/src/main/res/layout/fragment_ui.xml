@@ -9,6 +9,8 @@
     <com.qishui.commontoolslibrary.view.HeadView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:middleText="UI表现实例"
-        app:leftText="退出"/>
+        app:leftText="退出"
+        app:middleText="UI表现实例" />
+
+
 </LinearLayout>
