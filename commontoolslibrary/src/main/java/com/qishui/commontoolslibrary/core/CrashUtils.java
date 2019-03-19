@@ -9,6 +9,9 @@ import com.qishui.commontoolslibrary.base.BaseQiShuiApplication;
 
 /**
  * Created by zhou on 2018/12/22.
+ * 添加人: add by qishui
+ * 添加时间: 2019/3/19  9:08
+ * 添加注释:
  */
 
 public class CrashUtils implements Thread.UncaughtExceptionHandler {
@@ -79,13 +82,31 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
      * @param throwable
      */
     private void saveCrashInfo2File(Throwable throwable) {
-
         StringBuilder sb = new StringBuilder();
         //获取设备参数
-        sb.append("手机系统 ").append(Build.VERSION.SDK_INT).append(" 设备型号 ").append(Build.MODEL).append(" 设备厂商 ").append(Build.MANUFACTURER).append("\n");
+        sb.append("手机系统:").append(Build.VERSION.SDK_INT).append("\n")
+                .append("设备型号:").append(Build.MODEL).append("\n")
+                .append("设备厂商:").append(Build.MANUFACTURER).append("\n");
+
+        if (throwable.getStackTrace() != null && throwable.getStackTrace().length > 0) {
+            StackTraceElement element = throwable.getStackTrace()[0];
+
+            int lineNumber = element.getLineNumber();
+            String className = element.getClassName();
+            String fileName = element.getFileName();
+            String methodName = element.getMethodName();
+            String exceptionType = throwable.getClass().getName();
+
+            sb.append("文件名字: ").append(fileName + "\n");
+            sb.append("发生类名: ").append(className + "\n");
+            sb.append("发生行号: ").append(lineNumber + "\n");
+            sb.append("发生方法: ").append(methodName + "\n");
+            sb.append("异常类型: ").append(exceptionType + "\n\n");
+        }
+
         //获取异常信息
         String message = FileUtils.getThrowable(throwable);
-        sb.append(message);
+        sb.append("异常信息: ").append(message);
         errMsg = sb.toString();
     }
 }
