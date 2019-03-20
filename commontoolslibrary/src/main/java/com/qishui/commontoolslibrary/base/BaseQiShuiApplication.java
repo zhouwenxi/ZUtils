@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by zhou on 2018/12/23.
+ * 注册及运行设置
  */
 
 public class BaseQiShuiApplication extends Application {
@@ -64,7 +65,7 @@ public class BaseQiShuiApplication extends Application {
             @Override
             public void onActivityStopped(Activity activity) {
                 if (activity != null) {
-                    AdapterScreenUtils.cancelMatch(activity,  AdapterScreenUtils.MATCH_UNIT_DP);
+                    AdapterScreenUtils.cancelMatch(activity, AdapterScreenUtils.MATCH_UNIT_DP);
                 }
             }
 
