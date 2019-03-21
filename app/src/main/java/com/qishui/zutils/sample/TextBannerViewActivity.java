@@ -71,12 +71,19 @@ public class TextBannerViewActivity extends BaseQiShuiActivity {
         tv2.setText("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         tv2.setTextSize(20);
 
-
         marqueeView.addViewInQueue(tv2);
-        marqueeView.setScrollSpeed(8).setScrollDirection(MarqueeView.LEFT_TO_RIGHT).setViewMargin(15).startScroll();
+        marqueeView.setScrollSpeed(8).setScrollDirection(MarqueeView.RIGHT_TO_LEFT).setViewMargin(15).startScroll();
 
-        //marqueeView2.addViewInQueue(tv).addViewInQueue(tv2);
-        //marqueeView2.setScrollSpeed(10).setScrollDirection(MarqueeView.LEFT_TO_RIGHT).setViewMargin(15).startScroll();
+        TextView tv3 = new TextView(this);
+        tv3.setText("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+        tv3.setTextSize(20);
+
+        TextView tv4 = new TextView(this);
+        tv4.setText("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        tv4.setTextSize(20);
+
+        marqueeView2.addViewInQueue(tv3).addViewInQueue(tv4);
+        marqueeView2.setScrollSpeed(10).setScrollDirection(MarqueeView.LEFT_TO_RIGHT).setViewMargin(15).startScroll();
     }
 
     private void initData() {
@@ -87,8 +94,6 @@ public class TextBannerViewActivity extends BaseQiShuiActivity {
         mList.add("不是我吹，就怕你做不到，哈哈");
         mList.add("66666666666666666666666666666");
         mList.add("你是最棒的，奔跑吧孩子！");
-
-
     }
 
     private void setListener() {
@@ -180,7 +185,7 @@ public class TextBannerViewActivity extends BaseQiShuiActivity {
         mTvBanner4.startViewAnimator();
 
         marqueeView.startScroll();
-        // marqueeView2.startScroll();
+        marqueeView2.startScroll();
     }
 
     @Override
@@ -194,7 +199,7 @@ public class TextBannerViewActivity extends BaseQiShuiActivity {
 
 
         marqueeView.stopScroll();
-        // marqueeView2.stopScroll();
+        marqueeView2.stopScroll();
     }
 
 }
