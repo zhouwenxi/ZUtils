@@ -2,10 +2,15 @@ package com.qishui.commontoolslibrary.core;
 
 /**
  * Created by zhou on 2018/12/22.
+
  */
 
 public class RegUtils {
 
+
+    ///////////////////////////////////////////////////////////////////////////
+    // If u want more please visit http://toutiao.com/i6231678548520731137
+    ///////////////////////////////////////////////////////////////////////////
 
     /**
      * 正则：手机号（简单）

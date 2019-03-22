@@ -1,10 +1,13 @@
 package com.qishui.commontoolslibrary.core;
 
+import com.google.gson.Gson;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Type;
 
 /**
  * 作者: create by qishui
@@ -46,6 +49,25 @@ public class BeanCloneUtils {
                 }
         }
         return dist;
+    }
+
+
+    /**
+     * Deep clone.
+     *
+     * @param data The data.
+     * @param type The type.
+     * @param <T>  The value type.
+     * @return The object of cloned.
+     */
+    public static <T> T deepClone(final T data, final Type type) {
+        try {
+            Gson gson = new Gson();
+            return gson.fromJson(gson.toJson(data), type);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

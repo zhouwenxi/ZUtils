@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
