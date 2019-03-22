@@ -18,6 +18,7 @@ import com.qishui.commontoolslibrary.R;
  * 日期：2019/3/21  16:48
  * 邮箱: qishuichixi@163.com
  * 描述：原地址 https://github.com/GITbiubiubiu/MarqueeView/
+ * tips:一个view只能添加一次
  */
 
 public class MarqueeView extends HorizontalScrollView implements Runnable {
@@ -64,14 +65,22 @@ public class MarqueeView extends HorizontalScrollView implements Runnable {
         screenWidth = metrics.widthPixels;
 
         mainLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.scroll_content, null);
+
+//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        mainLayout = new LinearLayout(context);
+//        mainLayout.setOrientation(LinearLayout.HORIZONTAL);
+//        mainLayout.setLayoutParams(lp);
+
         this.addView(mainLayout);
     }
 
     public MarqueeView addViewInQueue(View view) {
+
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(viewMargin, 0, 0, 0);
         lp.gravity = Gravity.CENTER_VERTICAL;
         view.setLayoutParams(lp);
+
         mainLayout.addView(view);
         //测量view
         view.measure(0, 0);
