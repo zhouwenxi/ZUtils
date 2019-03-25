@@ -43,7 +43,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- 9.0加的，哦哦 -->
+        <!-- 9.0-->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -56,7 +56,7 @@
         <activity android:name=".activity.QiShuiCrashActivity" />
         <activity android:name=".activity.QiShuiMainStyle04Activity" />
         <activity android:name=".activity.QiShuiContactActivity" />
-        <activity android:name=".activity.QiShuiWebActivity"></activity>
+        <activity android:name=".activity.QiShuiWebActivity"/>
     </application>
 
 </manifest>

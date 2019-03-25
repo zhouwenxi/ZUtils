@@ -38,9 +38,7 @@ public class MainActivity extends BaseQiShuiActivity {
     @Override
     protected void initEvent(Bundle savedInstanceState) {
         initPermissions();
-
         init();
-
     }
 
     private void init() {

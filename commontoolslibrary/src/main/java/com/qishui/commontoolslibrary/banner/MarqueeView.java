@@ -12,7 +12,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.qishui.commontoolslibrary.R;
-import com.qishui.commontoolslibrary.core.BeanCloneUtils;
 
 /**
  * 作者: create by qishui 修改

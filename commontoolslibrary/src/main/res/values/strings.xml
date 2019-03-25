@@ -27,5 +27,8 @@
     <string name="qq_zone">QQ空间</string>
     <string name="weibo">微博</string>
 
+    <!--转场动画-->
+    <string name="big_pv">big_photoview</string>
+
 
 </resources>
