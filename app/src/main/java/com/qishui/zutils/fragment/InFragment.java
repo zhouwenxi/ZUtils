@@ -3,9 +3,13 @@ package com.qishui.zutils.fragment;
 import android.view.View;
 import android.widget.ListView;
 
+import com.qishui.commontoolslibrary.activity.QiShuiSeeBigPictureActivity;
 import com.qishui.commontoolslibrary.adapter.CommonLvAdapter;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
+import com.qishui.commontoolslibrary.bean.BigPictureBean;
+import com.qishui.commontoolslibrary.bean.EventBean;
+import com.qishui.commontoolslibrary.eventbus.EventBusManager;
 import com.qishui.zutils.R;
 import com.qishui.zutils.sample.TextBannerViewActivity;
 
@@ -37,6 +41,7 @@ public class InFragment extends BaseQiShuiFragment {
         list.add("页面state处理");
         list.add("缓存处理");
         list.add("权限处理");
+        list.add("图片放大处理");
 
         lv.setAdapter(new CommonLvAdapter<String>(getActivity(), list, R.layout.item_single_text) {
             @Override
@@ -63,8 +68,18 @@ public class InFragment extends BaseQiShuiFragment {
      */
     private void handle(int position) {
 
-        if (position == 2) {
-            startActivity(TextBannerViewActivity.class);
+        switch (position) {
+            case 2:
+                startActivity(TextBannerViewActivity.class);
+                break;
+            case 6:
+                postSticky(new EventBean(EventBusManager.KEY_BIG_PICTURE, new BigPictureBean("郭霖book", "http://guolin.tech/book.png")));
+                startActivity(QiShuiSeeBigPictureActivity.class);
+                break;
+            default:
+                toast("wait to handle ...");
+                break;
         }
+
     }
 }
