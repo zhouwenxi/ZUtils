@@ -18,6 +18,7 @@ public class QiShuiSeeBigPictureActivity extends BaseQiShuiActivity {
 
     private PhotoView photoView;
     private HeadView headView;
+    private BigPictureBean bean;
 
     @Override
     protected int initLayout() {
@@ -30,18 +31,17 @@ public class QiShuiSeeBigPictureActivity extends BaseQiShuiActivity {
         photoView = findViewById(R.id.big_pv);
         headView=findViewById(R.id.hv);
 
-    }
-
-    @Override
-    public void uiEvent(EventBean eventBean) {
-
-        if(eventBean.getType()== EventBusManager.KEY_BIG_PICTURE){
-            BigPictureBean bean= (BigPictureBean) eventBean.getObject();
+        if(bean!=null){
             headView.getMiddleTv().setText(bean.getTitle());
             GlideUtils.display(this,bean.getPath(),photoView);
         }
 
+    }
 
-
+    @Override
+    public void uiEvent(EventBean eventBean) {
+        if(eventBean.getType()== EventBusManager.KEY_BIG_PICTURE){
+             bean= (BigPictureBean) eventBean.getObject();
+        }
     }
 }
