@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".sample.TextBannerViewActivity"></activity>
+        <activity android:name=".sample.TextBannerViewActivity" />
+        <activity android:name=".sample.LinkageActivity"></activity>
     </application>
 
 </manifest>

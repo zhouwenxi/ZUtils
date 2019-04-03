@@ -35,4 +35,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    compile 'com.contrarywind:Android-PickerView:4.1.7'
 }

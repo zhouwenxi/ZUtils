@@ -32,4 +32,23 @@
     </declare-styleable>
 
 
+    <declare-styleable name="SwitchView">
+        <!--是否显示按钮阴影-->
+        <attr name="hasShadow" format="boolean" />
+        <!--开启状态背景色-->
+        <attr name="primaryColor" format="color" />
+        <!--开启状态按钮描边色-->
+        <attr name="primaryColorDark" format="color" />
+        <!--关闭状态描边色-->
+        <attr name="offColor" format="color" />
+        <!--关闭状态按钮描边色-->
+        <attr name="offColorDark" format="color" />
+        <!--按钮阴影色-->
+        <attr name="shadowColor" format="color" />
+        <!--按钮宽高形状比率(0,1] 不推荐大幅度调整-->
+        <attr name="ratioAspect" format="float" />
+        <!--初始化默认状态-->
+        <attr name="isOpened" format="boolean" />
+    </declare-styleable>
+
 </resources>
