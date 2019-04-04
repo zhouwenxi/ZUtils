@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
 import com.qishui.commontoolslibrary.image.GlideUtils;
+import com.qishui.commontoolslibrary.view.RatingStarView;
 import com.qishui.commontoolslibrary.view.SwitchView;
 import com.qishui.zutils.R;
 
@@ -16,6 +17,8 @@ public class UIFragment extends BaseQiShuiFragment {
     ImageView iv;
     @QBindView(R.id.sw)
     SwitchView sw;
+    @QBindView(R.id.rsv)
+    RatingStarView rsv;
 
     @Override
     protected int initLayout() {
@@ -42,6 +45,8 @@ public class UIFragment extends BaseQiShuiFragment {
                 toast("toggleToOff...................");
             }
         });
+
+        rsv.setRating(3.5f);
 
     }
 }
