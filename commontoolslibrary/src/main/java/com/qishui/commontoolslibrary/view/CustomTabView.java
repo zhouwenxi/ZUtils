@@ -127,6 +127,15 @@ public class CustomTabView extends LinearLayout {
     }
 
     /**
+     * 获取加载布局
+     *
+     * @return
+     */
+    public List<View> getTabViews() {
+        return mTabViews;
+    }
+
+    /**
      * 设置选中Tab
      *
      * @param curPosition
@@ -176,6 +185,7 @@ public class CustomTabView extends LinearLayout {
 
     /**
      * 获取最后点击位置
+     *
      * @return
      */
     public int getLastPosition() {
