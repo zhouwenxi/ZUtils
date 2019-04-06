@@ -371,7 +371,7 @@ public class RatingStarView extends View implements View.OnClickListener {
 
         // layer 2
         RectF r = star.getOuterRect();
-        canvas.saveLayerAlpha(r.left, r.top, r.right, r.bottom, 0xff, CLIP_SAVE_FLAG);
+        canvas.saveLayerAlpha(r.left, r.top, r.right, r.bottom, 0xff, Canvas.ALL_SAVE_FLAG);
         RectF clip = new RectF(star.getOuterRect());
         clip.right = dividerX;
         canvas.clipRect(clip);

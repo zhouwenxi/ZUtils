@@ -10,7 +10,9 @@ import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
 import com.qishui.commontoolslibrary.bean.BigPictureBean;
 import com.qishui.commontoolslibrary.bean.EventBean;
 import com.qishui.commontoolslibrary.core.TakePictureUtils;
+import com.qishui.commontoolslibrary.core.UiUtils;
 import com.qishui.commontoolslibrary.eventbus.EventBusManager;
+import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.notice.dialog.BottomDialogFragment;
 import com.qishui.zutils.R;
 import com.qishui.zutils.activity.MainActivity;
@@ -48,6 +50,7 @@ public class InFragment extends BaseQiShuiFragment {
         list.add("图片放大处理");
         list.add("三级联动");
         list.add("照片选取|拍照");
+        list.add("自定义toast");
 
 
         lv.setAdapter(new CommonLvAdapter<String>(getActivity(), list, R.layout.item_single_text) {
@@ -88,9 +91,15 @@ public class InFragment extends BaseQiShuiFragment {
                 break;
             case 8:
                 selectPicture();
+            case 9:
+                DIYToastUtils.with(getActivity()).setText("HELLO").show();
                 break;
             default:
-                toast("wait to handle ...");
+               // toast("wait to handle ...");
+                DIYToastUtils toastUtils = DIYToastUtils.with(getActivity());
+                toastUtils.getTV().setTextColor(UiUtils.getColor(R.color.colorRedaa));
+                toastUtils.getLL().setBackgroundColor(UiUtils.getColor(R.color.colorMain));
+                toastUtils.setText("wait to handle ...").show();
                 break;
         }
 
@@ -153,5 +162,12 @@ public class InFragment extends BaseQiShuiFragment {
                     }
                 }).showDialog(mainActivity);
 
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        DIYToastUtils.reset();
     }
 }
