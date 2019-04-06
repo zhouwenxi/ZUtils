@@ -12,9 +12,13 @@ import com.qishui.commontoolslibrary.core.CrashUtils;
 import com.qishui.commontoolslibrary.http.HttpManager;
 import com.qishui.commontoolslibrary.http.easyhttp.HttpThreadPoolManager;
 import com.qishui.commontoolslibrary.http.proxy.EasyHttpProxy;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Created by zhou on 2018/12/23.
@@ -81,6 +85,7 @@ public class BaseQiShuiApplication extends Application {
         });
 
         HttpManager.with().setHttp(new EasyHttpProxy());
+
 
         //检查最大容量 使用子线程，提高启动速度
         HttpThreadPoolManager.with().excute(new Runnable() {

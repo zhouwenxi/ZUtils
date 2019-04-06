@@ -27,11 +27,22 @@ public class OkHttp {
         return OkHttpUtils.get().url(url).params(params).build();
     }
 
+    public static RequestCall get(Object tag,String url, Map<String, String> params) {
+        printLog(url, params);
+        return OkHttpUtils.get().url(url).params(params).tag(tag).build();
+    }
+
     // get 异步请求
     public static RequestCall get(String url) {
         printLog(url, null);
         return OkHttpUtils.get().url(url).build();
     }
+
+    public static RequestCall get(Object tag,String url) {
+        printLog(url, null);
+        return OkHttpUtils.get().url(url).tag(tag).build();
+    }
+
 
     //post请求 异步请求
     public static RequestCall post(String url, Map<String, String> params) {
@@ -40,9 +51,20 @@ public class OkHttp {
     }
 
     //post请求 异步请求
+    public static RequestCall post(Object tag,String url, Map<String, String> params) {
+        printLog(url, params);
+        return OkHttpUtils.post().url(url).params(params).tag(tag).build();
+    }
+
+    //post请求 异步请求
     public static RequestCall post(String url) {
         printLog(url, null);
         return OkHttpUtils.post().url(url).build();
+    }
+
+    public static RequestCall post(Object tag,String url) {
+        printLog(url, null);
+        return OkHttpUtils.post().url(url).tag(tag).build();
     }
 
     //post一个json类型数据
@@ -51,10 +73,22 @@ public class OkHttp {
         return OkHttpUtils.postString().url(url).content(jsonData).mediaType(MediaType.parse("application/json; charset=utf-8")).build();
     }
 
+    //post一个json类型数据
+    public static RequestCall postJson(Object tag,String url, String jsonData) {
+        printLog(url, jsonData);
+        return OkHttpUtils.postString().url(url).tag(tag).content(jsonData).mediaType(MediaType.parse("application/json; charset=utf-8")).build();
+    }
+
     // post一个文件
     public static RequestCall postFile(String url, File file) {
         printLog(url, file.getAbsolutePath());
         return OkHttpUtils.postFile().url(url).file(file).build();
+    }
+
+    // post一个文件
+    public static RequestCall postFile(Object tag,String url, File file) {
+        printLog(url, file.getAbsolutePath());
+        return OkHttpUtils.postFile().url(url).file(file).tag(tag).build();
     }
 
     //上传文件以表单形式
@@ -68,6 +102,19 @@ public class OkHttp {
         }
         printLog(url, params);
         return OkHttpUtils.post().addFile(fileParam, file.getName(), file).url(url).params(params).build();
+    }
+
+    //上传文件以表单形式
+    public static RequestCall uploadFile(Object tag,String url, Map<String, String> params, String fileParam, File file) {
+
+        if (TextUtils.isEmpty(fileParam)) {
+            fileParam = "file";
+        }
+        if (file == null || !file.exists()) {
+            return null;
+        }
+        printLog(url, params);
+        return OkHttpUtils.post().addFile(fileParam, file.getName(), file).url(url).params(params).tag(tag).build();
     }
 
     // 下载文件
@@ -99,6 +146,11 @@ public class OkHttp {
     //取消请求
     public static void cancel(String url) {
         OkHttpUtils.get().url(url).build().cancel();
+    }
+
+    //取消请求
+    public static void cancelObject(Object object) {
+        OkHttpUtils.getInstance().cancelTag(object);
     }
 
 
