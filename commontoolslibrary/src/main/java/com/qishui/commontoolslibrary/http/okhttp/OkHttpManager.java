@@ -18,7 +18,7 @@ import okhttp3.MediaType;
  * 添加时间: 2019/3/15  20:11
  * 添加注释: OKhttp请求
  */
-public class OkHttp {
+public class OkHttpManager {
 
 
     // get 异步请求

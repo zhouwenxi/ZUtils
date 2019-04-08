@@ -25,9 +25,8 @@ public abstract class StringCallBackResult extends Callback<String> {
 
     @Override
     public void onError(Call call, Exception e, int id) {
-        ErrorHandle.handleFailure(e);
         LogUtils.e("调用返回错误信息:\n", FileUtils.getException(e), "\n");
-        onFailure(e);
+        onFailure(e,ErrorHandle.handleFailure(e));
     }
 
     @Override
@@ -40,7 +39,7 @@ public abstract class StringCallBackResult extends Callback<String> {
      * 失败
      * @param e
      */
-    public abstract void onFailure(Exception e);
+    public abstract void onFailure(Exception e,String value);
 
     /**
      * 成功

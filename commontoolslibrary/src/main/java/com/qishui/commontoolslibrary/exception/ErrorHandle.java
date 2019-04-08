@@ -6,6 +6,7 @@ import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.bean.HttpBean;
 import com.qishui.commontoolslibrary.constant.Keys;
 import com.qishui.commontoolslibrary.core.GsonUtils;
+import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.notice.ToastUtils;
 
 import java.net.ConnectException;
@@ -40,22 +41,22 @@ public class ErrorHandle extends RuntimeException {
      *
      * @param e 异常实体类
      */
-    public static void handleFailure(Exception e) {
+    public static String handleFailure(Exception e) {
 
         if (e != null) {
             if (e instanceof ConnectException) {
-                ToastUtils.showToastOnUiThread(R.string.network_connect_error);
+                return "网络连接异常";
             } else if (e instanceof SocketTimeoutException) {
-                ToastUtils.showToastOnUiThread(R.string.network_connect_timeout);
+                return "网络连接超时";
             } else if (e instanceof NoRouteToHostException) {
-                ToastUtils.showToastOnUiThread(R.string.no_route_to_host);
+                return "无法连接到服务器";
             } else if (e instanceof ParseException) {
-                ToastUtils.showToastOnUiThread(R.string.network_parse_error);
+                return "数据解析异常";
             } else {
-                ToastUtils.showToastOnUiThread(R.string.unknown_error);
+                return "发生未知错误";
             }
         } else {
-            ToastUtils.showToastOnUiThread(R.string.unknown_error);
+            return "发生未知错误";
         }
     }
 

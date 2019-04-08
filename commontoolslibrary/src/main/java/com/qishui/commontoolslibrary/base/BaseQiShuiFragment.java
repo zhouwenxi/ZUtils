@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.annotation.AnnotationUtils;
 import com.qishui.commontoolslibrary.bean.EventBean;
+import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,6 +46,8 @@ public abstract class BaseQiShuiFragment extends Fragment {
         EventBus.getDefault().removeAllStickyEvents();
         //反注册
         EventBus.getDefault().unregister(this);
+
+        DIYToastUtils.reset();
     }
 
     @Nullable
@@ -69,6 +72,16 @@ public abstract class BaseQiShuiFragment extends Fragment {
         setStateLayoutAttrs(view);
         initEvent(view);
     }
+
+    /**
+     * 提示框
+     *
+     * @param message
+     */
+    public void toast(String message) {
+        DIYToastUtils.with(getActivity()).setText(message).show();
+    }
+
 
     /**
      * 设置布局管理器属性
@@ -106,14 +119,6 @@ public abstract class BaseQiShuiFragment extends Fragment {
         return editText == null ? "" : editText.getText().toString().trim();
     }
 
-    /**
-     * 提示框
-     *
-     * @param message
-     */
-    public void toast(String message) {
-        Toast.makeText(BaseQiShuiApplication.getContext(), message, Toast.LENGTH_SHORT).show();
-    }
 
     /**
      * 跳转下一页

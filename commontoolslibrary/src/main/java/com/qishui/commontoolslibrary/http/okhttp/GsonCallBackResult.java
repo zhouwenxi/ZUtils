@@ -14,6 +14,7 @@ import okhttp3.Response;
 
 /**
  * Created by zhou on 2019/4/6.
+ *
  */
 
 public abstract class GsonCallBackResult<T>  extends Callback<T> {
@@ -31,9 +32,8 @@ public abstract class GsonCallBackResult<T>  extends Callback<T> {
 
     @Override
     public void onError(Call call, Exception e, int id) {
-        ErrorHandle.handleFailure(e);
         LogUtils.e("调用返回错误信息:\n", FileUtils.getException(e), "\n");
-        onFailure(e);
+        onFailure(e,ErrorHandle.handleFailure(e));
     }
 
     @Override
@@ -46,7 +46,7 @@ public abstract class GsonCallBackResult<T>  extends Callback<T> {
      * 失败
      * @param e
      */
-    public abstract void onFailure(Exception e);
+    public abstract void onFailure(Exception e,String value);
 
     /**
      * 成功

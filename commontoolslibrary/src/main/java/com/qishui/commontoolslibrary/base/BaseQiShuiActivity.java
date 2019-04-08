@@ -13,6 +13,7 @@ import com.qishui.commontoolslibrary.annotation.AnnotationUtils;
 import com.qishui.commontoolslibrary.bean.EventBean;
 import com.qishui.commontoolslibrary.constant.Keys;
 import com.qishui.commontoolslibrary.core.StatusBarUtils;
+import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,8 +46,13 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         initEvent(savedInstanceState);
         //设置状态属性
         setStateLayoutAttrs();
+
+    }
+
+
+    public void setNavigationBarColor(int color){
         //设置底部导航栏颜色
-        StatusBarUtils.setNavigationBarColor(this, Keys.KEY_MAIN_COLOR);
+        StatusBarUtils.setNavigationBarColor(this, color);
     }
 
     /**
@@ -93,8 +99,9 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
      * @param message
      */
     public void toast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        DIYToastUtils.with(this).setText(message).show();
     }
+
 
     /**
      * 跳转下一页
@@ -129,6 +136,8 @@ public abstract class BaseQiShuiActivity extends AppCompatActivity {
         EventBus.getDefault().removeAllStickyEvents();
         //反注册
         EventBus.getDefault().unregister(this);
+
+        DIYToastUtils.reset();
     }
 
 
