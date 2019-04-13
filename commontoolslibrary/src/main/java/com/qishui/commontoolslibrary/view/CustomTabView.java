@@ -178,7 +178,7 @@ public class CustomTabView extends LinearLayout {
             if (mOnTabCheckListener != null && curPosition == position) {
                 mOnTabCheckListener.onTabSelected(view, curPosition);
             } else if (mOnTabCheckListener != null && curPosition != position) {
-                mOnTabCheckListener.onTabUnSelected(view, curPosition);
+                mOnTabCheckListener.onTabUnSelected(view, position);
             }
         }
     }
