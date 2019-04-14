@@ -29,8 +29,8 @@ public class UIFragment extends BaseQiShuiFragment {
     protected void initEvent(View view) {
 
 
-        GlideUtils.display(getActivity(), "http://guolin.tech/book.png", iv);
-
+       GlideUtils.display(getActivity(), "http://guolin.tech/book.png", iv);
+       //GlideUtils.displayBigPic(getActivity(),"http://www.qqddc.com/downServer/dxh/2019/03/cp1_01.jpg",iv);
         sw.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
             @Override
             public void toggleToOn(SwitchView view) {
