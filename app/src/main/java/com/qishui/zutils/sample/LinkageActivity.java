@@ -23,7 +23,7 @@ import com.qishui.commontoolslibrary.adapter.CommonLvAdapter;
 import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.DateUtils;
-import com.qishui.zutils.Bean.JsonBean;
+import com.qishui.zutils.bean.JsonBean;
 import com.qishui.zutils.R;
 
 import org.json.JSONArray;

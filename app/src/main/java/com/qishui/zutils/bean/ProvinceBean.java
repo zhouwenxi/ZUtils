@@ -1,4 +1,4 @@
-package com.qishui.zutils.Bean;
+package com.qishui.zutils.bean;
 
 
 import com.contrarywind.interfaces.IPickerViewData;

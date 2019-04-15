@@ -16,6 +16,7 @@ import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.notice.dialog.BottomDialogFragment;
 import com.qishui.zutils.R;
 import com.qishui.zutils.activity.MainActivity;
+import com.qishui.zutils.sample.FloatRvActivity;
 import com.qishui.zutils.sample.LinkageActivity;
 import com.qishui.zutils.sample.TextBannerViewActivity;
 
@@ -51,6 +52,7 @@ public class InFragment extends BaseQiShuiFragment {
         list.add("三级联动");
         list.add("照片选取|拍照");
         list.add("自定义toast");
+        list.add("悬浮置顶");
 
 
         lv.setAdapter(new CommonLvAdapter<String>(getActivity(), list, R.layout.item_single_text) {
@@ -94,8 +96,11 @@ public class InFragment extends BaseQiShuiFragment {
             case 9:
                 DIYToastUtils.with(getActivity()).setText("HELLO").show();
                 break;
+            case 10:
+                startActivity(FloatRvActivity.class);
+                break;
             default:
-               // toast("wait to handle ...");
+                // toast("wait to handle ...");
                 DIYToastUtils toastUtils = DIYToastUtils.with(getActivity());
                 toastUtils.getTV().setTextColor(UiUtils.getColor(R.color.colorRedaa));
                 toastUtils.getLL().setBackgroundColor(UiUtils.getColor(R.color.colorMain));
