@@ -19,7 +19,7 @@
         app:srlAccentColor="@android:color/white"
         app:srlEnableHeaderTranslationContent="true"
         app:srlEnableLoadMore="false"
-        app:srlPrimaryColor="@color/colorWhite">
+        app:srlPrimaryColor="@color/colorMain">
 
         <com.scwang.smartrefresh.header.DropBoxHeader
             android:layout_width="match_parent"
