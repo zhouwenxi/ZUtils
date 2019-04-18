@@ -1,6 +1,7 @@
 package com.qishui.commontoolslibrary.notice;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,11 @@ public class DIYToastUtils {
     private AlphaAnimation mFadeInAnimation;
     private boolean isShow = false;
     private Handler mHandler = new Handler();
+    private static Context mContext;
+
 
     private DIYToastUtils(Activity activity) {
+        mContext = activity;
         container = activity.findViewById(android.R.id.content);
         mView = activity.getLayoutInflater().inflate(R.layout.toast_layout, container);
         mContainer = mView.findViewById(R.id.mbContainer);
@@ -44,6 +48,11 @@ public class DIYToastUtils {
     public static DIYToastUtils with(Activity context) {
         if (mInstance == null) {
             mInstance = new DIYToastUtils(context);
+        }else {
+            // 考虑Activity切换时，Toast依然显示
+            if (!mContext.getClass().getName().endsWith(context.getClass().getName())) {
+                mInstance = new DIYToastUtils(context);
+            }
         }
         return mInstance;
     }
