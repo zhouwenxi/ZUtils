@@ -1,41 +1,27 @@
 package com.qishui.commontoolslibrary.notice.dialog;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.R;
 
 /**
-* author： qishui
-* date: 2019/1/3  9:35
-* email: qihsuichixi@163.com
-* qq: 798150439
-* blog: http://zhouwenxi.top
-* desc: 加载dialog
-*/
+ * author： qishui
+ * date: 2019/1/3  9:35
+ * email: qihsuichixi@163.com
+ * qq: 798150439
+ * blog: http://zhouwenxi.top
+ * desc: 加载dialog
+ */
 public class LoadingDialog extends BaseQishuiDialog {
 
-    private String mText;
 
-    private static LoadingDialog loadingDialog;
+    private TextView tv;
 
-    private LoadingDialog(@NonNull Activity context) {
+    public LoadingDialog(@NonNull Activity context) {
         super(context);
-    }
-
-    public static LoadingDialog with(Activity activity){
-        if(loadingDialog==null){
-            synchronized (LoadingDialog.class){
-                if(loadingDialog==null){
-                    loadingDialog=new LoadingDialog(activity);
-                }
-            }
-        }
-        return loadingDialog;
     }
 
     @Override
@@ -47,19 +33,21 @@ public class LoadingDialog extends BaseQishuiDialog {
     protected void initEvent(View view) {
 
         setCanceledOnTouchOutside(false);
-        TextView tv = findViewById(R.id.dialog_loading_tv);
-        tv.setText(TextUtils.isEmpty(mText)?"加载中...":mText);
+        setCancelable(false);
+        tv = findViewById(R.id.dialog_loading_tv);
 
     }
 
     /**
      * 设置提示文本
+     *
      * @param text
      * @return
      */
-    public LoadingDialog setText(String text){
-        this.mText=text;
+    public LoadingDialog setText(String text) {
+        tv.setText(text);
         return this;
     }
+
 
 }

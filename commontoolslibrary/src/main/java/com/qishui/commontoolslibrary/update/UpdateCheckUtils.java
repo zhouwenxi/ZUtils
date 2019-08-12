@@ -12,6 +12,7 @@ import com.qishui.commontoolslibrary.http.HttpManager;
 import com.qishui.commontoolslibrary.http.callback.FileCallBack;
 import com.qishui.commontoolslibrary.notice.ToastUtils;
 import com.qishui.commontoolslibrary.notice.dialog.CommonDialog;
+import com.qishui.commontoolslibrary.notice.dialog.LoadingDialog;
 
 import java.io.File;
 
@@ -35,9 +36,6 @@ public class UpdateCheckUtils {
     private int versionCode;
     private String url;
     private String message;
-
-    //是否正在下載
-    private static Boolean state = false;
 
     /**
      * 获取对象
@@ -91,20 +89,16 @@ public class UpdateCheckUtils {
         if (TextUtils.isEmpty(url)) {
             return;
         }
-        if (state) {
-            ToastUtils.showToastOnUiThread(R.string.downloading);
-            return;
-        }
         if (mode == VERSONNAME) {
             if (!TextUtils.equals(localVersonName, versionName)) {
                 showDownDialog();
-            }else {
+            } else {
                 ToastUtils.showToastOnUiThread(R.string.last_version);
             }
         } else if (mode == VERSONCODE) {
             if (versionCode > localVersonCode) {
                 showDownDialog();
-            }else {
+            } else {
                 ToastUtils.showToastOnUiThread(R.string.last_version);
             }
         }
@@ -117,12 +111,10 @@ public class UpdateCheckUtils {
      * 显示下载提示框
      */
     private void showDownDialog() {
-        if (TextUtils.isEmpty(message)) {
-            message = "请升级到最新版本!";
-        }
-        CommonDialog.with(mActivity, CommonDialog.STYLE_IOS)
+
+        CommonDialog.with(mActivity, CommonDialog.STYLE_ANDROID)
                 .setDialogTitle("版本更新")
-                .setDialogContent(message)
+                .setDialogContent(TextUtils.isEmpty(message) ? "请升级到最新版本" : message)
                 .setDialogLeftText("不了")
                 .setDialogRightText("好的")
                 .setCallBack(new CommonDialog.CallBack() {
@@ -156,24 +148,28 @@ public class UpdateCheckUtils {
      */
     private void downApk() {
 
+        //加载进度框
+        final LoadingDialog loadingDialog = new LoadingDialog(mActivity);
+        loadingDialog.showDialog();
+
         HttpManager.with().getProxy().downloadFile(url, FileUtils.KEY_FILE_DOWNLOAD, "test.apk", new FileCallBack() {
             @Override
             protected void onEasyInProgress(float progress) {
-                state = true;
+
+                loadingDialog.setText("下载中 " + progress + "%");
             }
 
             @Override
             protected void onEasySuccess(File file) {
+                loadingDialog.dismissDialog();
                 ToastUtils.show("下载成功!");
-                state = false;
                 InstallUtil.install(mActivity, file.getAbsolutePath());
             }
 
             @Override
             protected void onEasyError(String message) {
+                loadingDialog.dismissDialog();
                 ToastUtils.show("下载失败..." + message);
-                state = false;
-                LogUtils.e(message + "  " + url);
             }
         });
     }

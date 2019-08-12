@@ -61,12 +61,12 @@ public class QiShuiLoginActivity extends MvpBaseActivity<QiShuiMVPContract.ILogi
 
     @Override
     public void loadingDialog(String text) {
-        LoadingDialog.with(this).setText(text).showDialog();
+
     }
 
     @Override
     public void dissmissDialog() {
-        LoadingDialog.with(this).dismissDialog();
+
     }
 
     @Override
@@ -77,6 +77,5 @@ public class QiShuiLoginActivity extends MvpBaseActivity<QiShuiMVPContract.ILogi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LoadingDialog.with(this).dismissDialog();
     }
 }

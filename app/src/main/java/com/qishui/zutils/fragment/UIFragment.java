@@ -10,6 +10,7 @@ import com.qishui.commontoolslibrary.core.UiUtils;
 import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.view.HeadView;
 import com.qishui.zutils.R;
+import com.qishui.zutils.bean.FunctionBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +40,18 @@ public class UIFragment extends BaseQiShuiFragment {
      * 展示列表数据
      */
     private void showList() {
-        List<String> list = setListData();
+        List<FunctionBean> list = setListData();
 
-        lv.setAdapter(new CommonLvAdapter<String>(getActivity(), list, R.layout.item_single_text) {
+        lv.setAdapter(new CommonLvAdapter<FunctionBean>(getActivity(), list, R.layout.item_single_text) {
             @Override
-            public void setData(BaseHolder holder, String item, final int position) {
+            public void setData(BaseHolder holder, final FunctionBean item, final int position) {
 
-                holder.setText(R.id.tv, item);
+                holder.setText(R.id.tv, item.getName());
 
                 holder.getView(R.id.ll).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        handle(position);
+                        handle(item.getId());
                     }
                 });
 
@@ -64,10 +65,10 @@ public class UIFragment extends BaseQiShuiFragment {
      *
      * @return
      */
-    private List<String> setListData() {
-        List<String> list = new ArrayList<>();
-        list.add("开关");
-        list.add("星星");
+    private List<FunctionBean> setListData() {
+        List<FunctionBean> list = new ArrayList<>();
+        list.add(new FunctionBean("开关", 1));
+        list.add(new FunctionBean("星星", 1));
         return list;
     }
 

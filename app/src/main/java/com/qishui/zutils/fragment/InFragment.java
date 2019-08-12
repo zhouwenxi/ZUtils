@@ -14,9 +14,11 @@ import com.qishui.commontoolslibrary.core.UiUtils;
 import com.qishui.commontoolslibrary.eventbus.EventBusManager;
 import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.notice.dialog.BottomDialogFragment;
+import com.qishui.commontoolslibrary.update.UpdateCheckUtils;
 import com.qishui.commontoolslibrary.view.HeadView;
 import com.qishui.zutils.R;
 import com.qishui.zutils.activity.MainActivity;
+import com.qishui.zutils.bean.FunctionBean;
 import com.qishui.zutils.sample.FloatRvActivity;
 import com.qishui.zutils.sample.LinkageActivity;
 import com.qishui.zutils.sample.TextBannerViewActivity;
@@ -50,30 +52,31 @@ public class InFragment extends BaseQiShuiFragment {
     }
 
     private void showList() {
-        List<String> list = new ArrayList<>();
-        list.add("网络请求");
-        list.add("banner处理");
-        list.add("文字滚动处理");
-        list.add("页面state处理");
-        list.add("缓存处理");
-        list.add("权限处理");
-        list.add("图片放大处理");
-        list.add("三级联动");
-        list.add("照片选取|拍照");
-        list.add("自定义toast");
-        list.add("悬浮置顶");
+        List<FunctionBean> list = new ArrayList<FunctionBean>();
+        list.add(new FunctionBean("网络请求", 1));
+        list.add(new FunctionBean("banner处理", 2));
+        list.add(new FunctionBean("文字滚动处理", 3));
+        list.add(new FunctionBean("页面state处理", 4));
+        list.add(new FunctionBean("缓存处理", 5));
+        list.add(new FunctionBean("权限处理", 6));
+        list.add(new FunctionBean("图片放大处理", 7));
+        list.add(new FunctionBean("三级联动", 8));
+        list.add(new FunctionBean("照片选取|拍照", 9));
+        list.add(new FunctionBean("自定义toast", 10));
+        list.add(new FunctionBean("悬浮置顶", 11));
+        list.add(new FunctionBean("升级", 12));
 
 
-        lv.setAdapter(new CommonLvAdapter<String>(getActivity(), list, R.layout.item_single_text) {
+        lv.setAdapter(new CommonLvAdapter<FunctionBean>(getActivity(), list, R.layout.item_single_text) {
             @Override
-            public void setData(BaseHolder holder, String item, final int position) {
+            public void setData(BaseHolder holder, final FunctionBean item, final int position) {
 
-                holder.setText(R.id.tv, item);
+                holder.setText(R.id.tv, item.getName());
 
                 holder.getView(R.id.ll).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        handle(position);
+                        handle(item.getId());
                     }
                 });
 
@@ -95,23 +98,26 @@ public class InFragment extends BaseQiShuiFragment {
     private void handle(int position) {
 
         switch (position) {
-            case 2:
+            case 3:
                 startActivity(TextBannerViewActivity.class);
                 break;
-            case 6:
+            case 7:
                 postSticky(new EventBean(EventBusManager.KEY_BIG_PICTURE, new BigPictureBean("郭霖book", "http://guolin.tech/book.png")));
                 startActivity(QiShuiSeeBigPictureActivity.class);
                 break;
-            case 7:
+            case 8:
                 startActivity(LinkageActivity.class);
                 break;
-            case 8:
-                selectPicture();
             case 9:
+                selectPicture();
+            case 10:
                 DIYToastUtils.with(getActivity()).setText("HELLO").show();
                 break;
-            case 10:
+            case 11:
                 startActivity(FloatRvActivity.class);
+                break;
+            case 12:
+                updateApp();
                 break;
             default:
                 // toast("wait to handle ...");
@@ -121,6 +127,20 @@ public class InFragment extends BaseQiShuiFragment {
                 toastUtils.setText("wait to handle ...").show();
                 break;
         }
+
+    }
+
+    /**
+     * 升级app
+     */
+    private void updateApp() {
+
+        UpdateCheckUtils.with(this)
+                .setUrl("http://118.24.148.250:8080/yk/update_signed.apk")
+                .setMessage("1、修复未知bug")
+                .setVersionName("2.0.0")
+                .setMode(UpdateCheckUtils.VERSONNAME)
+                .check();
 
     }
 
