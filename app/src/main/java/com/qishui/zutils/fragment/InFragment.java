@@ -14,6 +14,7 @@ import com.qishui.commontoolslibrary.core.UiUtils;
 import com.qishui.commontoolslibrary.eventbus.EventBusManager;
 import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.notice.dialog.BottomDialogFragment;
+import com.qishui.commontoolslibrary.view.HeadView;
 import com.qishui.zutils.R;
 import com.qishui.zutils.activity.MainActivity;
 import com.qishui.zutils.sample.FloatRvActivity;
@@ -32,6 +33,8 @@ public class InFragment extends BaseQiShuiFragment {
 
     @QBindView(R.id.in_lv)
     ListView lv;
+    @QBindView(R.id.home_hv)
+    HeadView home_hv;
 
     @Override
     protected int initLayout() {
@@ -41,6 +44,12 @@ public class InFragment extends BaseQiShuiFragment {
     @Override
     protected void initEvent(View view) {
 
+        setTitle();
+
+        showList();
+    }
+
+    private void showList() {
         List<String> list = new ArrayList<>();
         list.add("网络请求");
         list.add("banner处理");
@@ -71,6 +80,11 @@ public class InFragment extends BaseQiShuiFragment {
 
             }
         });
+    }
+
+    private void setTitle() {
+        home_hv.getLeftTv().setVisibility(View.GONE);
+        home_hv.getLeftIv().setVisibility(View.GONE);
     }
 
     /**
