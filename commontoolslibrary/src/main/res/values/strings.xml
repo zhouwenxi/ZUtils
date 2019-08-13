@@ -1,7 +1,7 @@
 <resources>
 
     <!--全局-->
-    <string name="app_name">ZUtils</string>
+    <string name="app_name">快速开发</string>
     <string name="please_Input_Name">请输入用户名</string>
     <string name="please_Input_Password">请输入密码</string>
     <string name="login">登录</string>

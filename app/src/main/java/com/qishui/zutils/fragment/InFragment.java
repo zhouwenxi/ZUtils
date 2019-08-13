@@ -1,5 +1,6 @@
 package com.qishui.zutils.fragment;
 
+import android.Manifest;
 import android.view.View;
 import android.widget.ListView;
 
@@ -9,6 +10,7 @@ import com.qishui.commontoolslibrary.annotation.QBindView;
 import com.qishui.commontoolslibrary.base.BaseQiShuiFragment;
 import com.qishui.commontoolslibrary.bean.BigPictureBean;
 import com.qishui.commontoolslibrary.bean.EventBean;
+import com.qishui.commontoolslibrary.core.PermissionUtils;
 import com.qishui.commontoolslibrary.core.TakePictureUtils;
 import com.qishui.commontoolslibrary.core.UiUtils;
 import com.qishui.commontoolslibrary.eventbus.EventBusManager;
@@ -54,7 +56,6 @@ public class InFragment extends BaseQiShuiFragment {
     private void showList() {
         List<FunctionBean> list = new ArrayList<FunctionBean>();
         list.add(new FunctionBean("网络请求", 1));
-        list.add(new FunctionBean("banner处理", 2));
         list.add(new FunctionBean("文字滚动处理", 3));
         list.add(new FunctionBean("页面state处理", 4));
         list.add(new FunctionBean("缓存处理", 5));
@@ -101,6 +102,9 @@ public class InFragment extends BaseQiShuiFragment {
             case 3:
                 startActivity(TextBannerViewActivity.class);
                 break;
+            case 6:
+                permission();
+                break;
             case 7:
                 postSticky(new EventBean(EventBusManager.KEY_BIG_PICTURE, new BigPictureBean("郭霖book", "http://guolin.tech/book.png")));
                 startActivity(QiShuiSeeBigPictureActivity.class);
@@ -126,6 +130,21 @@ public class InFragment extends BaseQiShuiFragment {
                 toastUtils.getLL().setBackgroundColor(UiUtils.getColor(R.color.colorMain));
                 toastUtils.setText("wait to handle ...").show();
                 break;
+        }
+
+    }
+
+    /**
+     * 权限处理
+     */
+    private void permission() {
+
+        String[] permission = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        if (!PermissionUtils.hasAllPermission(getActivity(), permission)) {
+            PermissionUtils.with(this)
+                    .addPermissions(PermissionUtils.GROUP_STORAGE)
+                    .addPermissions(PermissionUtils.GROUP_CAMERA)
+                    .request();
         }
 
     }

@@ -20,6 +20,7 @@ import android.widget.Scroller;
 
 import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.click.QiShuiClick;
+import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.UiUtils;
 
 import java.lang.reflect.Field;
@@ -156,6 +157,7 @@ public class BannerView extends RelativeLayout {
             viewPager.setAdapter(new MyViewPagerAdapter(mList));
             viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
             currentItem = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % count;
+            LogUtils.e("currentItem:" + currentItem);
             viewPager.setCurrentItem(currentItem);
             setSliderTransformDuration(1000);
             if (isAutoPlay) {
@@ -248,6 +250,7 @@ public class BannerView extends RelativeLayout {
         if (TYPE == TYPE_IMAGEVIEW) {
             this.count = tempImageView.size();
             this.relCount = this.count;
+
 
             if (count == 1) {
                 Object value = tempImageView.get(0);
@@ -421,7 +424,7 @@ public class BannerView extends RelativeLayout {
             currentItem = position;
             final int relPos = position % relCount;
 
-            for (int index = 0; index < relCount; index++) {
+            for (int index = 0; index < relCount && index < mListPoints.size(); index++) {
                 if (index == relPos) {
                     if (selectId != 0) {
                         mListPoints.get(index).setBackgroundResource(selectId);

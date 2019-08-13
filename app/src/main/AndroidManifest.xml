@@ -25,7 +25,8 @@
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".sample.TextBannerViewActivity" />
         <activity android:name=".sample.LinkageActivity" />
-        <activity android:name=".sample.FloatRvActivity"></activity>
+        <activity android:name=".sample.FloatRvActivity" />
+        <activity android:name=".activity.ViewLoadActivity"></activity>
     </application>
 
 </manifest>

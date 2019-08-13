@@ -1,5 +1,6 @@
 package com.qishui.zutils.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
 
@@ -10,6 +11,7 @@ import com.qishui.commontoolslibrary.core.UiUtils;
 import com.qishui.commontoolslibrary.notice.DIYToastUtils;
 import com.qishui.commontoolslibrary.view.HeadView;
 import com.qishui.zutils.R;
+import com.qishui.zutils.activity.ViewLoadActivity;
 import com.qishui.zutils.bean.FunctionBean;
 
 import java.util.ArrayList;
@@ -68,7 +70,8 @@ public class UIFragment extends BaseQiShuiFragment {
     private List<FunctionBean> setListData() {
         List<FunctionBean> list = new ArrayList<>();
         list.add(new FunctionBean("开关", 1));
-        list.add(new FunctionBean("星星", 1));
+        list.add(new FunctionBean("星星", 2));
+        list.add(new FunctionBean("banner", 3));
         return list;
     }
 
@@ -85,6 +88,22 @@ public class UIFragment extends BaseQiShuiFragment {
     private void handle(int position) {
 
         switch (position) {
+
+            case 1:
+                startActivity(new Intent(getActivity(), ViewLoadActivity.class).putExtra(ViewLoadActivity.KEY_LAYOUT_ID, position)
+                        .putExtra(ViewLoadActivity.KEY_LAYOUT, R.layout.view_status1));
+                break;
+
+            case 2:
+                startActivity(new Intent(getActivity(), ViewLoadActivity.class).putExtra(ViewLoadActivity.KEY_LAYOUT_ID, position)
+                        .putExtra(ViewLoadActivity.KEY_LAYOUT, R.layout.view_status2));
+                break;
+
+            case 3:
+                startActivity(new Intent(getActivity(), ViewLoadActivity.class).putExtra(ViewLoadActivity.KEY_LAYOUT_ID, position)
+                        .putExtra(ViewLoadActivity.KEY_LAYOUT, R.layout.view_status3));
+                break;
+
 
             default:
                 // toast("wait to handle ...");

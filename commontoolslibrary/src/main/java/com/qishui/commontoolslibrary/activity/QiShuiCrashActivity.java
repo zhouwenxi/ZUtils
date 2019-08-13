@@ -7,6 +7,7 @@ import com.qishui.commontoolslibrary.R;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
 import com.qishui.commontoolslibrary.core.CrashUtils;
 import com.qishui.commontoolslibrary.core.FileUtils;
+import com.qishui.commontoolslibrary.core.LogUtils;
 
 public class QiShuiCrashActivity extends BaseQiShuiActivity {
 
@@ -19,9 +20,9 @@ public class QiShuiCrashActivity extends BaseQiShuiActivity {
     protected void initEvent(Bundle savedInstanceState) {
 
         String extra = getIntent().getStringExtra(CrashUtils.KEY_ERRMSG);
-        TextView qishui_crash_tv=findViewById(R.id.qishui_crash_tv);
+        TextView qishui_crash_tv = findViewById(R.id.qishui_crash_tv);
         qishui_crash_tv.setText(extra);
-
+        LogUtils.e(extra);
         FileUtils.writeCrash(extra);
     }
 }

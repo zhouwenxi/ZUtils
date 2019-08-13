@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.qishui.commontoolslibrary.view.HeadView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:middleText="星星" />
+
+    <com.qishui.commontoolslibrary.view.RatingStarView
+        android:id="@+id/rsv"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="#fff"
+        android:padding="5dp"
+        app:rsv_cornerRadius="4dp"
+        app:rsv_drawStrokeForEmptyStar="false"
+        app:rsv_drawStrokeForHalfStar="true"
+        app:rsv_enableSelectRating="true"
+        app:rsv_onlyHalfStar="true"
+        app:rsv_rating="1"
+        app:rsv_starBackgroundColor="#E8E8E8"
+        app:rsv_starForegroundColor="#FF55ACEF"
+        app:rsv_starMargin="10dp"
+        app:rsv_starNum="5"
+        app:rsv_starThickness="0.7"
+        app:rsv_strokeColor="#457DD7"
+        app:rsv_strokeWidth="1dp" />
+
+
+</LinearLayout>
