@@ -90,20 +90,16 @@ public class UIFragment extends BaseQiShuiFragment {
         switch (position) {
 
             case 1:
-                startActivity(new Intent(getActivity(), ViewLoadActivity.class).putExtra(ViewLoadActivity.KEY_LAYOUT_ID, position)
-                        .putExtra(ViewLoadActivity.KEY_LAYOUT, R.layout.view_status1));
+                start(position, R.layout.view_status1);
                 break;
 
             case 2:
-                startActivity(new Intent(getActivity(), ViewLoadActivity.class).putExtra(ViewLoadActivity.KEY_LAYOUT_ID, position)
-                        .putExtra(ViewLoadActivity.KEY_LAYOUT, R.layout.view_status2));
+                start(position, R.layout.view_status2);
                 break;
 
             case 3:
-                startActivity(new Intent(getActivity(), ViewLoadActivity.class).putExtra(ViewLoadActivity.KEY_LAYOUT_ID, position)
-                        .putExtra(ViewLoadActivity.KEY_LAYOUT, R.layout.view_status3));
+                start(position, R.layout.view_status3);
                 break;
-
 
             default:
                 // toast("wait to handle ...");
@@ -114,6 +110,12 @@ public class UIFragment extends BaseQiShuiFragment {
                 break;
         }
 
+    }
+
+    public void start(int pos, int layout) {
+        startActivity(new Intent(getActivity(), ViewLoadActivity.class)
+                .putExtra(ViewLoadActivity.KEY_LAYOUT_ID, pos)
+                .putExtra(ViewLoadActivity.KEY_LAYOUT, layout));
     }
 
 }
