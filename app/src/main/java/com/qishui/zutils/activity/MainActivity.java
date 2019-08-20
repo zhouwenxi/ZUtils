@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.qishui.commontoolslibrary.adapter.CommonFragmentPagerAdapter;
 import com.qishui.commontoolslibrary.base.BaseQiShuiActivity;
+import com.qishui.commontoolslibrary.core.LogUtils;
 import com.qishui.commontoolslibrary.core.PermissionUtils;
 import com.qishui.commontoolslibrary.view.CustomTabView;
 import com.qishui.zutils.R;
@@ -40,8 +41,10 @@ public class MainActivity extends BaseQiShuiActivity {
         initPermissions();
         init();
 
-        //ccc
+
     }
+
+
 
     private void init() {
         vp = findViewById(R.id.home_container_vp);

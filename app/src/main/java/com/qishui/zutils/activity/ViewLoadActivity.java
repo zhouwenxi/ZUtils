@@ -39,12 +39,7 @@ public class ViewLoadActivity extends BaseQiShuiActivity {
                 break;
             case 3:
                 banner1();
-                try {
-                    banner2();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+                banner2();
                 break;
 
             default:
